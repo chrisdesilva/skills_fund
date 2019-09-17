@@ -66,8 +66,8 @@ const IndexPage = ({ data }) => {
         </div>
 
 
-        <div id="homeContent--4" className="py-8 bg-gray-100 h-64">
-          <div class="yotpo yotpo-reviews-carousel" 
+        <div id="homeContent--4">
+          <div class="yotpo yotpo-reviews-carousel bg-gray-100 pb-8" 
             data-background-color="transparent" 
             data-mode="top_rated" 
             data-type="site" 
