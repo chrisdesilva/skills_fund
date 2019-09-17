@@ -35,11 +35,11 @@ const Header = () => {
             </div>
             <div className="flex flex-col items-center text-lg">
               {/* DROPDOWN */}
-                <div className="flex flex-col justify-center">
-                  <Link className="font-bold text-white text-center bg-primary rounded-full py-2 px-4 shadow-xl" to="/get-started">
+                <div className="flex flex-col justify-center items-center">
+                  <Link className="hoverButton bg-primary mt-4 rounded px-4 py-2 text-white text-center w-32 shadow-xl" to="/get-started">
                     Get Started
                   </Link>
-                  <Link id="students" to="/students" className="pt-4">
+                  <Link id="students" to="/schools" className="pt-4">
                     Students
                   </Link>
                   <Link className="pt-4" to="/how-skills-fund-works">
@@ -54,7 +54,7 @@ const Header = () => {
                   <Link className=" pt-4" to="/pay-your-loan">
                     How To Pay Your Loan
                   </Link>
-                  <Link className=" pt-4" to="/reviews">
+                  <Link className="pt-4" to="/reviews">
                     Reviews
                   </Link>
                   <Link to="/partners" className="pt-4">
@@ -99,8 +99,10 @@ const Header = () => {
           
           {/* DROPDOWN */}
           <div className="subnav flex justify-center">
-            <p id="students" className="py-4 cursor-pointer m-0 colorLink flex items-center">
-              Students <FaAngleDown />
+            <p id="students" className="py-4 cursor-pointer m-0 colorLink">
+              <Link className="flex items-center" to="/schools">
+                Students <FaAngleDown />
+              </Link>
             </p>
               <div className="subnav__content mt-12 p-4 bg-white border-t-4 border-primary shadow-2xl rounded flex flex-col">
                 <Link className="colorLink" to="/how-skills-fund-works">
@@ -131,8 +133,10 @@ const Header = () => {
 
           {/* DROPDOWN */}
           <div className="subnav flex justify-center">
-            <p id="students" className="py-4 cursor-pointer  m-0 colorLink flex items-center">
-              Blog <FaAngleDown />
+            <p id="students" className="py-4 cursor-pointer  m-0 colorLink">
+              <Link className="flex items-center" to="/blog">
+                Blog <FaAngleDown />
+              </Link>
             </p>
               <div className="subnav__content mt-12 p-4 bg-white border-t-4 border-primary shadow-2xl rounded flex flex-col">
                 <Link className="colorLink" to="/student-journey">
@@ -151,8 +155,8 @@ const Header = () => {
 
         {/* GET STARTED */}
         <div className="w-1/2 pr-16 flex justify-end items-center font-bold">
-          <Link className="text-white bg-primary rounded-full py-2 px-4 shadow-xl" to="/get-started">Get Started</Link>
-        </div>
+          <Link className="hoverButton bg-primary rounded px-4 py-2 text-white text-center w-32 shadow-xl" to="/get-started">Get Started</Link>
+        </div> 
 
       </div>
     </header>

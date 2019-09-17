@@ -1,7 +1,7 @@
 #banner {
     -webkit-clip-path: polygon(0 0, 0 85%, 74% 100%, 100% 76%, 100% 0);
     clip-path: polygon(0 0, 0 85%, 74% 100%, 100% 76%, 100% 0);
-    height: 50vh;
+    height: 55vh;
     z-index: 100;
   }
   
