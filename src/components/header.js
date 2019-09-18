@@ -2,7 +2,7 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React, { useState } from "react"
 import skillsFund from "../images/skillsFund_logo.png"
-import { FaBars, FaTimes, FaAngleDown } from 'react-icons/fa'
+import { FaBars, FaTimes } from 'react-icons/fa'
 import { UnmountClosed as Collapse } from 'react-collapse'
 
 const Header = () => {
@@ -100,8 +100,8 @@ const Header = () => {
           {/* DROPDOWN */}
           <div className="subnav flex justify-center">
             <p id="students" className="py-4 cursor-pointer m-0 colorLink">
-              <Link className="flex items-center" to="/schools">
-                Students <FaAngleDown />
+              <Link to="/schools">
+                Students
               </Link>
             </p>
               <div className="subnav__content mt-12 p-4 bg-white border-t-4 border-primary shadow-2xl rounded flex flex-col">
@@ -134,8 +134,8 @@ const Header = () => {
           {/* DROPDOWN */}
           <div className="subnav flex justify-center">
             <p id="students" className="py-4 cursor-pointer  m-0 colorLink">
-              <Link className="flex items-center" to="/blog">
-                Blog <FaAngleDown />
+              <Link to="/blog">
+                Blog
               </Link>
             </p>
               <div className="subnav__content mt-12 p-4 bg-white border-t-4 border-primary shadow-2xl rounded flex flex-col">

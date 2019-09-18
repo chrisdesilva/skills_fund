@@ -1,9 +1,11 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
-import { UnmountClosed as Collapse } from 'react-collapse'
-import { schools } from "../constants/getFunded.js"
+import { Input } from "semantic-ui-react"
+import { schools } from "../constants/getFunded"
 import climbers from "../images/climbers.png"
 import bike from "../images/bike.png"
+import TextInput from 'react-autocomplete-input'
+import 'react-autocomplete-input/dist/bundle.css'
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -14,45 +16,49 @@ const IndexPage = ({ data }) => {
   
   const [showInput, toggleShowInput] = useState(false)
   const [schoolLink, changeSchoolLink] = useState(schools[0]['link'])
+  const [inputValue, setInputValue] = useState(false)
+
+  const selectSchool = e => {
+    setInputValue(true)
+    changeSchoolLink(e.target.value)
+  }
   
   return (
     <Layout>
       <SEO title="Home" />
       <div className="bg-white">
         
-        <div id="banner" className="bg-purple-150 flex flex-col lg:flex-row justify-center lg:justify-start items-center lg:pl-32">
-            <div className="flex flex-col items-center">
-              {!showInput && <button onClick={()=> toggleShowInput(!showInput)} className="hoverButton bg-primary rounded px-4 py-2 text-white w-48 shadow-xl">I know my school</button>}
-              <Collapse isOpened={showInput}>
-                <div className="flex flex-col items-center">
-                  <select className="w-48" onChange={(e) => changeSchoolLink(e.target.value)}>
+        <div id="banner" className="bg-purple-150 flex flex-col justify-center items-center">
+              <h1 className="text-center mb-0 pb-4">How Education Pays Off</h1>
+              <p className="text-center mb-0 pb-4">We won’t finance you to attend a crappy program. No tricks, gimmicks or teaser rates here. Just the help you deserve to build the career you want.</p>
+              <p className="text-center text-primary font-bold mb-0 pb-4">It’s your future. Expect more from your school and lender.</p>
+          <div id="relative">
+            {!showInput &&
+              <div className={!showInput ? "absolute show left-50 -ml-48" : "absolute hide"}>
+                <button onClick={()=> toggleShowInput(!showInput)} className="hoverButton bg-primary rounded px-4 py-2 text-white w-48 text-center">I know my school</button>
+                <button className="hoverButton bg-primary rounded px-4 py-2 text-white w-48 text-center"><Link to='/bootcamp-selector'>I need help deciding</Link></button>
+              </div>
+            }
+            {showInput &&
+              <div className={showInput ? "absolute show left-50 -ml-32" : "absolute hide"}>
+                <p className="m-0 text-xs">Select your school below</p>
+                <Input icon={null} onChange={selectSchool} className="w-full" list="schools" placeholder="School name"/>
+                {inputValue &&
+                <>
+                  <datalist  id="schools">
                     {schools.map(school => {
                       return <option value={school.link}>{school.name}</option>
                     })}
-                  </select>
-                  <Link className="hoverButton bg-primary rounded px-4 py-2 text-white text-center w-48 shadow-xl mt-2" to={schoolLink}>Get Funded</Link>
-                  <button onClick={()=> toggleShowInput(!showInput)} className="bg-gray-400 rounded px-2 py-2 text-black w-48 mt-5">Wait, I need help</button>
-                </div>
-              </Collapse>
-                {!showInput && <Link to='/bootcamp-selector' className="hoverButton bg-primary mt-4 rounded px-4 py-2 text-white text-center w-48 shadow-xl">I need help deciding</Link>}
-            </div>
-        </div>
-
-        <div id="homeContent--1" className="px-8 flex flex-col lg:flex-row items-center pt-16 lg:pt-32 lg:pb-12">
-          <div className="lg:w-2/4">
-            <h1 className="text-center">How Education Pays Off</h1>
-            <p className="text-center">We won’t finance you to attend a crappy program. No tricks, gimmicks or teaser rates here. Just the help you deserve to build the career you want.</p>
-            <p className="text-center text-primary font-bold">It’s your future. Expect more from your school and lender.</p>
-          </div>
-          <div className="lg:w-1/4">
-
-          </div>
-          <div className="lg:w-1/4 pt-0">
-            <img className="h-64" src={climbers} alt="Sitting and climbing on top of books"/>
+                  </datalist>
+                  <button className="show hoverButton bg-primary rounded px-4 py-2 text-white w-40 mx-2 text-center mt-4 left-50 absolute -ml-20"><Link to={schoolLink}>Get Funded</Link></button>
+                </>
+                }
+              </div>
+            }
           </div>
         </div>
 
-        <div id="homeContent--2" className="px-8 lg:px-32 bg-gray-100 py-12 lg:py-32">
+        <div id="homeContent--1" className="px-8 lg:px-32 bg-gray-100 py-12 lg:py-32">
           <div className="flex flex-col items-center">
             <p className="text-primary text-xl">WE BELIEVE</p>
             <h2 className="">Education is a life-changing investment.</h2>

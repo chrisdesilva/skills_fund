@@ -48,20 +48,20 @@ const Schools = props => {
             <h2>Select Your Skills Training</h2>
             <p>Browse schools by program type or location. Once you've found the right school for you, click on "Get Funded" to see your transparent loan terms and use the Loan Calculator.</p>
             <div className="w-full flex flex-col lg:flex-row items-center justify-around mt-5">
-                <p className="cursor-pointer flex items-center colorLink" 
+                <p className="cursor-pointer flex items-center hoverButton bg-primary rounded px-4 py-2 text-white justify-center w-48" 
                     onClick={displayOnlinePrograms}>
                     <FaWifi className="mr-2" /> 
-                    Show Online Programs
+                    Online Programs
                 </p>
-                <p className="cursor-pointer flex items-center colorLink" 
+                <p className="cursor-pointer flex items-center hoverButton bg-primary rounded px-4 py-2 text-white justify-center w-48"
                     onClick={displayInPersonPrograms}>
                     <FaSchool className="mr-2" /> 
-                    Show In-Person Programs
+                    In-Person Programs
                 </p>
-                <p className="cursor-pointer flex items-center colorLink" 
+                <p className="cursor-pointer flex items-center hoverButton bg-primary rounded px-4 py-2 text-white justify-center w-48"
                     onClick={displayAllPrograms}>
                     <FaGlobe className="mr-2" />
-                    Show All Programs
+                    All Programs
                 </p>
             </div>
         </div>
