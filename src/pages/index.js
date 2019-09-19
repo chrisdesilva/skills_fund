@@ -4,8 +4,6 @@ import { Input } from "semantic-ui-react"
 import { schools } from "../constants/getFunded"
 import climbers from "../images/climbers.png"
 import bike from "../images/bike.png"
-import TextInput from 'react-autocomplete-input'
-import 'react-autocomplete-input/dist/bundle.css'
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -28,31 +26,27 @@ const IndexPage = ({ data }) => {
       <SEO title="Home" />
       <div className="bg-white">
         
-        <div id="banner" className="bg-purple-150 flex flex-col justify-center items-center">
+        <div id="banner" className={showInput ? "back-purple flex flex-col pt-20" : "flex flex-col pt-20"}>
               <h1 className="text-center mb-0 pb-4">How Education Pays Off</h1>
               <p className="text-center mb-0 pb-4">We won’t finance you to attend a crappy program. No tricks, gimmicks or teaser rates here. Just the help you deserve to build the career you want.</p>
               <p className="text-center text-primary font-bold mb-0 pb-4">It’s your future. Expect more from your school and lender.</p>
           <div id="relative">
             {!showInput &&
-              <div className={!showInput ? "absolute show left-50 -ml-48" : "absolute hide"}>
-                <button onClick={()=> toggleShowInput(!showInput)} className="hoverButton bg-primary rounded px-4 py-2 text-white w-48 text-center">I know my school</button>
-                <button className="hoverButton bg-primary rounded px-4 py-2 text-white w-48 text-center"><Link to='/bootcamp-selector'>I need help deciding</Link></button>
+              <div className={!showInput ? "absolute show left-50 -ml-48 pt-12" : "absolute"}>
+                <button onClick={()=> toggleShowInput(true)} className="hoverButton bg-primary rounded px-4 py-2 mx-1 text-white w-48 text-center shadow-xl">I know my school</button>
+                <button className="hoverButton bg-primary rounded px-4 py-2 mx-1 text-white w-48 text-center shadow-xl"><Link to='/bootcamp-selector'>I need help deciding</Link></button>
               </div>
             }
             {showInput &&
-              <div className={showInput ? "absolute show left-50 -ml-32" : "absolute hide"}>
+              <div className={showInput ? "absolute show left-50 -ml-32" : "absolute"}>
                 <p className="m-0 text-xs">Select your school below</p>
-                <Input icon={null} onChange={selectSchool} className="w-full" list="schools" placeholder="School name"/>
-                {inputValue &&
-                <>
-                  <datalist  id="schools">
-                    {schools.map(school => {
-                      return <option value={school.link}>{school.name}</option>
-                    })}
-                  </datalist>
-                  <button className="show hoverButton bg-primary rounded px-4 py-2 text-white w-40 mx-2 text-center mt-4 left-50 absolute -ml-20"><Link to={schoolLink}>Get Funded</Link></button>
-                </>
-                }
+                    <select onChange={selectSchool}>
+                      {schools.map(school => {
+                        return <option value={school.link}>{school.name}</option>
+                      })}
+                    </select>
+                  <button className="show hoverButton bg-primary rounded px-4 py-2 text-white w-40 text-center mt-8 left-50 absolute -ml-20 shadow-xl"><Link to={schoolLink}>Get Funded</Link></button>
+                  <button onClick={()=> toggleShowInput(false)} className="show hoverButton bg-gray-100 rounded px-4 py-2 text-black w-40 text-center mt-20 left-50 absolute -ml-20 shadow-xl">Wait, I need help</button>
               </div>
             }
           </div>

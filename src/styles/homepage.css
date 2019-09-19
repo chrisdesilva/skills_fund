@@ -1,5 +1,5 @@
 #banner {
-  height: 65vh;
+  height: 50vh;
   z-index: 100;
 }
 
@@ -21,6 +21,42 @@ input {
 
   to {
     opacity: 1;
+  }
+}
+
+@-webkit-keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.back-purple {
+  background-color: #fce4fc; 
+  animation-duration: 1s;
+  animation-name: bg-color;
+}
+
+@keyframes bg-color {
+  0% {
+    background-color: #fff;
+  }
+
+  100% {
+    background-color: #fce4fc;
+  }
+}
+
+@-webkit-keyframes bg-color {
+  0% {
+    background-color: #fff;
+  }
+
+  100% {
+    background-color: #fce4fc;
   }
 }
 

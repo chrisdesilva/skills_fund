@@ -101,52 +101,55 @@ const Header = () => {
           <div className="subnav flex justify-center">
             <p id="students" className="py-4 cursor-pointer m-0 colorLink">
               <Link to="/schools">
-                Students
+                Get Funded
               </Link>
             </p>
               <div className="subnav__content mt-12 p-4 bg-white border-t-4 border-primary shadow-2xl rounded flex flex-col">
-                <Link className="colorLink" to="/how-skills-fund-works">
-                  How Skills Fund Works
+                <Link className="colorLink" to="/loan">
+                 Loan
                 </Link>
-                <Link className="colorLink pt-4" to="/how-to-apply-for-a-loan">
-                  How To Apply For A Loan
-                </Link>
-                <Link className="colorLink pt-4" to="/eligibility-criteria">
-                  Credit & Eligibility Criteria
-                </Link>
-                <Link className="colorLink pt-4" to="/pay-your-loan">
-                  How To Pay Your Loan
-                </Link>
-                <Link className="colorLink pt-4" to="/reviews">
-                  Reviews
+                <Link className="colorLink pt-4" to="/isa">
+                  ISA
                 </Link>
               </div>
           </div>
 
-          <Link to="/partners" className="colorLink">
-            Partners
+          <Link to="/school-selector" className="colorLink">
+            School Selector
           </Link>
 
-          <Link to="/about" className="colorLink">
-            About
-          </Link>
+          <div className="subnav flex justify-center">
+            <p id="schools" className="py-4 cursor-pointer m-0 colorLink">
+              <Link to="/schools">
+                Schools
+              </Link>
+            </p>
+              <div className="subnav__content mt-12 p-4 bg-white border-t-4 border-primary shadow-2xl rounded flex flex-col">
+                <Link className="colorLink" to="/partners">
+                 Partners
+                </Link>
+              </div>
+          </div>
 
           {/* DROPDOWN */}
           <div className="subnav flex justify-center">
             <p id="students" className="py-4 cursor-pointer  m-0 colorLink">
-              <Link to="/blog">
-                Blog
+              <Link to="/learn">
+                Learn
               </Link>
             </p>
               <div className="subnav__content mt-12 p-4 bg-white border-t-4 border-primary shadow-2xl rounded flex flex-col">
-                <Link className="colorLink" to="/student-journey">
-                  Student Journey
+                <Link className="colorLink" to="/reviews">
+                  Reviews
                 </Link>
-                <Link className="colorLink pt-4" to="/financing-101">
-                  Financing 101
+                <Link className="colorLink pt-4" to="/knowledge-base">
+                  Knowledge Base
                 </Link>
-                <Link className="colorLink pt-4" to="/frequently-asked-questions">
-                  FAQ
+                <Link className="colorLink pt-4" to="/blog">
+                  Blog
+                </Link>
+                <Link className="colorLink pt-4" to="/quality-assurance">
+                  Quality Assurance
                 </Link>
               </div>
           </div>
@@ -154,8 +157,9 @@ const Header = () => {
         </div>
 
         {/* GET STARTED */}
-        <div className="w-1/2 pr-16 flex justify-end items-center font-bold">
-          <Link className="hoverButton bg-primary rounded px-4 py-2 text-white text-center w-32 shadow-xl" to="/get-started">Get Started</Link>
+        <div className="w-1/2 pr-8 flex justify-end items-center font-bold">
+          <Link className="hoverButton bg-gray-200 mx-1 rounded px-4 py-2 text-black text-center w-28 shadow-xl" to="/login">Log In</Link>
+          <Link className="hoverButton bg-primary mx-1 rounded px-4 py-2 text-white text-center w-28 shadow-xl" to="/get-started">Get Started</Link>
         </div> 
 
       </div>

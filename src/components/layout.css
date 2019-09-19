@@ -14,6 +14,7 @@
 .hoverButton {
   transition: all 200ms;
   transform: translateY(0);
+  outline: none;
 }
 
 .hoverButton:hover {
@@ -24,6 +25,7 @@
 .hoverButton:active {
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   transform: translateY(0);
+  outline: none;
 }
 
 .subnav {
