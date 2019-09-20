@@ -3,24 +3,9 @@
   z-index: 100;
 }
 
-input {
-  padding: .5rem;
-  border-radius: .25rem;
-  width: 16rem;
-}
-
 .show {
   animation-duration: .5s;
   animation-name: show;
-}
-
-ul.react-autocomplete-input > li {
-  background: black;
-  color: white
-}
-ul.react-autocomplete-input > li.active {
-  background: black;
-  color: white;
 }
 
 @keyframes show {

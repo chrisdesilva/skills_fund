@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
-import TextInput from 'react-autocomplete-input'
 import { schools } from "../constants/getFunded"
 import bike from "../images/bike.png"
 
@@ -8,23 +7,18 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 import "../styles/homepage.css"
+import AutoComplete from "../components/autocomplete"
 
-const IndexPage = ({ data }) => {
+const IndexPage = () => {
   
   const [showInput, toggleShowInput] = useState(false)
-  const [schoolLink, changeSchoolLink] = useState(schools[0]['link'])
   const [inputValue, setInputValue] = useState(false)
 
-  const selectSchool = e => {
-    setInputValue(true)
-    changeSchoolLink(e.target.value)
-  }
+  // const selectSchool = e => {
+  //   setInputValue(true)
+  //   changeSchoolLink(e.target.value)
+  // }
 
-  
-  // <button className="show hoverButton bg-primary rounded px-4 py-2 text-white w-40 text-center mt-12 left-50 absolute -ml-20 shadow-xl"><Link to={schoolLink}>Get Funded</Link></button>
-  // <button onClick={()=> toggleShowInput(false)} className="show hoverButton bg-gray-100 rounded px-4 py-2 text-black w-40 text-center mt-24 left-50 absolute -ml-20 shadow-xl">Wait, I need help</button>
-
-  
   return (
     <Layout>
       <SEO title="Home" />
@@ -43,9 +37,9 @@ const IndexPage = ({ data }) => {
             }
             {showInput &&
               <div className={showInput ? "absolute show left-50 -ml-32" : "absolute"}>
-                <p className="m-0 text-xs">Select your school below</p>
-                  <TextInput trigger="" Component="input" options={schools.map(school => school.name)} /> 
-                  
+                <AutoComplete 
+                  toggleInput={()=> toggleShowInput(false)}
+                />
               </div>
             }
           </div>
