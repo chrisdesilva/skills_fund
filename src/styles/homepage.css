@@ -1,5 +1,5 @@
 #banner {
-  height: 50vh;
+  height: 60vh;
   z-index: 100;
 }
 
@@ -12,6 +12,15 @@ input {
 .show {
   animation-duration: .5s;
   animation-name: show;
+}
+
+ul.react-autocomplete-input > li {
+  background: black;
+  color: white
+}
+ul.react-autocomplete-input > li.active {
+  background: black;
+  color: white;
 }
 
 @keyframes show {

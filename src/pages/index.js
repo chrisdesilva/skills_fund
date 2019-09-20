@@ -1,8 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
-import { Input } from "semantic-ui-react"
+import TextInput from 'react-autocomplete-input'
 import { schools } from "../constants/getFunded"
-import climbers from "../images/climbers.png"
 import bike from "../images/bike.png"
 
 import Layout from "../components/layout"
@@ -20,19 +19,24 @@ const IndexPage = ({ data }) => {
     setInputValue(true)
     changeSchoolLink(e.target.value)
   }
+
+  
+  // <button className="show hoverButton bg-primary rounded px-4 py-2 text-white w-40 text-center mt-12 left-50 absolute -ml-20 shadow-xl"><Link to={schoolLink}>Get Funded</Link></button>
+  // <button onClick={()=> toggleShowInput(false)} className="show hoverButton bg-gray-100 rounded px-4 py-2 text-black w-40 text-center mt-24 left-50 absolute -ml-20 shadow-xl">Wait, I need help</button>
+
   
   return (
     <Layout>
       <SEO title="Home" />
       <div className="bg-white">
         
-        <div id="banner" className={showInput ? "back-purple flex flex-col pt-20" : "flex flex-col pt-20"}>
+        <div id="banner" className={showInput ? "back-purple flex flex-col pt-8" : "flex flex-col pt-8"}>
               <h1 className="text-center mb-0 pb-4">How Education Pays Off</h1>
               <p className="text-center mb-0 pb-4">We won’t finance you to attend a crappy program. No tricks, gimmicks or teaser rates here. Just the help you deserve to build the career you want.</p>
               <p className="text-center text-primary font-bold mb-0 pb-4">It’s your future. Expect more from your school and lender.</p>
           <div id="relative">
             {!showInput &&
-              <div className={!showInput ? "absolute show left-50 -ml-48 pt-12" : "absolute"}>
+              <div className={!showInput ? "absolute show left-50 -ml-48 pt-4" : "absolute"}>
                 <button onClick={()=> toggleShowInput(true)} className="hoverButton bg-primary rounded px-4 py-2 mx-1 text-white w-48 text-center shadow-xl">I know my school</button>
                 <button className="hoverButton bg-primary rounded px-4 py-2 mx-1 text-white w-48 text-center shadow-xl"><Link to='/bootcamp-selector'>I need help deciding</Link></button>
               </div>
@@ -40,13 +44,8 @@ const IndexPage = ({ data }) => {
             {showInput &&
               <div className={showInput ? "absolute show left-50 -ml-32" : "absolute"}>
                 <p className="m-0 text-xs">Select your school below</p>
-                    <select onChange={selectSchool}>
-                      {schools.map(school => {
-                        return <option value={school.link}>{school.name}</option>
-                      })}
-                    </select>
-                  <button className="show hoverButton bg-primary rounded px-4 py-2 text-white w-40 text-center mt-8 left-50 absolute -ml-20 shadow-xl"><Link to={schoolLink}>Get Funded</Link></button>
-                  <button onClick={()=> toggleShowInput(false)} className="show hoverButton bg-gray-100 rounded px-4 py-2 text-black w-40 text-center mt-20 left-50 absolute -ml-20 shadow-xl">Wait, I need help</button>
+                  <TextInput trigger="" Component="input" options={schools.map(school => school.name)} /> 
+                  
               </div>
             }
           </div>
@@ -75,7 +74,7 @@ const IndexPage = ({ data }) => {
           </div>
         </div>
 
-          <div class="yotpo yotpo-reviews-carousel bg-gray-100 pb-8 m-0" 
+          <div className="yotpo yotpo-reviews-carousel bg-gray-100 pb-8 m-0" 
             data-background-color="transparent" 
             data-mode="top_rated" 
             data-type="site" 

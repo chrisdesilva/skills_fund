@@ -85,17 +85,17 @@ const Header = () => {
 
     {/* ***** START WEB VERSION ***** */}
     <header className="hidden lg:block border-b-4 border-primary">
-      <div className="flex">
+      <div className="flex text-sm ">
 
         {/* LOGO */}
-        <div className="w-1/4 flex justify-center items-center m-0">
+        <div className="w-1/6 flex justify-start items-center m-0 pl-4">
             <Link to="/">
               <img className="h-8 m-0" src={skillsFund} alt="Skills Fund Logo"/>
             </Link>
         </div>
 
         {/* CENTRAL NAVIGATION */}
-        <div className="w-1/4 flex justify-around items-center text-lg">
+        <div className="w-1/3 flex justify-around items-center">
           
           {/* DROPDOWN */}
           <div className="subnav flex justify-center">
@@ -104,14 +104,6 @@ const Header = () => {
                 Get Funded
               </Link>
             </p>
-              <div className="subnav__content mt-12 p-4 bg-white border-t-4 border-primary shadow-2xl rounded flex flex-col">
-                <Link className="colorLink" to="/loan">
-                 Loan
-                </Link>
-                <Link className="colorLink pt-4" to="/isa">
-                  ISA
-                </Link>
-              </div>
           </div>
 
           <Link to="/school-selector" className="colorLink">
