@@ -26,20 +26,12 @@ class AutoComplete extends React.Component {
         this.setState({ suggestions, text: value, link: '' })
     }
 
-    suggestionSelected = value => {
+    suggestionSelected = (value, i) => {
         this.setState({
             text: value,
-            suggestions: []
+            suggestions: [],
+            link: links[i]
         })
-    }
-
-    setLink = () => {
-        if (window !== undefined) {
-            const span = document.getElementById("link").innerHTML
-            this.setState({
-                link: span
-            })
-        }
     }
 
     renderSuggestions = () => {
@@ -48,8 +40,12 @@ class AutoComplete extends React.Component {
             return null
         }
         return (
-            <ul className="z-50" onClick={()=> this.setLink()}>
-                {suggestions.map((school, i) => <li key={i} onClick={() => this.suggestionSelected(school)}>{school}<span id="link" className="hidden">{links[i]}</span></li>)}
+            <ul className="z-50">
+                {suggestions.map((school, i) => {
+                    return <li key={i} onClick={() => {
+                        this.suggestionSelected(school, i)
+                    }}>{school}</li>
+                })}
             </ul>
         )
     }
