@@ -100,13 +100,13 @@ const Header = () => {
 
 
     {/* ***** START WEB VERSION ***** */}
-    <header className={ navBackground ? "hidden lg:block fixed w-full z-50 border-b-4 border-primary bg-white" : "hidden lg:block fixed w-full bg-white z-50"}   >
+    <header className={ navBackground ? "nav showNav" : "nav"}   >
       <div className="flex text-sm ">
 
         {/* LOGO */}
         <div className="w-1/6 flex justify-start items-center m-0 pl-4">
             <Link to="/">
-              <img className={navBackground ? "h-8 m-0" : "h-10 m-0"} src={skillsFund} alt="Skills Fund Logo"/>
+              <img className={navBackground ? "navImg showNavImg" : "navImg"} src={skillsFund} alt="Skills Fund Logo"/>
             </Link>
         </div>
 
