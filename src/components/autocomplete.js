@@ -3,8 +3,8 @@ import { schools } from "../constants/getFunded"
 import { Link } from "gatsby"
 import "../styles/autocomplete.css"
 
-const programs = schools.map(school => school.name)
-const links = schools.map(school => school.link)
+const programs = schools.map(school => school.name) // get list of all program names
+const links = schools.map(school => school.link) // get list of all program internal page links
 
 class AutoComplete extends React.Component {
     constructor(props){
@@ -18,19 +18,19 @@ class AutoComplete extends React.Component {
 
     onTextChanged = e => {
         const value = e.target.value
-        let suggestions = []
+        let suggestions = [] // set initial suggestions array to empty
             if(value.length > 0) {
-                const regex = new RegExp(`${value}`, 'i')
-                suggestions = programs.sort().filter(v => regex.test(v))
+                const regex = new RegExp(`${value}`, 'i') // check if characters from input string match any letters of programs
+                suggestions = programs.filter(v => regex.test(v)).slice(0, 6) // show first 6 matches
             }
         this.setState({ suggestions, text: value, link: '' })
     }
 
     suggestionSelected = (value, i) => {
         this.setState({
-            text: value,
-            suggestions: [],
-            link: links[i]
+            text: value, // set input text to value of clicked program
+            suggestions: [], // clear suggestions array
+            link: links[i] // populate get funded button with link at the position of the clicked program
         })
     }
 
@@ -40,9 +40,9 @@ class AutoComplete extends React.Component {
             return null
         }
         return (
-            <ul className="z-50">
+            <ul>
                 {suggestions.map((school, i) => {
-                    return <li key={i} onClick={() => {
+                    return <li className="m-0" key={i} onClick={() => {
                         this.suggestionSelected(school, i)
                     }}>{school}</li>
                 })}

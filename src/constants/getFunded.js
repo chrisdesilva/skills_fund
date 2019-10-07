@@ -39,5 +39,5 @@ export const schools = [
         link: "/austin-coding-academy",
         hasOnline: false,
         hasInPerson: true
-    },
+    }
 ]

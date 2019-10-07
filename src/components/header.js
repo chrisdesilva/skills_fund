@@ -1,6 +1,6 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import skillsFund from "../images/skillsFund_logo.png"
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { UnmountClosed as Collapse } from 'react-collapse'
@@ -8,11 +8,27 @@ import { UnmountClosed as Collapse } from 'react-collapse'
 const Header = () => {
   
   const [nav, toggleNav] = useState(false)
+  const [navBackground, setNavBackground] = useState(false)
+  const navRef = useRef()
+  
+  navRef.current = navBackground
+  useEffect(() => {
+    const handleScroll = () => {
+      const show = window.scrollY > 50
+      if (navRef.current !== show){
+        setNavBackground(show)
+      }
+    }
+    document.addEventListener('scroll', handleScroll)
+    return () => {
+      document.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   return (
     <>
     {/* ***** START MOBILE VERSION ***** */}
-      <header className="border-b-4 border-primary lg:hidden">
+      <header className="border-b-4 border-primary lg:hidden" >
       <Collapse isOpened={!nav} springConfig={{stiffness: 150, damping: 30}}>
         <div className="flex justify-around py-2 bg-white">
 
@@ -84,13 +100,13 @@ const Header = () => {
 
 
     {/* ***** START WEB VERSION ***** */}
-    <header className="hidden lg:block border-b-4 border-primary">
+    <header className={ navBackground ? "hidden lg:block fixed w-full z-50 border-b-4 border-primary bg-white" : "hidden lg:block fixed w-full bg-white z-50"}   >
       <div className="flex text-sm ">
 
         {/* LOGO */}
         <div className="w-1/6 flex justify-start items-center m-0 pl-4">
             <Link to="/">
-              <img className="h-8 m-0" src={skillsFund} alt="Skills Fund Logo"/>
+              <img className={navBackground ? "h-8 m-0" : "h-10 m-0"} src={skillsFund} alt="Skills Fund Logo"/>
             </Link>
         </div>
 
