@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { FaTwitter, FaFacebookF } from "react-icons/fa"
 
 import Header from "./header"
-import "./layout.css"
+import "../styles/main.scss"
 
 // no updates necessary
 

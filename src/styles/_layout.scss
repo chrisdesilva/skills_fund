@@ -5,27 +5,27 @@
 
 .colorLink {
   transition: all 300ms;
-}
 
-.colorLink:hover {
-  color: #9d1996;
+  &:hover {
+    color: #9d1996;
+  }
 }
 
 .hoverButton {
   transition: all 200ms;
   transform: translateY(0);
   outline: none;
-}
 
-.hoverButton:hover {
-  box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.5);
-  transform: translateY(-1px);
-}
+  &:hover {
+    box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.5);
+    transform: translateY(-1px);
+  }
 
-.hoverButton:active {
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-  transform: translateY(0);
-  outline: none;
+  &:active {
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    transform: translateY(0);
+    outline: none;
+  }
 }
 
 .nav {
@@ -35,36 +35,36 @@
   background: white;
   z-index: 100;
   transition: all 300ms;
-}
 
-.nav.showNav {
-  border-bottom: 2px solid #9d1996;
-  z-index: 100;
-  width: 100%;
-  position: fixed;
-  display: block;
-}
+  &.showNav {
+    border-bottom: 2px solid #9d1996;
+    z-index: 100;
+    width: 100%;
+    position: fixed;
+    display: block;
+  }
 
-.navImg {
-  margin: 0;
-  height: 2rem;
-  transition: all 300ms;
-}
+  &__img {
+    margin: 0;
+    height: 2rem;
+    transition: all 300ms;
 
-.navImg.showNavImg {
-  height: 1.8rem;
+    &.showNavImg {
+      height: 1.8rem;
+    }
+  }
 }
 
 .subnav {
   float: left;
   overflow: hidden;
-}
 
-.subnav__content {
-  display: none;
-  position: absolute;
-  z-index: 1;
-  transition: all 300ms;
+  &__content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    transition: all 300ms;
+  }
 }
 
 .subnav:hover .subnav__content {

@@ -1,7 +1,11 @@
 import React from 'react'
-import { schools } from "../constants/getFunded"
 import { Link } from "gatsby"
-import "../styles/autocomplete.css"
+
+const schools = [
+    {
+        name: "Flatiron"
+    }
+]
 
 const programs = schools.map(school => school.name) // get list of all program names
 const links = schools.map(school => school.link) // get list of all program internal page links
