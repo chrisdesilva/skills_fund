@@ -7,13 +7,102 @@ exports.createPages = ({ graphql, actions }) => {
   return graphql(
     `
     {
-        allContentfulSchool {
-            edges {
-                node {
-                    slug
+      allContentfulSchool {
+        edges {
+          node {
+            applicationsLive
+            aprRange36
+            childrenContentfulSchoolProgramLoanInfoJsonNode {
+              url
+              name
+              locations
+              loanInfo {
+                loanTerm36
+                loanTerm60
+                maxLoanAmt
+              }
+              metros {
+                location
+                loanInfo {
+                  loanTerm36
+                  loanTerm60
+                  maxLoanAmt
                 }
+              }
             }
+            defaultLoanAmount
+            disabledLoanAppFormId
+            faq {
+              APR36
+              APR60
+              IOPayment36
+              IOPayment60
+              costOfLiving
+              costOfLivingPrograms
+              immediateRepayment
+              interestOnly
+              interestRate36
+              interestRate60
+              loanRange {
+                col
+                colAmount
+                maxAmount
+                programName
+              }
+              multCostOfLivingPrograms
+              multiPrograms
+              multipleLoanLengths
+              multipleLoanTypes
+              onlinePrograms
+              origFee
+              schoolHQState
+            }
+            headline
+            hubspotFormId
+            interestOnly {
+              APR36
+              APR60
+              FullMonthlyPayment36
+              FullMonthlyPayment60
+              IOPayment36
+              IOPayment60
+              LoanExampleAmt
+              LoanExampleAmtPlusOFee
+              LoanExampleOFeeAmt
+              financeCharge36
+              financeCharge60
+              programLength
+              programName
+            }
+            interestRate36
+            interestRate60
+            interestRates {
+              ir36
+              ir60
+            }
+            leadContent {
+              header
+              paragraph
+            }
+            multiLoanLengths
+            multiLoanTypes
+            netlifyFormName
+            placeholderAmount
+            programMaxText {
+              programMaxText
+            }
+            schoolLogo {
+              file {
+                url
+              }
+            }
+            schoolname
+            schoolurl
+            selectAProgram
+            slug
+          }
         }
+      }
     }
     `
   ).then(result => {

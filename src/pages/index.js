@@ -13,27 +13,13 @@ const IndexPage = () => {
   const [showInput, toggleShowInput] = useState(false)
   const [inputValue, setInputValue] = useState(false)
 
-  const data = useStaticQuery(graphql`
-  query {
-    schools: allContentfulSchoolProgramLoanInfoJsonNode {
-      nodes {
-        url
-        loanTerm36
-        loanTerm60
-      }
-    }
-  }
-`)
-
-
-
   return (
     <Layout>
       <SEO title="Home" />
       <div className="bg-white">
         
         <div id="banner" className={showInput ? "back-purple flex flex-col pt-8 px-4" : "flex flex-col pt-8 px-4"}>
-              <h1 className="text-center mb-0 pb-4 mt-16">How Education Pays Off at {data.schools.nodes[0].url}</h1>
+              <h1 className="text-center mb-0 pb-4 mt-16">How Education Pays Off</h1>
               <p className="text-center mb-0 pb-4">We won’t finance you to attend a crappy program. No tricks, gimmicks or teaser rates here. Just the help you deserve to build the career you want.</p>
               <p className="text-center text-primary font-bold mb-0 pb-4">It’s your future. Expect more from your school and lender.</p>
           <div className="relative">
