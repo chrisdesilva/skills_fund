@@ -1,5 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&display=swap');
+
+// ----- FONTS ----- //
+$font-body: 'Roboto Condensed', sans-serif;
+
+// ----- BREAKPOINTS ----- //
+
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Small devices
+@mixin sm {
+  @media (min-width: #{$breakpoint-sm}) {
+      @content;
+  }
+}
+
+// Medium devices
+@mixin md {
+  @media (min-width: #{$breakpoint-md}) {
+      @content;
+  }
+}
+
+// Large devices
+@mixin lg {
+  @media (min-width: #{$breakpoint-lg}) {
+      @content;
+  }
+}
+
+// Extra large devices
+@mixin xl {
+  @media (min-width: #{$breakpoint-xl}) {
+      @content;
+  }
+}
+
 // ----- COLORS ----- //
 
-$purple: #9d1996;
-$teal: #14a5a9;
-$yellow: rgb(246, 134, 14);
+$primary: #14a5a9;
+$secondary: #9d1996;
+$tertiary: rgb(246, 134, 14);
+$black: rgb(29, 29, 29);

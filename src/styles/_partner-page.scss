@@ -1,0 +1,165 @@
+.partner-page-container {
+    background-color: white;
+}
+
+.loanApp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $primary;
+    color: white;
+    padding: 2rem;
+
+    @include md {
+        margin: 0 4rem 0 4rem;
+        border-radius: 5px;
+        box-shadow: 5px 5px 10px gray;
+    }
+
+    &__content {
+        background: white;
+        padding: 2rem;
+        border-radius: 5px;
+        box-shadow: 5px 5px 10px $black;
+        color: $black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 1rem;
+        
+        @include md {
+            max-width: 50%;
+        }
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__img {
+        width: 15rem;
+
+        @include md {
+            width: 25rem;
+        }
+    }
+
+    &__online {
+        width: 100%;
+        text-align: center;    
+    }
+
+    &__subContent {
+        margin-top: 2rem;
+        text-align: center;
+
+        p > a {
+            &:hover {
+                color: white;
+            }
+        }
+
+        .disclaimers {
+            cursor: pointer;
+            position: relative;
+            margin-bottom: 0;
+            font-weight: bold;
+
+            &:before,
+            &:after {
+                transition: all 300ms;
+            }
+
+            &:after {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                width: 0%;
+                content: '';
+                color: transparent;
+                background: white;
+                height: 2px;
+            }
+
+            &:hover:after {
+                width: 75%;
+            }
+        }
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+        transition: all 300ms;
+
+        &:hover {
+            color: $primary;
+        }
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        text-align: center;
+
+        @include md {
+            font-size: 2.5rem;
+        }
+    }
+
+    h2 {
+        font-size: 1.25rem;
+        text-align: center;
+
+        @include md {
+            font-size: 2rem;
+        }
+    }
+
+    input:not(.btn) {
+        background: white;
+        padding: .5rem;
+        margin-bottom: 1rem;
+        width: 16rem;
+        border-radius: 5px;
+        border: 2px solid $primary;
+    }
+
+    select {
+        background: white;
+        padding: .5rem;
+        width: 16rem;
+        margin-bottom: 1rem;
+    }
+
+}
+
+.logos {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    &__image {
+        width: 10rem;
+        margin: 0;
+
+        @include md {
+            width: 16rem;
+        }
+    }
+
+    img {
+        margin: 0;
+    }
+}
+
+.gatsbyImage {
+    width: 20rem;
+}
+
+.gatsby-image-wrapper {
+    width: 100%;
+}

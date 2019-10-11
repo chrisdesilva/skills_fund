@@ -1,39 +1,185 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import ReactGA from "react-ga"
+import ReactPixel from "react-facebook-pixel"
+import { UnmountClosed as Collapse } from 'react-collapse'
 
 
 const PartnerPage = ({ data }) => {
 
-  const [loanUrl, setLoanUrl] = useState(data.school.loanInfo[0].url)
-  const [programName, setProgramName] = useState(data.school.loanInfo.name)
+  const [segment, setSegment] = useState(data.school.loanInfo[0].segment)
+  const [programName, setProgramName] = useState(data.school.loanInfo[0].name)
+  const [IP, setIP] = useState('')
+  const [email, setEmail] = useState('')
+  const [submitted, isSubmitted] = useState(false)
+  const [disclaimers, toggleDisclaimers] = useState(false)
 
+  // Get IP address from client for Hubspot analytics
+  async function fetchIP() {
+    const res = await fetch("https://ip.nf/me.json")
+    res
+        .json()
+        .then(res => setIP(res.ip.ip))
+        .catch(err => console.log(err))
+  }
+
+  useEffect(() => {
+    fetchIP();
+  })
 
   const updateLoanUrl = e => {
     const { options, selectedIndex } = e.target
-    setLoanUrl(e.target.value)
+    setSegment(e.target.value)
     setProgramName(options[selectedIndex].innerHTML)
   }
 
+  const handleChange = e => {
+    setEmail(e.target.value)
+  }
+
+  const redirectLoanApp = () => {
+    window.open(`https://sf.privateloan.studentloan.org/external/LoanApplication.do?lenderCode=${segment}`, "_blank", "noopener noreferrer")
+  };
+
+  const trackGoogleAnalyticsEvent = () => {
+    ReactGA.event({
+        category: `Apply Now Button`,
+        action: 'click',
+        label: 'submitted loan application'
+    })
+  }
+
+  const trackFacebookPixel = () => {
+    ReactPixel.track('InitiateCheckout', {
+        value: 7200.00,
+        currency: 'USD'
+    })
+  }
+
+  // submit form data to Hubspot, track Google Analytics event, and redirect user to loan application
+  const handleSubmit = e => {
+    e.preventDefault();
+    const url = `https://api.hsforms.com/submissions/v3/integration/submit/3871135/${data.school.hubspotFormId}`
+    
+    // hsCookie gets the data necessary to track Hubspot analytics
+    const hsCookie = document.cookie.split(';').reduce((cookies, cookie) => {
+        const [ name, value ] = cookie.split('=').map(c => c.trim());
+        cookies[name] = value;
+        return cookies;
+      }, {});
+
+    //   field names are all set to match internal values on Hubspot
+    const info = {
+    "fields": [
+        {
+        "name": "email",
+        "value": `${email}`
+        },
+        {
+        "name": "stakeholder_type",
+        "value": "Student"
+        },
+        {
+        "name": `${data.school.selectAProgram}`,
+        "value": `${programName}`
+        },
+        {
+        "name": "school",
+        "value": `${data.school.schoolname}`
+        },
+        {
+        "name": "student_loan_application_status",
+        "value": "BLA Click Email Submitted"
+        },
+        {
+        "name": "clicked_begin_loan_application_bla",
+        "value": "BLA Click"
+        },
+    ],
+    "context": {
+        "hutk": hsCookie.hubspotutk, // include this parameter and set it to the hubspotutk cookie value to enable cookie tracking on your submission
+        "pageUri": `${data.school.slug}`,
+        "pageName": `${data.school.schoolname} | Skills Fund`,
+        "ipAddress": `${IP}`
+    }
+    }
+
+    fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(info),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => res.json())
+    .then(response => console.log('success', response))
+    .catch(error => console.log('error: ', error))
+    
+    trackGoogleAnalyticsEvent()
+    trackFacebookPixel()
+    redirectLoanApp()
+    isSubmitted(true)
+}
     return (
         <Layout>
         <SEO title={`Partner page for Skills Fund and ${data.school.schoolname}`} />
-            <h1 style={{color: 'black'}}>{data.school.schoolname}</h1>
-            <h2>{data.school.schoolurl}</h2>
-            <h3>{data.school.slug}</h3>
-            <img style={{width: '25rem'}} src={data.school.schoolLogo.file.url} />
-            <select onChange={updateLoanUrl}>
-              {data.school.loanInfo.map((school, i) => <option key={school.name} value={school.url}>{school.name}</option>)}
-            </select>
-            <p>{loanUrl}</p>
-            <p>{programName}</p>
+          <div className="partner-page-container">
+            <div className="logos">
+              <img className="logos__image" src={data.school.schoolLogo.file.url} alt={`${data.school.schoolname} logo`}/>
+              <div className="logos__image" ><Img className="logos__skf" fluid={data.skfLogo.childImageSharp.fluid} alt="Skills Fund logo"/></div>
+            </div>
+            <div className="loanApp">
+              
+              <h1>Loan Application for {data.school.schoolname}</h1>
+              <div className="loanApp__content">
+                <h2>{data.school.schoolname} Tuition {data.school.faq.costOfLiving ? 'and Cost of Living' : null} Financing</h2>
+                <div className="loanApp__img"><Img fluid={data.march.childImageSharp.fluid} alt="Skills Fund logo"/></div>
+                  <form onSubmit={handleSubmit} className={`loanApp__form  ${data.school.schoolname}_apply_now program-apply`}>
+                    <label htmlFor="email">Email address</label>
+                    <input onChange={handleChange} type="email" name="email" value={email} placeholder="Enter your email address" />
+                    <select onChange={updateLoanUrl}>
+                      {data.school.loanInfo.map((school, i) => <option key={school.name} value={school.segment}>{school.name}</option>)}
+                    </select>
+                    {submitted ? <span>Thanks for applying! Your loan application has opened in a new window. If the application does not open and pop-up blockers have been disabled, please contact <a href="mailto:tech@skills.fund">Tech@Skills.Fund</a>.</span> : <input className="btn btn--submit" type="submit" value="APPLY NOW"/>}
+                  </form>
+                  <p className="loanApp__online"><strong>ATTENTION ONLINE STUDENTS: </strong>When entering "Applicant Information" within your loan application, <strong>please select {data.school.faq.schoolHQState} as "the state of the school you plan to attend."</strong></p>
+              </div>
+              <div className="loanApp__subContent">
+                <p>If you are a cosigner, begin the addendum now by clicking <a className="disclaimers" href="https://sf.privateloan.studentloan.org/Cosigner.do?execution=e1s1" rel="noreferrer noopener" target="_blank">here</a>.</p>
+                <p onClick={() => toggleDisclaimers(!disclaimers)}><span className="disclaimers">Disclaimers</span></p>
+                <Collapse isOpened={disclaimers} springConfig={{stiffness: 150, damping: 40}}>
+                  <div>
+                      <p><strong>Before you begin, please read these important notes:</strong></p>
+                      <p>Customer identification policy:</p>
+                      <p>For the purpose of the following notice, the words "you" and "your" mean the Borrower and the Cosigner. All applicants: Important Federal Law Notice - Important information about procedures for opening a new account: To help the government fight the funding of terrorism and money laundering activities, federal law requires all financial institutions to obtain, verify, and record information that identifies each person who opens an account. What this means for you: When you open an account, we will ask for your name, address, date of birth and other information that will allow us to identify you. We may also ask to see your driver's license or other identifying documents.</p>
+                      <p>Consent to share data:</p>
+                      <p>By clicking the box below and beginning the application, I consent under Federal and state privacy laws to NIMAA providing to Skills Fund information related to my application, enrollment, and completion, including but not limited to information contained in my original application and supplements as well as information regarding my completion, graduation, and post-program outcomes information.</p>
+                      <p><strong>While in the application, please note:</strong></p>
+                      <p>1. DO NOT use the browser Back button. Using the browser Back button may cause invalid information and delay the processing of your loan.</p>
+                      <p>2. Your application will not be complete until it has been signed and submitted along with any required documentation.</p>
+                      <p style={{margin: 0}}>3. You will need the address and phone number of 3 references to complete your application, including one relative not living with you. Others may be friends, employers, etc.</p>
+                  </div>
+              </Collapse>
+              </div>
+            </div>
+          </div>
         </Layout>
     )
 }
 
 export default PartnerPage;
+
+export const fluidImage = graphql`
+  fragment fluidImage on File {
+    childImageSharp {
+      fluid {
+        ...GatsbyImageSharpFluid
+      }
+    }
+  }
+`;
 
 export const pageQuery = graphql`
   query($slug: String!) {
@@ -41,7 +187,7 @@ export const pageQuery = graphql`
       applicationsLive
       aprRange36
       loanInfo: childrenContentfulSchoolProgramLoanInfoJsonNode {
-        url
+        segment
         name
         locations
         loanInfo {
@@ -128,6 +274,12 @@ export const pageQuery = graphql`
       schoolurl
       selectAProgram
       slug
+    }
+    skfLogo: file(relativePath: { eq: "skillsFund_logo.png" }){
+      ...fluidImage
+    }
+    march: file(relativePath: { eq: "PeopleMarch_Color.png" }){
+      ...fluidImage
     }
   }
 `;

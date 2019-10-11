@@ -13,7 +13,7 @@ exports.createPages = ({ graphql, actions }) => {
             applicationsLive
             aprRange36
             childrenContentfulSchoolProgramLoanInfoJsonNode {
-              url
+              segment
               name
               locations
               loanInfo {

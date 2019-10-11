@@ -1,10 +1,28 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.btn {
+  border-radius: 9999px;
+  width: 10rem;
+  padding: .5rem 1rem;
+  cursor: pointer;
+  box-shadow: 3px 5px 5px rgb(170, 170, 170);
+  border: 2px solid transparent;
+  transition: all 300ms;
+
+  &:hover {
+    box-shadow: 1px 3px 2px rgb(170, 170, 170);
+  }
+
+  &:active {
+    box-shadow: 1px 1px 2px rgb(170, 170, 170);
+    outline: none;
+  }
+
+  &--submit {
+    background: $primary;
+    color: white;
+  }
+}
 
 .colorLink {
-  transition: all 300ms;
 
   &:hover {
     color: #9d1996;
@@ -12,7 +30,6 @@
 }
 
 .hoverButton {
-  transition: all 200ms;
   transform: translateY(0);
   outline: none;
 
@@ -34,7 +51,6 @@
   width: 100%;
   background: white;
   z-index: 100;
-  transition: all 300ms;
 
   &.showNav {
     border-bottom: 2px solid #9d1996;
@@ -47,7 +63,6 @@
   &__img {
     margin: 0;
     height: 2rem;
-    transition: all 300ms;
 
     &.showNavImg {
       height: 1.8rem;
@@ -63,7 +78,6 @@
     display: none;
     position: absolute;
     z-index: 1;
-    transition: all 300ms;
   }
 }
 
@@ -71,7 +85,7 @@
   display: flex;
 }
 
-/* BEGIN GATSBY DEFAULT STYLING */
+/* ----- BEGIN GATSBY DEFAULT STYLING ----- */
 
 html {
   font-family: 'Roboto Condensed', sans-serif;
