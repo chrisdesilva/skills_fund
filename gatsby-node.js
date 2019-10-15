@@ -12,53 +12,27 @@ exports.createPages = ({ graphql, actions }) => {
           node {
             applicationsLive
             aprRange36
-            childrenContentfulSchoolProgramLoanInfoJsonNode {
-              segment
-              name
-              locations
-              loanInfo {
-                loanTerm36
-                loanTerm60
-                maxLoanAmt
-              }
-              metros {
-                location
-                loanInfo {
-                  loanTerm36
-                  loanTerm60
-                  maxLoanAmt
-                }
-              }
-            }
+            aprRange60
+            costOfLiving
             defaultLoanAmount
             disabledLoanAppFormId
-            faq {
+            hasImmediateRepayment
+            hasInterestOnly
+            hubspotFormId
+            immediateRepayment {
               APR36
               APR60
+              FullMonthlyPayment36
+              FullMonthlyPayment60
               IOPayment36
               IOPayment60
-              costOfLiving
-              costOfLivingPrograms
-              immediateRepayment
-              interestOnly
-              interestRate36
-              interestRate60
-              loanRange {
-                col
-                colAmount
-                maxAmount
-                programName
-              }
-              multCostOfLivingPrograms
-              multiPrograms
-              multipleLoanLengths
-              multipleLoanTypes
-              onlinePrograms
-              origFee
-              schoolHQState
+              LoanExampleAmt
+              LoanExampleAmtPlusOFee
+              LoanExampleOFeeAmt
+              financeCharge36
+              financeCharge60
+              programName
             }
-            headline
-            hubspotFormId
             interestOnly {
               APR36
               APR60
@@ -76,18 +50,34 @@ exports.createPages = ({ graphql, actions }) => {
             }
             interestRate36
             interestRate60
-            interestRates {
-              ir36
-              ir60
-            }
-            leadContent {
-              header
-              paragraph
+            loanRange {
+              loanRange
             }
             multiLoanLengths
             multiLoanTypes
-            netlifyFormName
+            multiPrograms
+            nextCohortStartDate
+            origFee
+            paymentTable {
+              data {
+                col
+                max
+                program
+                tuition
+              }
+              headers
+              show
+            }
             placeholderAmount
+            programLoanInfo {
+              name
+              segment
+              loanInfo {
+                loanTerm36
+                loanTerm60
+                maxLoanAmt
+              }
+            }
             programMaxText {
               programMaxText
             }
@@ -104,6 +94,7 @@ exports.createPages = ({ graphql, actions }) => {
         }
       }
     }
+    
     `
   ).then(result => {
       if (result.errors) {

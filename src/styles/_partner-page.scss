@@ -137,6 +137,47 @@
 
 }
 
+.loanCalculator {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 2rem;
+    align-items: center;
+
+    &__slider {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 80%;
+        height: 10px;
+        background: #d3d3d3;
+        border-radius: 5px;
+        outline: none;
+
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            background: $primary;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+    }
+
+    &__labels {
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+        text-align: center;
+    }
+
+    &__amount {
+        font-size: 1.5rem;
+        color: $primary;
+        font-weight: bold;
+    }
+}
+
 .logos {
     display: flex;
     justify-content: space-around;
