@@ -33,6 +33,8 @@ const PartnerPage = ({ data }) => {
               ir36={data.school.interestRate36}
               ir60={data.school.interestRate60}
               origFee={data.school.origFee}
+              hasIO={data.school.hasInterestOnly}
+              scales={data.scales.childImageSharp.fluid}
             />
           </div>
         </Layout>
@@ -148,6 +150,9 @@ export const pageQuery = graphql`
       ...fluidImage
     }
     march: file(relativePath: { eq: "PeopleMarch_Color.png" }){
+      ...fluidImage
+    }
+    scales: file(relativePath: { eq: "Scales_Color.png" }){
       ...fluidImage
     }
   }

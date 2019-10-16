@@ -135,7 +135,6 @@ const LoanApp = props => {
             </form>
         </div>
         <div className="loanApp__subContent">
-          <p>If you are a cosigner, begin the addendum now by clicking <a className="disclaimers" href="https://sf.privateloan.studentloan.org/Cosigner.do?execution=e1s1" rel="noreferrer noopener" target="_blank">here</a>.</p>
           <p onClick={() => toggleDisclaimers(!disclaimers)}><span className="disclaimers">Disclaimers</span></p>
           <Collapse isOpened={disclaimers} springConfig={{stiffness: 150, damping: 40}}>
             <div>

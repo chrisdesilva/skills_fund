@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import Img from "gatsby-image"
 
 const LoanCalculator = props => {
 
@@ -16,7 +17,10 @@ const LoanCalculator = props => {
         setLoanValue(e.target.value)
     }
 
-    const calculateMonthlyPayment = () => {
+    const calculateMonthlyPayment = e => {
+        if(monthlyPayment.payment36 || monthlyPayment.payment60) {
+            handleChange(e)
+        }
         const monthlyRate36 = (Number(props.ir36) / 100) / 12
         const monthlyRate60 = (Number(props.ir60) / 100) / 12
         const borrowedAmount = Number(loanValue) || Number(props.defaultLoanAmount)
@@ -33,25 +37,35 @@ const LoanCalculator = props => {
         setInterestPayment({payment36: interest36.toFixed(2), payment60: interest60.toFixed(2)})
     }
 
+    useEffect(() => {
+        calculateMonthlyPayment()
+    }, [])
+
     return (
         <div className="loanCalculator">
             <h2>Loan Calculator</h2>
-            <input className="loanCalculator__slider" onMouseUp={calculateMonthlyPayment} onChange={handleChange} type="range" min="2000" step="5" max={props.maxLoanAmt} value={loanValue}/>
-            <div className="loanCalculator__labels">
-                <p>$2,000</p>
-                <p >Loan Amount:<br/><span className="loanCalculator__amount">{formatter.format(loanValue)}</span></p>
-                <p>{formatter.format(props.maxLoanAmt)}</p>
-            </div>
-            <div className="loanCalculator__monthlyPayments">
-                <div className="loanCalculator__immediateRepayment">
-                    <p>Monthly Payment 36: {monthlyPayment.payment36}</p>
-                    <p>Monthly Payment 60: {monthlyPayment.payment60}</p>
+            <div className="loanCalculator__img"><Img fluid={props.scales} /></div>
+            <p>Find out exactly what you'll pay with a Skills Fund loan:</p>
+            <div className="loanCalculator__content">
+                <div className="loanCalculator__slider">
+                    <input className="loanCalculator__input" onChange={calculateMonthlyPayment} type="range" min="2000" step="5" max={props.maxLoanAmt} value={loanValue}/>
+                    <div className="loanCalculator__labels">
+                        <p>$2,000</p>
+                        <p >Loan Amount<br/><span className="loanCalculator__amount">{formatter.format(loanValue)}</span></p>
+                        <p>{formatter.format(props.maxLoanAmt)}</p>
+                    </div>
                 </div>
-                <div className="loanCalculator__interestOnly">
-                    <p>Monthly Payment 36: {monthlyPayment.payment36}</p>
-                    <p>Monthly Payment 60: {monthlyPayment.payment60}</p>
-                    <p>Interest Only 36: {interestPayment.payment36}</p>
-                    <p>Interest Only 60: {interestPayment.payment60}</p>
+                <div className="loanCalculator__monthlyPayments">
+                    <div className="loanCalculator__36months">
+                        <h3>36 Month Option</h3>
+                        {props.hasIO ? <><p>Interest Only Payment:</p> <p className="loanCalculator__paymentAmounts">${interestPayment.payment36}</p></> : null }
+                        <p>Monthly Payment:</p> <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment36}</p>
+                    </div>
+                    <div className="loanCalculator__60months">
+                        <h3>60 Month Option</h3>
+                        <p>Interest Only Payment:</p> <p className="loanCalculator__paymentAmounts">${interestPayment.payment60}</p>
+                        {props.hasIO ? <><p>Monthly Payment:</p> <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment60}</p></> : null }
+                    </div>
                 </div>
             </div>
         </div>

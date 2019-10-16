@@ -106,16 +106,16 @@
         text-align: center;
 
         @include md {
-            font-size: 2.5rem;
+            font-size: 2rem;
         }
     }
 
     h2 {
-        font-size: 1.25rem;
+        font-size: 1rem;
         text-align: center;
 
         @include md {
-            font-size: 2rem;
+            font-size: 1.2rem;
         }
     }
 
@@ -164,22 +164,81 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin-top: 2rem;
+    margin-top: 4rem;
     align-items: center;
+    margin-bottom: 5rem;
 
-    &__slider {
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+
+    &__36months {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        text-align: center;
+
+        @include md {
+            border: 2px solid lighten($black, 40);
+            box-shadow: 5px 7px 8px darken($primary, 10);
+            border-radius: 5px;
+            padding: 3rem;
+        }
+    }
+
+    &__60months {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        text-align: center;
+
+        @include md {
+            border: 2px solid lighten($black, 40);
+            box-shadow: 5px 7px 8px darken($primary, 10);
+            border-radius: 5px;
+            padding: 3rem;
+        }
+    }
+
+    &__amount {
+        font-size: 1.5rem;
+        color: $primary;
+        font-weight: bold;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 1rem;
+    }
+
+    &__img {
+        width: 15%;
+        margin-bottom: 2rem;
+    }
+
+    &__input {
         -webkit-appearance: none;
         appearance: none;
-        width: 80%;
+        width: 100%;
         height: 10px;
-        background: #d3d3d3;
+        background: #e7e7e7;
         border-radius: 5px;
         outline: none;
 
         &::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            background: $primary;
+            background: $secondary;
             width: 20px;
             height: 20px;
             cursor: pointer;
@@ -190,14 +249,46 @@
     &__labels {
         display: flex;
         justify-content: space-between;
-        width: 80%;
+        width: 100%;
         text-align: center;
+        margin-top: .5rem;
     }
 
-    &__amount {
-        font-size: 1.5rem;
-        color: $primary;
+    &__monthlyPayments {
+        width: 100%;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid lighten($black, 40);
+        box-shadow: 5px 7px 8px darken($primary, 10);
+        border-radius: 5px;
+        margin-top: 2rem;
+
+        @include md {
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
+            justify-content: space-evenly;
+        }
+
+        p {
+            margin-bottom: .5rem;
+        }
+    }
+
+    &__paymentAmounts {
         font-weight: bold;
+        color: $primary;
+        font-size: 1.5rem;
+    }
+
+    &__slider {
+        width: 100%;
+        padding: 0 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 }
 
