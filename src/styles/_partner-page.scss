@@ -1,5 +1,35 @@
-.partner-page-container {
+select {
+    display: block;
+    font-family: $font-body;
+    line-height: 1.3;
+    padding: .5rem;
+    width: 100%;
+    max-width: 100%; 
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    border: 2px solid lighten($black, 30);
+    border-radius: 0;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
     background-color: white;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat, repeat;
+    background-position: right .7em top 50%, 0 0;
+    background-size: .65em auto, 100%;
+
+    &:focus {
+        border-color: 2px solid lighten($black, 30);
+        outline: none;
+    }
+}
+
+.gatsbyImage {
+    width: 20rem;
+}
+
+.gatsby-image-wrapper {
+    width: 100%;
 }
 
 .loanApp {
@@ -14,6 +44,47 @@
         margin: 0 4rem 0 4rem;
         border-radius: 5px;
         box-shadow: 5px 5px 10px gray;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+        transition: all 300ms;
+
+        &:hover {
+            color: $primary;
+        }
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        text-align: center;
+
+        @include md {
+            font-size: 2rem;
+        }
+    }
+
+    h2 {
+        font-size: 1rem;
+        text-align: center;
+
+        @include md {
+            font-size: 1.2rem;
+        }
+    }
+
+    input:not(.btn) {
+        background: white;
+        padding: .5rem;
+        margin-bottom: 1rem;
+        width: 16rem;
+        border: 2px solid lighten($black, 30);
+
+        &:focus {
+            outline: none;
+            border: 2px solid lighten($black, 30);
+        }
     }
 
     &__content {
@@ -90,74 +161,6 @@
             }
         }
     }
-
-    a {
-        text-decoration: none;
-        color: inherit;
-        transition: all 300ms;
-
-        &:hover {
-            color: $primary;
-        }
-    }
-
-    h1 {
-        font-size: 1.5rem;
-        text-align: center;
-
-        @include md {
-            font-size: 2rem;
-        }
-    }
-
-    h2 {
-        font-size: 1rem;
-        text-align: center;
-
-        @include md {
-            font-size: 1.2rem;
-        }
-    }
-
-    input:not(.btn) {
-        background: white;
-        padding: .5rem;
-        margin-bottom: 1rem;
-        width: 16rem;
-        border: 2px solid lighten($black, 30);
-
-        &:focus {
-            outline: none;
-            border: 2px solid lighten($black, 30);
-        }
-    }
-
-    select {
-        display: block;
-        font-family: $font-body;
-        line-height: 1.3;
-        padding: .5rem;
-        width: 100%;
-        max-width: 100%; 
-        box-sizing: border-box;
-        margin-bottom: 1rem;
-        border: 2px solid lighten($black, 30);
-        border-radius: 0;
-        -moz-appearance: none;
-        -webkit-appearance: none;
-        appearance: none;
-        background-color: white;
-        background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
-        background-repeat: no-repeat, repeat;
-        background-position: right .7em top 50%, 0 0;
-        background-size: .65em auto, 100%;
-
-        &:focus {
-            border-color: 2px solid lighten($black, 30);
-            outline: none;
-        }
-    }
-
 }
 
 .loanCalculator {
@@ -254,6 +257,11 @@
         margin-top: .5rem;
     }
 
+    &__leadText {
+        padding: 0 1rem;
+        text-align: center;
+    }
+
     &__monthlyPayments {
         width: 100%;
         padding: 0 1rem;
@@ -283,6 +291,13 @@
         font-size: 1.5rem;
     }
 
+    &__select {
+        display: flex;
+        align-self: center;
+        width: 16rem;
+        margin-bottom: 1rem;
+    }
+
     &__slider {
         width: 100%;
         padding: 0 2rem;
@@ -297,6 +312,10 @@
     justify-content: space-around;
     align-items: center;
 
+    img {
+        margin: 0;
+    }
+
     &__image {
         width: 8rem;
         margin: 0;
@@ -306,16 +325,8 @@
             width: 10rem;
         }
     }
-
-    img {
-        margin: 0;
-    }
 }
 
-.gatsbyImage {
-    width: 20rem;
-}
-
-.gatsby-image-wrapper {
-    width: 100%;
+.partner-page-container {
+    background-color: white;
 }

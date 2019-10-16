@@ -9,6 +9,8 @@ import LoanCalculator from "../components/partner-pages/loanCalculator"
 
 const PartnerPage = ({ data }) => {
 
+  const loanInfo = data.school.loanInfo.map(program => program)
+
     return (
         <Layout>
         <SEO title={`Partner page for Skills Fund and ${data.school.schoolname}`} />
@@ -35,6 +37,7 @@ const PartnerPage = ({ data }) => {
               origFee={data.school.origFee}
               hasIO={data.school.hasInterestOnly}
               scales={data.scales.childImageSharp.fluid}
+              loanInfo={loanInfo}
             />
           </div>
         </Layout>

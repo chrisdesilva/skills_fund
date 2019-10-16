@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import Img from "gatsby-image"
+import Img from 'gatsby-image'
 
 const LoanCalculator = props => {
 
     const [loanValue, setLoanValue] = useState(props.defaultLoanAmount)
+    const [programMax, setProgramMax] = useState(props.maxLoanAmt)
     const [monthlyPayment, setMonthlyPayment] = useState({ payment36: null, payment60: null })
     const [interestPayment, setInterestPayment] = useState({ payment36: null, payment60: null })
 
@@ -17,10 +18,7 @@ const LoanCalculator = props => {
         setLoanValue(e.target.value)
     }
 
-    const calculateMonthlyPayment = e => {
-        if(monthlyPayment.payment36 || monthlyPayment.payment60) {
-            handleChange(e)
-        }
+    const calculateMonthlyPayment = () => {
         const monthlyRate36 = (Number(props.ir36) / 100) / 12
         const monthlyRate60 = (Number(props.ir60) / 100) / 12
         const borrowedAmount = Number(loanValue) || Number(props.defaultLoanAmount)
@@ -37,36 +35,54 @@ const LoanCalculator = props => {
         setInterestPayment({payment36: interest36.toFixed(2), payment60: interest60.toFixed(2)})
     }
 
+    const setSlider = e => {
+        let index = e.target.value
+        setProgramMax(Number(props['loanInfo'][index]['loanInfo']['maxLoanAmt']))        
+    }
+
     useEffect(() => {
         calculateMonthlyPayment()
     }, [])
 
     return (
         <div className="loanCalculator">
+
             <h2>Loan Calculator</h2>
             <div className="loanCalculator__img"><Img fluid={props.scales} /></div>
-            <p>Find out exactly what you'll pay with a Skills Fund loan:</p>
+            <p className="loanCalculator__leadText">Find out exactly what you'll pay with a Skills Fund loan:</p>
+
             <div className="loanCalculator__content">
+                <div className="loanCalculator__select">
+                    <select onChange={setSlider}>
+                        {props.loanInfo.map((program, i) => <option value={i} key={program.name}>{program.name}</option>)}
+                    </select>
+                </div>
+
                 <div className="loanCalculator__slider">
-                    <input className="loanCalculator__input" onChange={calculateMonthlyPayment} type="range" min="2000" step="5" max={props.maxLoanAmt} value={loanValue}/>
+                    <input className="loanCalculator__input" onChange={handleChange} onTouchEnd={calculateMonthlyPayment} onMouseUp={calculateMonthlyPayment} type="range" min="2000" step="5" max={programMax} value={loanValue}/>
                     <div className="loanCalculator__labels">
                         <p>$2,000</p>
                         <p >Loan Amount<br/><span className="loanCalculator__amount">{formatter.format(loanValue)}</span></p>
-                        <p>{formatter.format(props.maxLoanAmt)}</p>
+                        <p>{formatter.format(programMax)}</p>
                     </div>
                 </div>
+
                 <div className="loanCalculator__monthlyPayments">
+
                     <div className="loanCalculator__36months">
                         <h3>36 Month Option</h3>
                         {props.hasIO ? <><p>Interest Only Payment:</p> <p className="loanCalculator__paymentAmounts">${interestPayment.payment36}</p></> : null }
                         <p>Monthly Payment:</p> <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment36}</p>
                     </div>
+
                     <div className="loanCalculator__60months">
                         <h3>60 Month Option</h3>
                         <p>Interest Only Payment:</p> <p className="loanCalculator__paymentAmounts">${interestPayment.payment60}</p>
                         {props.hasIO ? <><p>Monthly Payment:</p> <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment60}</p></> : null }
                     </div>
+
                 </div>
+
             </div>
         </div>
     )

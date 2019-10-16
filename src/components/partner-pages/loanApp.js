@@ -122,9 +122,11 @@ const LoanApp = props => {
         <div className="loanApp">
               
         <h1>Loan Application for {props.schoolname}</h1>
+
         <div className="loanApp__content">
           <h2>{props.schoolname} Tuition {props.costOfLiving ? 'and Cost of Living' : null} Financing</h2>
           <div className="loanApp__img"><Img fluid={props.skfLogo} alt="Skills Fund logo"/></div>
+            
             <form onSubmit={handleSubmit} className={`loanApp__form  ${props.schoolname}_apply_now program-apply`}>
               <label htmlFor="email">Email address</label>
               <input onChange={handleChange} type="email" name="email" value={email} placeholder="Enter your email address" />
@@ -133,7 +135,9 @@ const LoanApp = props => {
               </select>
               {submitted ? <span>Thanks for applying! Your loan application has opened in a new window. If the application does not open and pop-up blockers have been disabled, please contact <a href="mailto:tech@skills.fund">Tech@Skills.Fund</a>.</span> : <input className="btn btn--submit" type="submit" value="APPLY NOW"/>}
             </form>
+            
         </div>
+
         <div className="loanApp__subContent">
           <p onClick={() => toggleDisclaimers(!disclaimers)}><span className="disclaimers">Disclaimers</span></p>
           <Collapse isOpened={disclaimers} springConfig={{stiffness: 150, damping: 40}}>
@@ -150,6 +154,7 @@ const LoanApp = props => {
             </div>
         </Collapse>
         </div>
+
       </div>
     )
 }
