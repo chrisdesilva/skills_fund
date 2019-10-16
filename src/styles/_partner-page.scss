@@ -297,14 +297,20 @@ select {
 
     &__select {
         display: flex;
+        flex-direction: column;
         align-self: center;
         width: 16rem;
-        margin-bottom: 1rem;
+        justify-content: space-evenly;
+        height: 150px;
+
+        select {
+            margin-bottom: 0;
+        }
     }
 
     &__slider {
         width: 100%;
-        padding: 0 2rem;
+        padding: 2rem 2rem;
         display: flex;
         flex-direction: column;
         justify-content: center;

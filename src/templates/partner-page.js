@@ -23,7 +23,7 @@ const PartnerPage = ({ data }) => {
               schoolname={data.school.schoolname}
               costOfLiving={data.school.costOfLiving}
               skfLogo={data.march.childImageSharp.fluid}
-              loanInfo={data.school.loanInfo}
+              loanInfo={data.school.loanURLs}
               hubspotFormId={data.school.hubspotFormId}
               selectAProgram={data.school.selectAProgram}
               slug={data.school.slug}
@@ -35,7 +35,6 @@ const PartnerPage = ({ data }) => {
               ir36={data.school.interestRate36}
               ir60={data.school.interestRate60}
               origFee={data.school.origFee}
-              hasIO={data.school.hasInterestOnly}
               scales={data.scales.childImageSharp.fluid}
               loanInfo={loanInfo}
             />
@@ -64,12 +63,23 @@ export const pageQuery = graphql`
       aprRange60
       loanInfo: childrenContentfulSchoolProgramLoanInfoJsonNode {
         name
-        segment
+        hasIO
+        hasIR
+        multiMetros
+        loanType
+        metros {
+          location
+          maxLoanAmt
+        }
         loanInfo {
           loanTerm36
           loanTerm60
           maxLoanAmt
         }
+      }
+      loanURLs: childrenContentfulSchoolLoanUrLsJsonNode {
+        name
+        segment
       }
       costOfLiving
       defaultLoanAmount
@@ -127,15 +137,6 @@ export const pageQuery = graphql`
         show
       }
       placeholderAmount
-      programLoanInfo {
-        name
-        segment
-        loanInfo {
-          loanTerm36
-          loanTerm60
-          maxLoanAmt
-        }
-      }
       programMaxText {
         programMaxText
       }

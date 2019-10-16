@@ -53,6 +53,10 @@ exports.createPages = ({ graphql, actions }) => {
             loanRange {
               loanRange
             }
+            loanUrLs {
+              name
+              segment
+            }
             multiLoanLengths
             multiLoanTypes
             multiPrograms
@@ -71,7 +75,14 @@ exports.createPages = ({ graphql, actions }) => {
             placeholderAmount
             programLoanInfo {
               name
-              segment
+              hasIO
+              hasIR
+              multiMetros
+              loanType
+              metros {
+                location
+                maxLoanAmt
+              }
               loanInfo {
                 loanTerm36
                 loanTerm60

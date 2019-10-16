@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Img from 'gatsby-image'
+import { UnmountClosed as Collapse } from 'react-collapse'
 
 const LoanCalculator = props => {
 
@@ -7,6 +8,10 @@ const LoanCalculator = props => {
     const [programMax, setProgramMax] = useState(props.maxLoanAmt)
     const [monthlyPayment, setMonthlyPayment] = useState({ payment36: null, payment60: null })
     const [interestPayment, setInterestPayment] = useState({ payment36: null, payment60: null })
+    const [loanType, setLoanType] = useState('io')
+    const metros = props.loanInfo.map(program => program.metros)
+    const multiMetros = props.loanInfo.map(program => program.multiMetros)
+    const [programIndex, setProgramIndex] = useState(0)
 
     const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
@@ -14,7 +19,7 @@ const LoanCalculator = props => {
         minimumFractionDigits: 0
     })
 
-    const handleChange = e => {
+    const handleSliderAmt = e => {
         setLoanValue(e.target.value)
     }
 
@@ -35,9 +40,19 @@ const LoanCalculator = props => {
         setInterestPayment({payment36: interest36.toFixed(2), payment60: interest60.toFixed(2)})
     }
 
-    const setSlider = e => {
+    const handleProgramName = e => {
         let index = e.target.value
-        setProgramMax(Number(props['loanInfo'][index]['loanInfo']['maxLoanAmt']))        
+        setProgramIndex(index)
+        setProgramMax(Number(props['loanInfo'][index]['loanInfo']['maxLoanAmt']))
+        console.log(multiMetros)        
+    }
+
+    const handleLoanType = e => {
+        setLoanType(e.target.value)
+    }
+
+    const handleMetro = e => {
+        setProgramMax(e.target.value)
     }
 
     useEffect(() => {
@@ -53,13 +68,28 @@ const LoanCalculator = props => {
 
             <div className="loanCalculator__content">
                 <div className="loanCalculator__select">
-                    <select onChange={setSlider}>
-                        {props.loanInfo.map((program, i) => <option value={i} key={program.name}>{program.name}</option>)}
-                    </select>
+                    <div>
+                        <select onChange={handleProgramName}>
+                            {props.loanInfo.map((program, i) => <option value={i} key={program.name}>{program.name}</option>)}
+                        </select>
+                    </div>
+
+                    <Collapse isOpened={props.loanInfo[programIndex].hasIO && props.loanInfo[programIndex].hasIR}>
+                        <select onChange={handleLoanType}>
+                            <option value="io">Interest-Only</option>
+                            <option value="ir">Immediate Repayment</option>
+                        </select>
+                    </Collapse>
+
+                    <Collapse isOpened={multiMetros[programIndex]}>
+                        <select onChange={handleMetro}>
+                            {metros.map(city => city.map(program => <option key={program.name} value={program.maxLoanAmt}>{program.location}</option>))}
+                        </select>
+                    </Collapse>
                 </div>
 
                 <div className="loanCalculator__slider">
-                    <input className="loanCalculator__input" onChange={handleChange} onTouchEnd={calculateMonthlyPayment} onMouseUp={calculateMonthlyPayment} type="range" min="2000" step="5" max={programMax} value={loanValue}/>
+                    <input className="loanCalculator__input" onChange={handleSliderAmt} onTouchEnd={calculateMonthlyPayment} onMouseUp={calculateMonthlyPayment} type="range" min="2000" step="5" max={programMax} value={loanValue}/>
                     <div className="loanCalculator__labels">
                         <p>$2,000</p>
                         <p >Loan Amount<br/><span className="loanCalculator__amount">{formatter.format(loanValue)}</span></p>
@@ -70,15 +100,17 @@ const LoanCalculator = props => {
                 <div className="loanCalculator__monthlyPayments">
 
                     <div className="loanCalculator__36months">
-                        <h3>36 Month Option</h3>
-                        {props.hasIO ? <><p>Interest Only Payment:</p> <p className="loanCalculator__paymentAmounts">${interestPayment.payment36}</p></> : null }
+                        <h3>{loanType === "io" ? 'Interest-Only' : 'Immediate Repayment'}</h3>
+                        <h4>36 Month Option</h4>
+                        {loanType === "io" ? <><p>Interest Only Payment:</p> <p className="loanCalculator__paymentAmounts">${interestPayment.payment36}</p></> : null }
                         <p>Monthly Payment:</p> <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment36}</p>
                     </div>
 
                     <div className="loanCalculator__60months">
-                        <h3>60 Month Option</h3>
+                        <h3>{loanType === "io" ? 'Interest-Only' : 'Immediate Repayment'}</h3>
+                        <h4>60 Month Option</h4>
                         <p>Interest Only Payment:</p> <p className="loanCalculator__paymentAmounts">${interestPayment.payment60}</p>
-                        {props.hasIO ? <><p>Monthly Payment:</p> <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment60}</p></> : null }
+                        {loanType === "io" ? <><p>Monthly Payment:</p> <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment60}</p></> : null }
                     </div>
 
                 </div>
