@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
       <Header siteTitle={data.site.siteMetadata.title} />
       <div>
         <main>{children}</main>
-        <footer className="text-center my-8">
+        {/* <footer className="text-center my-8">
           <div className="flex flex-col md:flex-row">
             <div className="w-full md:w-1/3">
               <p className="uppercase mb-1"><a href="https://skills.fund/privacy-policy" target="_blank" rel="noreferrer noopener" className="colorLink">privacy policy</a></p>
@@ -40,7 +40,7 @@ const Layout = ({ children }) => {
             </div>
           </div>
           <p>© 2015-{new Date().getFullYear()}, Skills Fund, LLC</p>
-        </footer>
+        </footer> */}
       </div>
     </>
   )

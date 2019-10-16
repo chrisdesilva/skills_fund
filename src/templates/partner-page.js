@@ -30,6 +30,9 @@ const PartnerPage = ({ data }) => {
             <LoanCalculator 
               maxLoanAmt={data.school.loanInfo[0].loanInfo.maxLoanAmt}
               defaultLoanAmount={data.school.defaultLoanAmount}
+              ir36={data.school.interestRate36}
+              ir60={data.school.interestRate60}
+              origFee={data.school.origFee}
             />
           </div>
         </Layout>
