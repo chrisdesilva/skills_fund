@@ -11,6 +11,8 @@ const LoanCalculator = props => {
     const [loanType, setLoanType] = useState('io')
     const metros = props.loanInfo.map(program => program.metros)
     const multiMetros = props.loanInfo.map(program => program.multiMetros)
+    const [metroMax, setMetroMax] = useState(metros[0][0].maxLoanAmt)
+    const [metroIndex, setMetroIndex] = useState(0)
     const [programIndex, setProgramIndex] = useState(0)
 
     const formatter = new Intl.NumberFormat('en-US', {
@@ -43,7 +45,6 @@ const LoanCalculator = props => {
     const handleProgramName = e => {
         let index = e.target.value
         setProgramIndex(Number(index))
-        console.log(programIndex, programMax)    
     }
 
     const handleLoanType = e => {
@@ -51,16 +52,23 @@ const LoanCalculator = props => {
     }
 
     const handleMetro = e => {
-        setProgramMax(e.target.value)
+        let index = e.target.value
+        setMetroIndex(Number(index))
     }
 
     useEffect(() => {
         calculateMonthlyPayment()
-        setProgramMax(Number(props['loanInfo'][programIndex]['loanInfo']['maxLoanAmt']))
-        if(props.defaultLoanAmount > programMax) {
-            setLoanValue(programMax)
+        if(props.loanInfo[programIndex]['multiMetros']){
+            setProgramMax(metros[programIndex][metroIndex]['maxLoanAmt'])
+        } else {
+            setProgramMax(props['loanInfo'][programIndex]['loanInfo']['maxLoanAmt'])
         }
-    }, [loanValue, programIndex, programMax])
+        if(props.defaultLoanAmount > props['loanInfo'][programIndex]['loanInfo']['maxLoanAmt']) {
+            setLoanValue(props['loanInfo'][programIndex]['loanInfo']['maxLoanAmt'])
+        } else {
+            setLoanValue(props.defaultLoanAmount)
+        }
+    }, [metroIndex, metroMax, programIndex, programMax])
 
     return (
         <div className="loanCalculator">
@@ -93,7 +101,7 @@ const LoanCalculator = props => {
 
                     <Collapse className="loanCalculator__selectInput" isOpened={multiMetros[programIndex]}>
                         <select onChange={handleMetro}>
-                            {metros.map(city => city.map(program => <option key={program.name} value={program.maxLoanAmt}>{program.location}</option>))}
+                            {metros.map(city => city.map((program, i) => <option key={program.name} value={i}>{program.location}</option>))}
                         </select>
                     </Collapse>
                 </div>
@@ -106,19 +114,20 @@ const LoanCalculator = props => {
                         <p>{formatter.format(programMax)}</p>
                     </div>
                 </div>
-
+                <div className="loanCalculator__monthlyPayments">
                 <div className="loanCalculator__36months loanCalculator__monthlyPayments">
                     <h3>{loanType === "io" ? 'Interest-Only' : 'Immediate Repayment'}</h3>
                     <h4>36 Month Option</h4>
-                    {loanType === "io" ? <><p>Interest Only Payment:</p> <p className="loanCalculator__paymentAmounts">${interestPayment.payment36}</p></> : null }
-                    <p>Monthly Payment:</p> <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment36}</p>
+                    {loanType === "io" ? <><p className="loanCalculator__paymentAmounts">${interestPayment.payment36}</p><p className="loanCalculator__paymentLabel">Interest Only Payment</p></> : null }
+                    <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment36}</p><p className="loanCalculator__paymentLabel">Monthly Payment</p>
                 </div>
 
                 <div className="loanCalculator__60months loanCalculator__monthlyPayments">
                     <h3>{loanType === "io" ? 'Interest-Only' : 'Immediate Repayment'}</h3>
                     <h4>60 Month Option</h4>
-                    <p>Interest Only Payment:</p> <p className="loanCalculator__paymentAmounts">${interestPayment.payment60}</p>
-                    {loanType === "io" ? <><p>Monthly Payment:</p> <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment60}</p></> : null }
+                    <p className="loanCalculator__paymentAmounts">${interestPayment.payment60}</p><p className="loanCalculator__paymentLabel">Interest Only Payment</p> 
+                    {loanType === "io" ? <> <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment60}</p><p className="loanCalculator__paymentLabel">Monthly Payment</p></> : null }
+                </div>
                 </div>
 
             </div>

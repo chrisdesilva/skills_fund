@@ -108,11 +108,7 @@ select {
     }
 
     &__img {
-        width: 15rem;
-
-        @include md {
-            width: 25rem;
-        }
+        width: 100%;
     }
 
     &__online {
@@ -163,7 +159,7 @@ select {
 
 .loanCalculator {
     h3 {
-        font-size: 1.1rem;
+        font-size: .75rem;
     }
 
     &__36months {
@@ -172,14 +168,9 @@ select {
         align-items: center;
         padding: 0 1rem;
         text-align: center;
-        grid-area: 36months;
 
         @include md {
-            padding: 3rem;
-        }
-
-        p:last-child {
-            margin-bottom: 1.5rem;;
+            padding: 3rem 3rem 1rem 3rem;
         }
     }
 
@@ -189,37 +180,12 @@ select {
         align-items: center;
         padding: 0 1rem;
         text-align: center;
-        grid-area: 60months;
         position: relative;
 
         @include md {
-            padding: 3rem;
+            padding: 3rem 3rem 1rem 3rem;
         }
 
-        &:before {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-            width: 50%;
-            content: '.';
-            height: 2px;
-            background: darken($primary, 15);
-            color: transparent;
-
-            @include md {
-                height: 0;
-            }
-        }
-
-        h3 {
-            visibility: hidden;
-
-            @include md {
-                visibility: visible;
-            }
-        }
     }
 
     &__amount {
@@ -233,8 +199,8 @@ select {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             grid-template-areas:
-            "select 36months 60months"
-            "select  slider   slider"
+            "select monthlyPayments monthlyPayments"
+            "select     slider          slider"
         }
     }
 
@@ -289,6 +255,10 @@ select {
     }
 
     &__monthlyPayments {
+        grid-area: monthlyPayments;
+        display: flex;
+        justify-content: space-evenly;
+
         h3 {
             margin-bottom: .5rem;
         }
@@ -301,7 +271,12 @@ select {
     &__paymentAmounts {
         font-weight: bold;
         color: lighten($primary, 10);
-        font-size: 1.5rem;
+        font-size: 1.75rem;
+    }
+
+    &__paymentLabel {
+        margin-top: -.75rem;
+        font-size: .75rem;
     }
 
     &__select {
