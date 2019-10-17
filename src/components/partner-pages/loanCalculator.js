@@ -42,9 +42,8 @@ const LoanCalculator = props => {
 
     const handleProgramName = e => {
         let index = e.target.value
-        setProgramIndex(index)
-        setProgramMax(Number(props['loanInfo'][index]['loanInfo']['maxLoanAmt']))
-        console.log(multiMetros)        
+        setProgramIndex(Number(index))
+        console.log(programIndex, programMax)    
     }
 
     const handleLoanType = e => {
@@ -57,31 +56,42 @@ const LoanCalculator = props => {
 
     useEffect(() => {
         calculateMonthlyPayment()
-    }, [])
+        setProgramMax(Number(props['loanInfo'][programIndex]['loanInfo']['maxLoanAmt']))
+        if(props.defaultLoanAmount > programMax) {
+            setLoanValue(programMax)
+        }
+    }, [loanValue, programIndex, programMax])
 
     return (
         <div className="loanCalculator">
 
-            <h2>Loan Calculator</h2>
-            <div className="loanCalculator__img"><Img fluid={props.scales} /></div>
-            <p className="loanCalculator__leadText">Find out exactly what you'll pay with a Skills Fund loan:</p>
-
             <div className="loanCalculator__content">
+
                 <div className="loanCalculator__select">
-                    <div>
+                    <h2>Simple. Transparent.</h2>
+                    {/* <div className="loanCalculator__img"><Img fluid={props.scales} /></div> */}
+                    <p id="leadText">Figuring out your monthly payments on a loan shouldn't require a math degree. Find out exactly what you'll pay with a Skills Fund loan:</p>
+                    
+                    <p>{` `}</p>
+
+                    <div className="loanCalculator__selectInput">
                         <select onChange={handleProgramName}>
                             {props.loanInfo.map((program, i) => <option value={i} key={program.name}>{program.name}</option>)}
                         </select>
                     </div>
 
-                    <Collapse isOpened={props.loanInfo[programIndex].hasIO && props.loanInfo[programIndex].hasIR}>
+                    <p>{` `}</p>
+
+                    <Collapse className="loanCalculator__selectInput" isOpened={props.loanInfo[programIndex].hasIO && props.loanInfo[programIndex].hasIR}>
                         <select onChange={handleLoanType}>
                             <option value="io">Interest-Only</option>
                             <option value="ir">Immediate Repayment</option>
                         </select>
                     </Collapse>
 
-                    <Collapse isOpened={multiMetros[programIndex]}>
+                    <p>{` `}</p>
+
+                    <Collapse className="loanCalculator__selectInput" isOpened={multiMetros[programIndex]}>
                         <select onChange={handleMetro}>
                             {metros.map(city => city.map(program => <option key={program.name} value={program.maxLoanAmt}>{program.location}</option>))}
                         </select>
@@ -97,22 +107,18 @@ const LoanCalculator = props => {
                     </div>
                 </div>
 
-                <div className="loanCalculator__monthlyPayments">
+                <div className="loanCalculator__36months loanCalculator__monthlyPayments">
+                    <h3>{loanType === "io" ? 'Interest-Only' : 'Immediate Repayment'}</h3>
+                    <h4>36 Month Option</h4>
+                    {loanType === "io" ? <><p>Interest Only Payment:</p> <p className="loanCalculator__paymentAmounts">${interestPayment.payment36}</p></> : null }
+                    <p>Monthly Payment:</p> <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment36}</p>
+                </div>
 
-                    <div className="loanCalculator__36months">
-                        <h3>{loanType === "io" ? 'Interest-Only' : 'Immediate Repayment'}</h3>
-                        <h4>36 Month Option</h4>
-                        {loanType === "io" ? <><p>Interest Only Payment:</p> <p className="loanCalculator__paymentAmounts">${interestPayment.payment36}</p></> : null }
-                        <p>Monthly Payment:</p> <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment36}</p>
-                    </div>
-
-                    <div className="loanCalculator__60months">
-                        <h3>{loanType === "io" ? 'Interest-Only' : 'Immediate Repayment'}</h3>
-                        <h4>60 Month Option</h4>
-                        <p>Interest Only Payment:</p> <p className="loanCalculator__paymentAmounts">${interestPayment.payment60}</p>
-                        {loanType === "io" ? <><p>Monthly Payment:</p> <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment60}</p></> : null }
-                    </div>
-
+                <div className="loanCalculator__60months loanCalculator__monthlyPayments">
+                    <h3>{loanType === "io" ? 'Interest-Only' : 'Immediate Repayment'}</h3>
+                    <h4>60 Month Option</h4>
+                    <p>Interest Only Payment:</p> <p className="loanCalculator__paymentAmounts">${interestPayment.payment60}</p>
+                    {loanType === "io" ? <><p>Monthly Payment:</p> <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment60}</p></> : null }
                 </div>
 
             </div>
