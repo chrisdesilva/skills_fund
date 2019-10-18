@@ -7,18 +7,19 @@ const LoanCalculator = props => {
     const [loanValue, setLoanValue] = useState(props.defaultLoanAmount)
     const [programMax, setProgramMax] = useState(props.maxLoanAmt)
     const [monthlyPayment, setMonthlyPayment] = useState({ payment36: null, payment60: null })
+    const [totalPayment, setTotalPayment] = useState({ payment36: null, payment60: null })
     const [interestPayment, setInterestPayment] = useState({ payment36: null, payment60: null })
-    const [loanType, setLoanType] = useState('io')
+    const [loanType, setLoanType] = useState(props.loanInfo[0].loanType)
     const metros = props.loanInfo.map(program => program.metros)
     const multiMetros = props.loanInfo.map(program => program.multiMetros)
-    const [metroMax, setMetroMax] = useState(metros[0][0].maxLoanAmt)
+    const metroMax = metros[0][0].maxLoanAmt
     const [metroIndex, setMetroIndex] = useState(0)
     const [programIndex, setProgramIndex] = useState(0)
 
-    const formatter = new Intl.NumberFormat('en-US', {
+    const formatter = new Intl.NumberFormat('en-US', { 
         style: 'currency',
         currency: 'USD',
-        minimumFractionDigits: 0
+        minimumFractionDigits: 0, // even dollar amounts without cents
     })
 
     const handleSliderAmt = e => {
@@ -34,6 +35,7 @@ const LoanCalculator = props => {
         let payment60 = Number((monthlyRate60 * totalLoan)) / (1 - (1 / Math.pow(1 + monthlyRate60, 60)))
         setMonthlyPayment({payment36: payment36.toFixed(2), payment60: payment60.toFixed(2)})
         calculateInterest()
+        calculateTotalPayment()
     }
 
     const calculateInterest = () => {
@@ -42,9 +44,23 @@ const LoanCalculator = props => {
         setInterestPayment({payment36: interest36.toFixed(2), payment60: interest60.toFixed(2)})
     }
 
+    const calculateTotalPayment = () => {
+        let months = [36, 60]
+        let interestPeriod = 6
+        let payments = []
+        if(loanType === "io"){
+            payments[0] = (interestPayment.payment36 * interestPeriod) + (monthlyPayment.payment36 * months[0])
+            payments[1] = (interestPayment.payment60 * interestPeriod) + (monthlyPayment.payment60 * months[1])
+        } else {
+            payments[0] = monthlyPayment.payment36 * months[0]
+            payments[1] = monthlyPayment.payment60 * months[1]
+        }
+        setTotalPayment({payment36: payments[0], payment60: payments[1]})
+    }
+
     const handleProgramName = e => {
-        let index = e.target.value
-        setProgramIndex(Number(index))
+        setProgramIndex(Number(e.target.value))
+        setLoanType(props.loanInfo[programIndex].loanType)
     }
 
     const handleLoanType = e => {
@@ -52,23 +68,33 @@ const LoanCalculator = props => {
     }
 
     const handleMetro = e => {
-        let index = e.target.value
-        setMetroIndex(Number(index))
+        setMetroIndex(Number(e.target.value))
     }
 
     useEffect(() => {
-        calculateMonthlyPayment()
+        calculateMonthlyPayment() // run calculator when page loads to show initial amounts
+        setLoanType(props.loanInfo[programIndex].loanType)
+
+        // check to see if the program has multiple locations and set the program max based on individual cities
         if(props.loanInfo[programIndex]['multiMetros']){
             setProgramMax(metros[programIndex][metroIndex]['maxLoanAmt'])
         } else {
             setProgramMax(props['loanInfo'][programIndex]['loanInfo']['maxLoanAmt'])
         }
+
+        // if the program selected has a maximum loan amount smaller than the default loan amount, set the initial value of the slider to the program's max
         if(props.defaultLoanAmount > props['loanInfo'][programIndex]['loanInfo']['maxLoanAmt']) {
             setLoanValue(props['loanInfo'][programIndex]['loanInfo']['maxLoanAmt'])
         } else {
             setLoanValue(props.defaultLoanAmount)
         }
+
+        // hook is triggered when the values in the array below are updated
     }, [metroIndex, metroMax, programIndex, programMax])
+
+    useEffect(() => {
+        calculateTotalPayment()
+    }, [monthlyPayment])
 
     return (
         <div className="loanCalculator">
@@ -116,17 +142,23 @@ const LoanCalculator = props => {
                 </div>
                 <div className="loanCalculator__monthlyPayments">
                 <div className="loanCalculator__36months loanCalculator__monthlyPayments">
-                    <h3>{loanType === "io" ? 'Interest-Only' : 'Immediate Repayment'}</h3>
+                    <h3>{loanType === "io" ? <span className={loanType === "io" ? "show" : "hide"}>Interest-Only</span> : <span className={loanType !== "io" ? "show" : "hide"}>Immediate Repayment</span>}</h3>
                     <h4>36 Month Option</h4>
-                    {loanType === "io" ? <><p className="loanCalculator__paymentAmounts">${interestPayment.payment36}</p><p className="loanCalculator__paymentLabel">Interest Only Payment</p></> : null }
-                    <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment36}</p><p className="loanCalculator__paymentLabel">Monthly Payment</p>
+                    <span className={loanType === "io" ? "show" : "hide"}><><p className="loanCalculator__paymentAmounts">${interestPayment.payment36}</p><p className="loanCalculator__paymentLabel">Interest Only Payment</p></></span>
+                    <div className={loanType === "io" ? "show" : "show move"}>
+                        <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment36}</p><p className="loanCalculator__paymentLabel">Monthly Payment</p>
+                        <p className="loanCalculator__paymentAmounts">{formatter.format(totalPayment.payment36)}</p><p className="loanCalculator__paymentLabel">Total Cost</p>
+                    </div>
                 </div>
 
                 <div className="loanCalculator__60months loanCalculator__monthlyPayments">
-                    <h3>{loanType === "io" ? 'Interest-Only' : 'Immediate Repayment'}</h3>
+                    <h3>{loanType === "io" ? <span className={loanType === "io" ? "show" : "hide"}>Interest-Only</span> : <span className={loanType !== "io" ? "show" : "hide"}>Immediate Repayment</span>}</h3>
                     <h4>60 Month Option</h4>
-                    <p className="loanCalculator__paymentAmounts">${interestPayment.payment60}</p><p className="loanCalculator__paymentLabel">Interest Only Payment</p> 
-                    {loanType === "io" ? <> <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment60}</p><p className="loanCalculator__paymentLabel">Monthly Payment</p></> : null }
+                    <span className={loanType === "io" ? "show" : "hide"}><><p className="loanCalculator__paymentAmounts">${interestPayment.payment60}</p><p className="loanCalculator__paymentLabel">Interest Only Payment</p></></span>
+                    <div className={loanType === "io" ? "show" : "show move"}>
+                        <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment60}</p><p className="loanCalculator__paymentLabel">Monthly Payment</p>
+                        <p className="loanCalculator__paymentAmounts">{formatter.format(totalPayment.payment60)}</p><p className="loanCalculator__paymentLabel">Total Cost</p>
+                    </div>
                 </div>
                 </div>
 
