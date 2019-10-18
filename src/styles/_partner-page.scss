@@ -158,6 +158,8 @@ select {
 }
 
 .loanCalculator {
+    padding: 2rem 0 6rem 0;
+
     h3 {
         font-size: .75rem;
     }
@@ -166,7 +168,7 @@ select {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 0 1rem;
+        padding: 0 .5rem;
         text-align: center;
 
         @include md {
@@ -178,7 +180,7 @@ select {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 0 1rem;
+        padding: 0 .5rem;
         text-align: center;
         position: relative;
 
@@ -189,9 +191,13 @@ select {
     }
 
     &__amount {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         color: lighten($primary, 10);
         font-weight: bold;
+
+        @include md {
+            font-size: 1.5rem;
+        }
     }
 
     &__content {
@@ -259,6 +265,7 @@ select {
         display: flex;
         justify-content: space-evenly;
         transition: all 500ms;
+        padding-top: 1.5rem;
 
         .hide {
             opacity: 0;
@@ -287,7 +294,11 @@ select {
     &__paymentAmounts {
         font-weight: bold;
         color: lighten($primary, 10);
-        font-size: 1.75rem;
+        font-size: 1.4rem;
+
+        @include md {
+            font-size: 1.75rem;
+        }
     }
 
     &__paymentLabel {
@@ -336,9 +347,9 @@ select {
 .loanTerms {
     background: lighten($secondary, 62);
     position: relative;
-    padding: 4rem 3rem;
+    padding: 6rem 3rem;
 
-    @include md {
+    @include lg {
         padding: 10rem 5rem;
     }
 
@@ -356,7 +367,11 @@ select {
             flex-direction: row;
             width: 50%;
             border: 3px solid lighten($secondary, 10);
-            padding: 3rem;
+            padding: 2rem;
+        }
+
+        @include lg {
+            padding: 2.25rem 1rem;
         }
     }
 
@@ -374,8 +389,16 @@ select {
             flex-direction: row;
             width: 50%;
             border: 3px solid lighten($secondary, 10);
-            padding: 3rem 3rem 3rem 0;
+            padding: 2rem 2rem 2rem 0;
             border-right: 0;
+        }
+
+        @include lg {
+            padding: 2.25rem 0;
+
+            h3 {
+                padding: 4rem 0;
+            }
         }
     }
 
@@ -389,12 +412,16 @@ select {
         }
 
         p {
-            font-size: 1.75rem;
+            font-size: 1.3rem;
             font-weight: bold;
             text-align: center;
 
             @include md {
                 text-align: left;
+            }
+
+            @include xl {
+                font-size: 1.75rem;
             }
         }
 
@@ -407,7 +434,7 @@ select {
                 text-align: center;
                 margin-bottom: .25rem;
 
-                @include md {
+                @include lg {
                     display: inline;
                     margin-bottom: 0;
                 }
@@ -420,12 +447,6 @@ select {
                 transform: rotate(270deg);
                 margin-right: 2rem;
             }
-
-            p {
-                font-size: 2rem;
-                font-weight: bold;
-            }
-
         }
     }
     #shape-1 {
@@ -445,7 +466,7 @@ select {
       }
     #shape-2 {
         position: absolute;
-        bottom: 0;
+        bottom: 10%;
         left: 3%;
         width: 10rem;
         transform: rotate(-120deg);
@@ -457,6 +478,7 @@ select {
             margin-bottom: 5rem;
             border-top: 20rem solid $secondary;
             border-left: 20rem solid transparent;
+            bottom: 0;
         }
       }
 }
