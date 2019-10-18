@@ -79,6 +79,7 @@ exports.createPages = ({ graphql, actions }) => {
               hasIR
               multiMetros
               loanType
+              nonPaymentPeriod
               metros {
                 location
                 maxLoanAmt

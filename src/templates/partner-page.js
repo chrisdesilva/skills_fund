@@ -5,6 +5,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import LoanApp from "../components/partner-pages/loanApp"
 import LoanCalculator from "../components/partner-pages/loanCalculator"
+import LoanTerms from '../components/partner-pages/loanTerms'
 
 
 const PartnerPage = ({ data }) => {
@@ -38,6 +39,13 @@ const PartnerPage = ({ data }) => {
               scales={data.scales.childImageSharp.fluid}
               loanInfo={loanInfo}
             />
+            <LoanTerms 
+              ir36={data.school.interestRate36}
+              ir60={data.school.interestRate60}
+              multiLoanLengths={data.school.multiLoanLengths}
+              APR36={data.school.aprRange36}
+              APR60={data.school.aprRange60}
+            />
           </div>
         </Layout>
     )
@@ -66,6 +74,7 @@ export const pageQuery = graphql`
         hasIO
         hasIR
         multiMetros
+        nonPaymentPeriod
         loanType
         metros {
           location
