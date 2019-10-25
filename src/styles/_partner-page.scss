@@ -39,6 +39,7 @@ select {
     background-color: lighten($primary, 10);
     color: white;
     padding: 2rem;
+    transition: opacity 1000ms;
 
     a {
         text-decoration: none;
@@ -109,6 +110,10 @@ select {
 
     &__img {
         width: 100%;
+
+        @include lg {
+            width: 60%;
+        }
     }
 
     &__online {
@@ -159,6 +164,7 @@ select {
 
 .loanCalculator {
     padding: 2rem 0 6rem 0;
+    transition: opacity 1000ms;
 
     h3 {
         font-size: .75rem;
@@ -208,6 +214,13 @@ select {
             "select monthlyPayments monthlyPayments"
             "select     slider          slider"
         }
+    }
+
+    &__disclaimers {
+        font-size: .75rem;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: underline;
     }
 
     &__img {
@@ -348,6 +361,7 @@ select {
     background: lighten($secondary, 62);
     position: relative;
     padding: 6rem 3rem;
+    transition: opacity 1000ms;
 
     @include lg {
         padding: 10rem 5rem;
@@ -412,21 +426,25 @@ select {
         }
 
         p {
-            font-size: 1.3rem;
-            font-weight: bold;
+            font-size: 1.75rem;
             text-align: center;
 
             @include md {
+                font-size: 1.5rem;
+            }
+
+            @include lg {
                 text-align: left;
+                font-size: 2rem;
             }
 
             @include xl {
-                font-size: 1.75rem;
+                font-size: 2.5rem;
             }
         }
 
         span {
-            font-size: 1rem;
+            font-size: .75rem;
             font-weight: normal;
             
             &:nth-child(odd) {
@@ -481,6 +499,24 @@ select {
             bottom: 0;
         }
       }
+
+    #shape-3 {
+        position: absolute;
+        bottom: 2%;
+        right: 20%;
+        width: 5rem;
+        transform: rotate(160deg);
+        z-index: 0;
+        border-top: 5rem solid $tertiary;
+        border-left: 5rem solid transparent;
+
+        @include md {
+            margin-bottom: 5rem;
+            border-top: 15rem solid $tertiary;
+            border-left: 15rem solid transparent;
+            bottom: 0;
+        }
+      }
 }
 
 
@@ -491,6 +527,7 @@ select {
 
     img {
         margin: 0;
+        cursor: pointer;
     }
 
     &__image {
@@ -501,6 +538,49 @@ select {
         @include md {
             width: 10rem;
         }
+    }
+}
+
+.modal {
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+    top: 20%;
+    display: flex;
+    justify-content: center;
+
+    .hide {
+        transition: all 1000ms;
+        opacity: 0;
+    }
+
+    .show {
+        transition: all 1000ms;
+        opacity: 1;
+    }
+
+    &__close {
+        cursor: pointer;
+        position: absolute;
+        top: 5%;
+        right: 2%;
+    }
+
+    &__content {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 5rem;
+        background: white;
+        color: $black;
+        position: relative;
+        border-radius: 5px;
+        box-shadow: 2px 2px 25px lighten($black, 70);
+    }
+
+    p {
+        margin-bottom: 1rem;
     }
 }
 

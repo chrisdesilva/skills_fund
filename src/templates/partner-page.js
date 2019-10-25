@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
@@ -6,18 +6,25 @@ import SEO from "../components/seo"
 import LoanApp from "../components/partner-pages/loanApp"
 import LoanCalculator from "../components/partner-pages/loanCalculator"
 import LoanTerms from '../components/partner-pages/loanTerms'
+import Modal from '../components/modal'
 
 
 const PartnerPage = ({ data }) => {
 
   const loanInfo = data.school.loanInfo.map(program => program)
 
+  const [isModalOpen, toggleModal] = useState(true)
+  const openSchoolPage = () => {
+    window.open(data.school.schoolurl)
+  }
+
+
     return (
         <Layout>
-        <SEO title={`Partner page for Skills Fund and ${data.school.schoolname}`} />
+        <SEO title={`Financing page for Skills Fund and ${data.school.schoolname}`} />
           <div className="partner-page-container">
             <div className="logos">
-              <img className="logos__image" src={data.school.schoolLogo.file.url} alt={`${data.school.schoolname} logo`}/>
+              <img className="logos__image" onClick={openSchoolPage} src={data.school.schoolLogo.file.url} alt={`${data.school.schoolname} logo`}/>
               <div className="logos__image" ><Img className="logos__skf" fluid={data.skfLogo.childImageSharp.fluid} alt="Skills Fund logo"/></div>
             </div>
             <LoanApp 
@@ -28,8 +35,16 @@ const PartnerPage = ({ data }) => {
               hubspotFormId={data.school.hubspotFormId}
               selectAProgram={data.school.selectAProgram}
               slug={data.school.slug}
-
+              modal={isModalOpen}
             />
+            {isModalOpen ? 
+              <Modal 
+                toggleModal={() => toggleModal(false)}
+                modal={isModalOpen}
+              />
+              :
+              null
+            }
             <LoanCalculator 
               maxLoanAmt={data.school.loanInfo[0].loanInfo.maxLoanAmt}
               defaultLoanAmount={data.school.defaultLoanAmount}
@@ -38,6 +53,8 @@ const PartnerPage = ({ data }) => {
               origFee={data.school.origFee}
               scales={data.scales.childImageSharp.fluid}
               loanInfo={loanInfo}
+              toggleModal={() => toggleModal(true)}
+              modal={isModalOpen}
             />
             <LoanTerms 
               ir36={data.school.interestRate36}
@@ -45,6 +62,7 @@ const PartnerPage = ({ data }) => {
               multiLoanLengths={data.school.multiLoanLengths}
               APR36={data.school.aprRange36}
               APR60={data.school.aprRange60}
+              modal={isModalOpen}
             />
           </div>
         </Layout>

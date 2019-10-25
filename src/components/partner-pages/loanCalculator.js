@@ -104,7 +104,7 @@ const LoanCalculator = props => {
     }, [monthlyPayment])
 
     return (
-        <div className="loanCalculator">
+        <div className={props.modal ? "loanCalculator opacity" : "loanCalculator"}>
 
             <div className="loanCalculator__content">
 
@@ -146,6 +146,7 @@ const LoanCalculator = props => {
                         <p >Loan Amount<br/><span className="loanCalculator__amount">{formatter.format(loanValue)}</span></p>
                         <p>{formatter.format(programMax)}</p>
                     </div>
+                    <p className="loanCalculator__disclaimers" onClick={props.toggleModal}>Disclaimers</p>
                 </div>
                 <div className="loanCalculator__monthlyPayments">
                 <div className="loanCalculator__36months loanCalculator__monthlyPayments">

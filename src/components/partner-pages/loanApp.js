@@ -119,7 +119,7 @@ const LoanApp = props => {
       isSubmitted(true)
   }
     return (
-        <div className="loanApp">
+        <div className={props.modal ? "loanApp opacity" : "loanApp"}>
               
         <h1>Loan Application for {props.schoolname}</h1>
 

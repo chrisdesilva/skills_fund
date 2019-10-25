@@ -115,6 +115,11 @@ select {
   display: flex;
 }
 
+.opacity {
+  transition: all 1000ms;
+  opacity: .2;
+}
+
 /* ----- BEGIN GATSBY DEFAULT STYLING ----- */
 
 html {

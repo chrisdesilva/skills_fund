@@ -3,7 +3,7 @@ import React from 'react'
 const LoanTerms = props => {
 
     return (
-        <div className="loanTerms">
+        <div className={props.modal ? "loanTerms opacity" : "loanTerms"}>
         <div id="shape-1"></div>
         <div id="shape-2"></div>
             <div className="loanTerms__info">
