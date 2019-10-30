@@ -26,12 +26,13 @@ select {
 
 .btn {
   border-radius: 9999px;
-  width: 10rem;
+  width: 12rem;
   padding: .5rem 1rem;
   cursor: pointer;
   box-shadow: 3px 5px 5px rgb(170, 170, 170);
   border: 2px solid transparent;
   transition: all 300ms;
+  text-decoration: none;
 
   &:hover {
     box-shadow: 1px 3px 2px rgb(170, 170, 170);
@@ -43,15 +44,21 @@ select {
   }
 
   &--submit {
-    background: $primary;
+    background: $secondary;
     color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
   }
 }
 
 .colorLink {
+  text-decoration: none;
+  color: black;
+  transition: all 300ms;
 
   &:hover {
-    color: #9d1996;
+    color: $secondary;
   }
 }
 
@@ -76,43 +83,50 @@ select {
 }
 
 .nav {
-  display: block;
+  display: flex;
   position: fixed;
   width: 100%;
   background: white;
   z-index: 100;
+  padding: .5rem 1rem;
+  transition: all 500ms;
+  align-items: center;
+
+  &__logo {
+    width: 20%;
+  }
+
+  &__links {
+    width: 60%;
+    font-size: .8rem;
+
+    .colorLink {
+      padding-right: 1.5rem;
+    }
+  }
+
+  &__apply {
+    width: 20%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  #headerLogo {
+    width: 12rem;
+    transition: all 500ms;
+  
+    &.shrink {
+      width: 10rem;
+    }
+  }
 
   &.showNav {
-    border-bottom: 2px solid #9d1996;
+    border-bottom: 2px solid $secondary;
     z-index: 100;
     width: 100%;
     position: fixed;
-    display: block;
+    display: flex;
   }
-
-  &__img {
-    margin: 0;
-    height: 2rem;
-
-    &.showNavImg {
-      height: 1.8rem;
-    }
-  }
-}
-
-.subnav {
-  float: left;
-  overflow: hidden;
-
-  &__content {
-    display: none;
-    position: absolute;
-    z-index: 1;
-  }
-}
-
-.subnav:hover .subnav__content {
-  display: flex;
 }
 
 .opacity {

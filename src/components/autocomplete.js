@@ -3,7 +3,8 @@ import { Link } from "gatsby"
 
 const schools = [
     {
-        name: "Flatiron"
+        name: "Coding Dojo",
+        link: "/codingdojo"
     }
 ]
 
@@ -34,7 +35,7 @@ class AutoComplete extends React.Component {
         this.setState({
             text: value, // set input text to value of clicked program
             suggestions: [], // clear suggestions array
-            link: links[i] // populate get funded button with link at the position of the clicked program
+            link: `schools/${links[i]}` // populate get funded button with link at the position of the clicked program
         })
     }
 

@@ -1,10 +1,21 @@
-import { Link } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
+import Img from "gatsby-image"
 import PropTypes from "prop-types"
 import React, { useEffect, useRef, useState } from "react"
-import skillsFund from "../images/skillsFund_logo.png"
-
 
 const Header = () => {
+
+  const data = useStaticQuery(graphql`
+    query {
+      skflogo: file(relativePath: { eq: "skillsFund_logo.png"}) {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  `)
   
   const [nav, toggleNav] = useState(false)
   const [navBackground, setNavBackground] = useState(false)
@@ -13,7 +24,7 @@ const Header = () => {
   navRef.current = navBackground
   useEffect(() => {
     const handleScroll = () => {
-      const show = window.scrollY > 50
+      const show = window.scrollY > 10
       if (navRef.current !== show){
         setNavBackground(show)
       }
@@ -36,7 +47,19 @@ const Header = () => {
 
     {/* ***** START WEB VERSION ***** */}
     <header className={ navBackground ? "nav showNav" : "nav"}   >
-  
+      <div className="nav__logo">
+        <div className={navBackground ? "shrink" : null} id="headerLogo">
+          <Link to="/"><Img fluid={data.skflogo.childImageSharp.fluid} alt="Skills Fund logo"/></Link>
+        </div>
+      </div>
+      <div className="nav__links">
+        <Link className="colorLink" to="/schools">Choose A Program</Link>
+        <Link className="colorLink" to="/quality-assurance">Quality Assurance</Link>
+        <Link className="colorLink" to="/faq">FAQ</Link>
+      </div>
+      <div className="nav__apply">
+        <Link className="btn btn--submit" to="/apply">Apply For A Loan</Link>
+      </div>
     </header>
 
     {/* ***** END WEB VERSION ***** */}

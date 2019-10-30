@@ -111,7 +111,7 @@ const LoanCalculator = props => {
                 <div className="loanCalculator__select">
                     <h2>Simple. Transparent.</h2>
                     {/* <div className="loanCalculator__img"><Img fluid={props.scales} /></div> */}
-                    <p id="leadText">Figuring out your monthly payments on a loan shouldn't require a math degree. Find out exactly what you'll pay with a Skills Fund loan:</p>
+                    <p id="leadText">Figuring out your monthly payments on a loan shouldn't require a math degree. Find out exactly what you'll pay at {props.schoolname} with a Skills Fund loan:</p>
                     
                     <p>{` `}</p>
 

@@ -39,29 +39,6 @@ const IndexPage = () => {
           </div>
         </div>
 
-        <div id="homeContent--1" className="px-8 lg:px-32 bg-gray-100 py-12 lg:py-32">
-          <div className="flex flex-col items-center">
-            <p className="text-primary text-xl">WE BELIEVE</p>
-            <h2 className="">Education is a life-changing investment.</h2>
-            <p className="text-lg">But only if it pays off. We evaluate school quality and partner with ones worth your time and money. And we make schools put real skin in the game in part of your long-term success.</p>
-            <p className="text-primary font-bold">After all, the whole point is for you to get a great job.</p>
-          </div>
-        </div>
-
-        <div id="homeContent--3" className="px-8 py-16 flex flex-col lg:flex-row items-center">
-          <div className="lg:w-2/4 justify-center flex flex-col items-center">
-            <p className="text-center text-xl">We make it easy to choose the right program for your goals. Browse our verified partners by location or career path.</p>
-            <p className="text-center text-primary font-bold text-lg">Find a school worthy of your future.</p>
-            <Link to='/schools' className="hoverButton bg-primary mt-4 rounded px-4 py-2 text-white text-center w-48 shadow-xl">Select Your School</Link>
-          </div>
-          <div className="lg:w-1/4">
-
-          </div>
-          <div className="lg:w-1/4 pt-0 order-first lg:order-last">
-            <img className="h-64" src={bike} alt="Riding a bike in the city"/>
-          </div>
-        </div>
-
           <div className="yotpo yotpo-reviews-carousel bg-gray-100 pb-8 m-0" 
             data-background-color="transparent" 
             data-mode="top_rated" 

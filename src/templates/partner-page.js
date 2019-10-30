@@ -13,7 +13,7 @@ const PartnerPage = ({ data }) => {
 
   const loanInfo = data.school.loanInfo.map(program => program)
 
-  const [isModalOpen, toggleModal] = useState(true)
+  const [isModalOpen, toggleModal] = useState(false)
   const openSchoolPage = () => {
     window.open(data.school.schoolurl)
   }
@@ -27,6 +27,18 @@ const PartnerPage = ({ data }) => {
               <img className="logos__image" onClick={openSchoolPage} src={data.school.schoolLogo.file.url} alt={`${data.school.schoolname} logo`}/>
               <div className="logos__image" ><Img className="logos__skf" fluid={data.skfLogo.childImageSharp.fluid} alt="Skills Fund logo"/></div>
             </div>
+            <LoanCalculator 
+              maxLoanAmt={data.school.loanInfo[0].loanInfo.maxLoanAmt}
+              defaultLoanAmount={data.school.defaultLoanAmount}
+              ir36={data.school.interestRate36}
+              ir60={data.school.interestRate60}
+              origFee={data.school.origFee}
+              scales={data.scales.childImageSharp.fluid}
+              loanInfo={loanInfo}
+              toggleModal={() => toggleModal(true)}
+              modal={isModalOpen}
+              schoolname={data.school.schoolname}
+            />
             <LoanApp 
               schoolname={data.school.schoolname}
               costOfLiving={data.school.costOfLiving}
@@ -45,17 +57,6 @@ const PartnerPage = ({ data }) => {
               :
               null
             }
-            <LoanCalculator 
-              maxLoanAmt={data.school.loanInfo[0].loanInfo.maxLoanAmt}
-              defaultLoanAmount={data.school.defaultLoanAmount}
-              ir36={data.school.interestRate36}
-              ir60={data.school.interestRate60}
-              origFee={data.school.origFee}
-              scales={data.scales.childImageSharp.fluid}
-              loanInfo={loanInfo}
-              toggleModal={() => toggleModal(true)}
-              modal={isModalOpen}
-            />
             <LoanTerms 
               ir36={data.school.interestRate36}
               ir60={data.school.interestRate60}
