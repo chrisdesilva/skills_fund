@@ -1,3 +1,10 @@
+input[type="text"] {
+  width: 16rem;
+  padding: 5px 5px;
+  border: 2px solid $black;
+  box-sizing: border-box;
+  outline: none;
+}
 select {
   display: block;
   font-family: $font-body;
@@ -26,7 +33,7 @@ select {
 
 .btn {
   border-radius: 9999px;
-  width: 12rem;
+  width: 10rem;
   padding: .5rem 1rem;
   cursor: pointer;
   box-shadow: 3px 5px 5px rgb(170, 170, 170);
@@ -49,6 +56,7 @@ select {
     text-transform: uppercase;
     font-weight: bold;
     text-align: center;
+    width: 12rem;
   }
 }
 
@@ -59,6 +67,49 @@ select {
 
   &:hover {
     color: $secondary;
+  }
+}
+
+.footer {
+  padding: 0 1rem;
+
+  &__content {
+    display: flex;
+  }
+
+  &__copyright {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  &__links {
+    width: 33%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  &__social {
+    width: 33%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .colorLink {
+      font-size: 2rem;
+    }
+  }
+
+  &__email {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -82,15 +133,22 @@ select {
   }
 }
 
+.main {
+  @include lg {
+    margin-top: 70px;
+  }
+}
+
 .nav {
   display: flex;
   position: fixed;
   width: 100%;
   background: white;
   z-index: 100;
-  padding: .5rem 1rem;
+  padding: 10px;
   transition: all 500ms;
   align-items: center;
+  top: 0;
 
   &__logo {
     width: 20%;

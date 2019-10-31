@@ -55,7 +55,7 @@ select {
         font-size: 1.5rem;
         text-align: center;
 
-        @include md {
+        @include lg {
             font-size: 2rem;
         }
     }
@@ -64,7 +64,7 @@ select {
         font-size: 1rem;
         text-align: center;
 
-        @include md {
+        @include lg {
             font-size: 1.2rem;
         }
     }
@@ -97,7 +97,7 @@ select {
         align-items: center;
         margin: 0 1rem;
         
-        @include md {
+        @include lg {
             max-width: 50%;
         }
     }
@@ -166,9 +166,15 @@ select {
     padding: 2rem 0 6rem 0;
     transition: opacity 1000ms;
     background: #fcfafa;
-
     h3 {
         font-size: .75rem;
+    }
+
+    .schoolLogo {
+        width: 12rem;
+        position: absolute;
+        right: 26%;
+        cursor: pointer;
     }
 
     &__36months {
@@ -178,7 +184,7 @@ select {
         padding: 0 .5rem;
         text-align: center;
 
-        @include md {
+        @include lg {
             padding: 3rem 3rem 1rem 3rem;
         }
     }
@@ -191,7 +197,7 @@ select {
         text-align: center;
         position: relative;
 
-        @include md {
+        @include lg {
             padding: 3rem 3rem 1rem 3rem;
         }
 
@@ -202,14 +208,15 @@ select {
         color: lighten($primary, 10);
         font-weight: bold;
 
-        @include md {
+        @include lg {
             font-size: 1.5rem;
         }
     }
 
     &__content {
-        @include md {
+        @include lg {
             display: grid;
+            margin-top: 2rem;
             grid-template-columns: 1fr 1fr 1fr;
             grid-template-areas:
             "select monthlyPayments monthlyPayments"
@@ -228,7 +235,7 @@ select {
         width: 25%;
         margin-bottom: 2rem;
 
-        @include md {
+        @include lg {
             width: 15%;
         }
     }
@@ -310,7 +317,7 @@ select {
         color: lighten($primary, 10);
         font-size: 1.4rem;
 
-        @include md {
+        @include lg {
             font-size: 1.75rem;
         }
     }
@@ -352,7 +359,7 @@ select {
         justify-content: center;
         grid-area: slider;
 
-        @include md {
+        @include lg {
             padding: 2rem 2rem;
         }
     }
@@ -378,7 +385,7 @@ select {
         padding: 1rem 0;
         background: lighten($secondary, 64);
 
-        @include md {
+        @include lg {
             flex-direction: row;
             width: 50%;
             border: 3px solid lighten($secondary, 10);
@@ -400,7 +407,7 @@ select {
         border-bottom: 0;
         background: lighten($secondary, 64);
 
-        @include md {
+        @include lg {
             flex-direction: row;
             width: 50%;
             border: 3px solid lighten($secondary, 10);
@@ -430,7 +437,7 @@ select {
             font-size: 1.75rem;
             text-align: center;
 
-            @include md {
+            @include lg {
                 font-size: 1.5rem;
             }
 
@@ -459,7 +466,7 @@ select {
                 }
             }
         }
-        @include md {
+        @include lg {
             flex-direction: row;
 
             h3 {
@@ -479,7 +486,7 @@ select {
         border-top: 10rem solid lighten($primary, 15);
         border-left: 10rem solid transparent;
 
-        @include md {
+        @include lg {
             top: 10%;
         }
       }
@@ -493,7 +500,7 @@ select {
         border-top: 15rem solid $secondary;
         border-left: 15rem solid transparent;
 
-        @include md {
+        @include lg {
             margin-bottom: 5rem;
             border-top: 20rem solid $secondary;
             border-left: 20rem solid transparent;
@@ -511,7 +518,7 @@ select {
         border-top: 5rem solid $tertiary;
         border-left: 5rem solid transparent;
 
-        @include md {
+        @include lg {
             margin-bottom: 5rem;
             border-top: 15rem solid $tertiary;
             border-left: 15rem solid transparent;
@@ -536,7 +543,7 @@ select {
         margin: 0;
         padding: .5rem 0;
 
-        @include md {
+        @include lg {
             width: 10rem;
         }
     }

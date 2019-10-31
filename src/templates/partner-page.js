@@ -23,11 +23,14 @@ const PartnerPage = ({ data }) => {
         <Layout>
         <SEO title={`Financing page for Skills Fund and ${data.school.schoolname}`} />
           <div className="partner-page-container">
-            <div className="logos">
+            {/* <div className="logos">
               <img className="logos__image" onClick={openSchoolPage} src={data.school.schoolLogo.file.url} alt={`${data.school.schoolname} logo`}/>
               <div className="logos__image" ><Img className="logos__skf" fluid={data.skfLogo.childImageSharp.fluid} alt="Skills Fund logo"/></div>
-            </div>
-            <LoanCalculator 
+            </div> */}
+            <LoanCalculator
+              openSchoolPage={openSchoolPage}
+              src={data.school.schoolLogo.file.url}
+              alt={`${data.school.schoolname} logo`} 
               maxLoanAmt={data.school.loanInfo[0].loanInfo.maxLoanAmt}
               defaultLoanAmount={data.school.defaultLoanAmount}
               ir36={data.school.interestRate36}

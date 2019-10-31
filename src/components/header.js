@@ -53,9 +53,11 @@ const Header = () => {
         </div>
       </div>
       <div className="nav__links">
-        <Link className="colorLink" to="/schools">Choose A Program</Link>
+        <Link className="colorLink" to="/schools">View All Schools</Link>
         <Link className="colorLink" to="/quality-assurance">Quality Assurance</Link>
-        <Link className="colorLink" to="/faq">FAQ</Link>
+        <a className="colorLink" href="https://my.skills.fund" target="_blank" rel="noreferrer noopener">Application Status</a>
+        <Link className="colorLink" to="/repayment">Make a Payment</Link>
+        <Link className="colorLink" to="/blog">Why Our Loans Are Better</Link>
       </div>
       <div className="nav__apply">
         <Link className="btn btn--submit" to="/apply">Apply For A Loan</Link>

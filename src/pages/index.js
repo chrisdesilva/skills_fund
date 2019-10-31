@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { graphql, Link, useStaticQuery } from "gatsby"
-import bike from "../images/bike.png"
+import Img from "gatsby-image"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -11,31 +11,47 @@ import AutoComplete from "../components/autocomplete"
 const IndexPage = () => {
   
   const [showInput, toggleShowInput] = useState(false)
-  const [inputValue, setInputValue] = useState(false)
+  const data = useStaticQuery(graphql`
+    query {
+      climbers: file(relativePath: {eq: "climbers.png"}){
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  `)
 
   return (
     <Layout>
       <SEO title="Home" />
-      <div className="bg-white">
+      <div>
         
-        <div id="banner" className={showInput ? "back-purple flex flex-col pt-8 px-4" : "flex flex-col pt-8 px-4"}>
-              <h1 className="text-center mb-0 pb-4 mt-16">How Education Pays Off</h1>
-              <p className="text-center mb-0 pb-4">We won’t finance you to attend a crappy program. No tricks, gimmicks or teaser rates here. Just the help you deserve to build the career you want.</p>
-              <p className="text-center text-primary font-bold mb-0 pb-4">It’s your future. Expect more from your school and lender.</p>
-          <div className="relative">
-            {!showInput &&
-              <div className={!showInput ? "absolute show left-50 -ml-24 lg:-ml-48 pt-4" : "absolute"}>
-                <button onClick={()=> toggleShowInput(true)} className="hoverButton bg-primary rounded px-4 py-2 mx-1 text-white w-48 text-center shadow-xl mb-1 lg:mb-0">I know my school</button>
-                <button className="hoverButton bg-primary rounded px-4 py-2 mx-1 text-white w-48 text-center shadow-xl"><Link to='/bootcamp-selector'>I need help deciding</Link></button>
+        <div className="banner">
+          <div className="banner__content">
+            <div className="banner__img">
+              <Img fluid={data.climbers.childImageSharp.fluid} />
+            </div>
+            <div className="banner__text">
+              <h1>Higher Ed Financing Made Simple</h1>
+              <p>It’s your future. Expect more from your school and lender.</p>
+              <div className="banner__buttons">
+                {!showInput &&
+                  <div className="banner__autocomplete">
+                    <button className="btn" onClick={()=> toggleShowInput(true)} >I know my school</button>
+                    <button className="btn" ><Link to='/schools'>View All Schools</Link></button>
+                  </div>
+                }
+                {showInput &&
+                  <div className="banner__autocomplete">
+                    <AutoComplete 
+                      toggleInput={()=> toggleShowInput(false)}
+                    />
+                  </div>
+                }
               </div>
-            }
-            {showInput &&
-              <div className={showInput ? "absolute show left-50 -ml-32" : "absolute"}>
-                <AutoComplete 
-                  toggleInput={()=> toggleShowInput(false)}
-                />
-              </div>
-            }
+            </div>
           </div>
         </div>
 
