@@ -105,7 +105,7 @@ const LoanCalculator = props => {
 
     return (
         <div className={props.modal ? "loanCalculator opacity" : "loanCalculator"}>
-            <img className="schoolLogo" src={props.src} alt={props.alt} onClick={props.openSchoolPage}/>
+            {/* <img className="schoolLogo" src={props.src} alt={props.alt} onClick={props.openSchoolPage}/> */}
             <div className="loanCalculator__content">
 
                 <div className="loanCalculator__select">

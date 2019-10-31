@@ -29,7 +29,6 @@ const PartnerPage = ({ data }) => {
             </div> */}
             <LoanCalculator
               openSchoolPage={openSchoolPage}
-              src={data.school.schoolLogo.file.url}
               alt={`${data.school.schoolname} logo`} 
               maxLoanAmt={data.school.loanInfo[0].loanInfo.maxLoanAmt}
               defaultLoanAmount={data.school.defaultLoanAmount}
