@@ -1,0 +1,27 @@
+.schoolsList {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    padding: 0 1rem;
+
+    &__img {
+
+        img {
+            margin: 0;
+            object-fit: scale-down;
+            width: 300px;
+            height: 100px;
+            filter: grayscale(1);
+        }
+    }
+
+    &__school {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid $black;
+        border-radius: 5px;
+    }
+}

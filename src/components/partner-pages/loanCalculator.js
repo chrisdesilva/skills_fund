@@ -13,7 +13,6 @@ const LoanCalculator = props => {
     const [loanType, setLoanType] = useState(props.loanInfo[0].loanType)
     const metros = props.loanInfo.map(program => program.metros)
     const multiMetros = props.loanInfo.map(program => program.multiMetros)
-    const metroMax = metros[0][0].maxLoanAmt
     const [metroIndex, setMetroIndex] = useState(0)
     const [programIndex, setProgramIndex] = useState(0)
 
@@ -97,7 +96,7 @@ const LoanCalculator = props => {
         }
 
         // hook is triggered when the values in the array below are updated
-    }, [metroIndex, metroMax, programIndex, programMax])
+    }, [metroIndex, programIndex, programMax])
 
     useEffect(() => {
         calculateTotalPayment()
