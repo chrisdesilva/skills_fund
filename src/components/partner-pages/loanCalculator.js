@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Img from 'gatsby-image'
 import { UnmountClosed as Collapse } from 'react-collapse'
 
 const LoanCalculator = props => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { graphql, Link, useStaticQuery } from "gatsby"
 
 const AutoComplete = props => {
@@ -25,7 +25,6 @@ const AutoComplete = props => {
     const [suggestions, setSuggestions] = useState([])
     const [text, updateText] = useState('')
     const [link, updateLink] = useState('')
-    const [programIndex, setProgramIndex] = useState(null)
 
     const onTextChanged = e => {
         const value = e.target.value
@@ -59,10 +58,6 @@ const AutoComplete = props => {
             </ul>
         )
     }
-
-    useEffect(() => {
-        // console.log(suggestions)
-    }, [link, programIndex])
     
     return (
         <div id="autocomplete">
