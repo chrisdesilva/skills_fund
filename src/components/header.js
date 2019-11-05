@@ -17,7 +17,7 @@ const Header = () => {
     }
   `)
   
-  const [nav, toggleNav] = useState(false)
+  // const [nav, toggleNav] = useState(false)
   const [navBackground, setNavBackground] = useState(false)
   const navRef = useRef()
   
