@@ -8,6 +8,7 @@ const Schools = ({ data }) => {
 
   const [program, setProgram] = useState(null)
   const [location, setLocation] = useState(null)
+  const [filter, setFilter] = useState("program")
 
   // get all schools and return an array with each school's information
   const allSchools = data.schools.edges.map(school => {
@@ -19,36 +20,20 @@ const Schools = ({ data }) => {
       <SEO title="Schools" />
       <div className="schools">
         <div className="schoolsFilter">
-        <label>Filter by Program</label>
-          <select onChange={e => {
-            setProgram(e.target.value)
-            setLocation(null)
-          }}>
-            <option value="allSchools">Show All Schools</option>
-            <option value="hasDataScience">Data Science</option>
-            <option value="hasSoftwareDev">Software Development</option>
-            <option value="hasCyberSecurity">Cyber Security</option>
-            <option value="hasUxui">UX/UI</option>
+
+        <label>Filter by...</label>
+          <select onChange={e => setFilter(e.target.value)}>
+            <option value="program">Program Type</option>
+            <option value="region">Region</option>
+            <option value="time">Time Commitment</option>
           </select>
-        <label>Filter by Location</label>
-          <select onChange={e => {
-            setLocation(e.target.value)
-            setProgram(null)
-          }}>
-            <option value="allSchools">Show All Schools</option>
-            <option value="west">West</option>
-            <option value="midwest">Midwest</option>
-            <option value="south">South</option>
-            <option value="east">East</option>
-          </select>
+
         </div>
         
         <div className="schoolsList">
         
           {allSchools.map(school => {
-
-            const programFilter = programType => {
-              return <div key={school.schoolname} className={program === programType ? "schoolsList__school show" : "schoolsList__school"}>
+              return <div key={school.schoolname} className="schoolsList__school show">
                 <h3>{school.schoolname}</h3>
                 <Link to={`/schools/${school.slug}`}>  
                   <div className="schoolsList__img"><img src={school.schoolLogo.file.url} alt={school.schoolname}/></div>
@@ -58,77 +43,7 @@ const Schools = ({ data }) => {
                 </Link>
               </div> 
             }
-
-            switch(program){
-              case "allSchools": 
-                  return programFilter("allSchools")
-                  break;
-              case "hasDataScience": 
-                if(school.hasDataScience){
-                  return programFilter("hasDataScience")
-                }
-                break;
-              case "hasSoftwareDev":
-                  if(school.hasSoftwareDev){
-                    return programFilter("hasSoftwareDev")
-                }
-                break;
-              case "hasUxui":
-                  if(school.hasUxui){
-                    return programFilter("hasUxui")
-                }
-                break;
-              case "hasCyberSecurity":
-                  if(school.hasCyberSecurity){
-                    return programFilter("hasCyberSecurity")
-                }
-                break;
-            }
-
-            const regionFilter = region => {
-              return <div key={school.schoolname} className={location === region ? "schoolsList__school show" : "schoolsList__school"}>
-                <h3>{school.schoolname}</h3>
-                <Link to={`/schools/${school.slug}`}>  
-                  <div className="schoolsList__img"><img src={school.schoolLogo.file.url} alt={school.schoolname}/></div>
-                </Link>
-                <Link className="schoolsList__link" to={`/schools/${school.slug}`}>  
-                  Get Funded
-                </Link>
-              </div> 
-            }
-
-            switch(location){
-              case "allSchools": 
-                  return regionFilter("allSchools")
-                  break;
-              case "west": 
-                if(school.region === "west"){
-                  return regionFilter("west")
-                }
-                break;
-              case "east": 
-                if(school.region === "east"){
-                  return regionFilter("east")
-                }
-                break;
-              case "south": 
-                if(school.region === "south"){
-                  return regionFilter("south")
-                }
-                break;
-              case "midwest": 
-                if(school.region === "midwest"){
-                  return regionFilter("midwest")
-                }
-                break;
-              default:
-                return regionFilter("allSchools")
-                break;
-            }
-
-
-
-          })}
+          )}
         </div>
       </div>
     </Layout>
