@@ -15,7 +15,12 @@ const AutoComplete = props => {
             }
         }
     `)
-    const programs = data.schools.edges.map(school => school.node.schoolname) // get list of all program names
+    const programs = data.schools.edges.map(school => {
+        return {
+            name: school.node.schoolname,
+            link: school.node.slug
+        }
+    }) // get list of all program names
 
     const [suggestions, setSuggestions] = useState([])
     const [text, updateText] = useState('')
@@ -27,17 +32,17 @@ const AutoComplete = props => {
         let suggestions = [] // set initial suggestions array to empty
             if(value.length > 0) {
                 const regex = new RegExp(`${value}`, 'i') // check if characters from input string match any letters of programs
-                suggestions = programs.filter(v => regex.test(v)).slice(0, 6) // show first 6 matches
+                suggestions = programs.map(program => [program.name, program.link]).filter(v => regex.test(v)).slice(0, 6) // show first 6 matches and populate with school name and slug
             }
         setSuggestions(suggestions)
         updateText(value)
-        updateLink('')
+        updateLink('') // clear out link to remove get funded button while user searches through schools
     }
 
     const suggestionSelected = (value, i) => {
-        updateText(value)
+        updateText(value[0]) // value[0] is the school's name
         setSuggestions([])
-        updateLink('/schools/codingdojo')
+        updateLink(`/schools/${value[1]}`) // value[1] is the school's slug
     }
 
     const renderSuggestions = () => {
@@ -49,14 +54,14 @@ const AutoComplete = props => {
                 {suggestions.map((school, i) => {
                     return <li key={i} onClick={() => {
                         suggestionSelected(school, i)
-                    }}>{school}</li>
+                    }}>{school[0]}</li>
                 })}
             </ul>
         )
     }
 
     useEffect(() => {
-        console.log(suggestions)
+        // console.log(suggestions)
     }, [link, programIndex])
     
     return (

@@ -1,27 +1,81 @@
+.schools {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas: 
+    "schoolsFilter schoolsList schoolsList schoolsList schoolsList"
+    ;
+}
+
+.schoolsFilter {
+    grid-area: schoolsFilter;
+    background: lighten($black, 85);
+    padding: .5rem;
+}
+
 .schoolsList {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 25%);
     grid-gap: 1rem;
-    padding: 0 1rem;
+    padding: 2rem 1rem;
+    background: lighten($primary, 10);
+    grid-area: schoolsList;
+
+    h3 {
+        margin: 0;
+    }
 
     &__img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem 0;
 
         img {
             margin: 0;
             object-fit: scale-down;
-            width: 300px;
+            width: 75%;
             height: 100px;
             filter: grayscale(1);
         }
+    }
+
+    &__link {
+        text-decoration: none;
+        position: relative;
+        transition: all 300ms;
+        color: $black;
+
+        &:after,
+        &:before {
+            transition: all 300ms;
+        }
+
+        &:after {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 0%;
+            content: '.';
+            color: transparent;
+            background: $primary;
+            height: 2px;
+          }
+    
+          &:hover:after {
+            width: 75%;
+          }
     }
 
     &__school {
         padding: 1rem;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-evenly;
         align-items: center;
-        border: 2px solid $black;
+        border: 2px solid lighten($black, 80);
         border-radius: 5px;
+        background: white;
     }
 }
