@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
+import Img from 'gatsby-image'
 
 const SchoolSelector = props => {
 
@@ -11,6 +12,7 @@ const SchoolSelector = props => {
     const [regionSelected, setRegionSelected] = useState(false)
     const [programSelected, setProgramSelected] = useState(false)
     const [finalList, showFinalList] = useState(false)
+    const [itsAMatch, showItsAMatch] = useState(false)
     
     const resetFilters = () => {
         setScheduleSelected(false)
@@ -57,6 +59,7 @@ const SchoolSelector = props => {
         console.log("program: ", schools)
         setSchools(schools)
         showFinalList(true)
+        showItsAMatch(true)
       }
 
       const showAllSchools = () => {
@@ -164,7 +167,9 @@ const SchoolSelector = props => {
                     null
                 }
             </div>
-            {finalList ? 
+            {finalList ?
+                <>
+                {schools.length > 0 && itsAMatch ? <h2 className="show">It's a match!</h2> : null}
                 <div className="schoolsList__final">
                     {schools.map(school => {
                         return <div key={school.schoolname} className="schoolsList__school show">
@@ -178,19 +183,29 @@ const SchoolSelector = props => {
                         </div> 
                         }
                     )}
+                    {schools.length === 0 ? 
+                        <div className="schoolsList__noMatch">
+                            <Img fluid={props.fluid} />
+                            <p>Dang, looks like we don't have any options.</p>
+                            {isFiltering && scheduleSelected ? <button className="btn startOver show" onClick={resetFilters}>Try Again</button> : null}
+                        </div>
+                        :
+                        null 
+                    }
                 </div> 
-                : 
+                </>
+                :
                 null
             }
-            {!isFiltering ?
+            {!isFiltering && optionButtons ?
                 <div className="schoolsList__start">
+                    <Img fluid={props.fluid} />
                     <button className="btn" onClick={showAllSchools}>Show All Schools</button>
                     <button className="btn" onClick={startFilter}>I Need Options</button>
                 </div>
                 :
                 null
             }
-            {isFiltering && scheduleSelected ? <button className="btn startOver show" onClick={resetFilters}>Start Over</button> : null}
         </div>
     )
 }

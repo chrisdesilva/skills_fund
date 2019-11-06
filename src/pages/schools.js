@@ -18,6 +18,7 @@ const Schools = ({ data }) => {
       <div className="schools">
         <SchoolSelector 
           allSchools={allSchools}
+          fluid={data.noMatches.childImageSharp.fluid}
         />
       </div>
     </Layout>
@@ -44,6 +45,13 @@ export const pageQuery = graphql`
         schoolname
         slug
         states
+      }
+    }
+  }
+  noMatches: file(relativePath: {eq: "climbers.png"}) {
+    childImageSharp {
+      fluid {
+        ...GatsbyImageSharpFluid
       }
     }
   }

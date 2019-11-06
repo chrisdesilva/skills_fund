@@ -28,29 +28,29 @@
   }
 }
 
-.back-purple {
-  background-color: #fce4fc; 
+.bg-primary {
+  background-color: $primary; 
   animation-duration: 1s;
-  animation-name: bg-color;
+  animation-name: bg-primary-transition;
 }
 
-@keyframes bg-color {
+@keyframes bg-primary-transition {
   0% {
-    background-color: #fff;
+    background-color: white;
   }
 
   100% {
-    background-color: #fce4fc;
+    background-color: $primary;
   }
 }
 
-@-webkit-keyframes bg-color {
+@-webkit-keyframes bg-primary-transition {
   0% {
-    background-color: #fff;
+    background-color: white;
   }
 
   100% {
-    background-color: #fce4fc;
+    background-color: $primary;
   }
 }
 
