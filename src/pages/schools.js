@@ -34,6 +34,7 @@ const Schools = ({ data }) => {
     } else {
       schools = allSchools
     }
+    console.log("schedule: ", schools)
     setSchools(schools)
     setScheduleSelected(true)
   }
@@ -46,84 +47,23 @@ const Schools = ({ data }) => {
     } else {
       setLocationSelected("inPerson")
     }
+    console.log("online: ", schools)
     setSchools(schools)
   }
 
   const setRegion = region => {
     schools = schools.filter(school => school.states.includes(region))
     setRegionSelected(true)
+    console.log("region: ", schools)
     setSchools(schools)
-
-    // switch(region) {
-    //   case "west":
-    //     schools = schools.filter(school => school.region === "west")
-    //     setRegionSelected(true)
-    //     setSchools(schools)
-    //     break;
-    //   case "east":
-    //     schools = schools.filter(school => school.region === "east")
-    //     setRegionSelected(true)
-    //     setSchools(schools)
-    //     break;
-    //   case "midwest":
-    //     schools = schools.filter(school => school.region === "midwest")
-    //     setRegionSelected(true)
-    //     setSchools(schools)
-    //     break;
-    //   case "south":
-    //     schools = schools.filter(school => school.region === "south")
-    //     setRegionSelected(true)
-    //     setSchools(schools)
-    //     break;
-    //   default:
-    //     setRegionSelected(true)
-    //     break;
-    // }
   }
 
   const setProgram = program => {
-    switch(program) {
-      case "dataScience":
-        schools = schools.filter(school => school.hasDataScience)
-        setProgramSelected(true)
-        setSchools(schools)
-        showFinalList(true)
-        break;
-      case "softwareDev":
-        schools = schools.filter(school => school.hasSoftwareDev)
-        setProgramSelected(true)
-        setSchools(schools)
-        showFinalList(true)
-        break;
-      case "uxui":
-        schools = schools.filter(school => school.hasUxui)
-        setProgramSelected(true)
-        setSchools(schools)
-        showFinalList(true)
-        break;
-      case "cyberSec":
-        schools = schools.filter(school => school.hasCyberSecurity)
-        setProgramSelected(true)
-        setSchools(schools)
-        showFinalList(true)
-        break;
-      case "licensure":
-        schools = schools.filter(school => school.hasLicensureTraining)
-        setProgramSelected(true)
-        setSchools(schools)
-        showFinalList(true)
-        break;
-      case "professional":
-        schools = schools.filter(school => school.hasProfessionalTraining)
-        setProgramSelected(true)
-        setSchools(schools)
-        showFinalList(true)
-        break;
-      default:
-        setProgramSelected(true)
-        showFinalList(true)
-        break;
-    }
+    schools = schools.filter(school => school.programsOffered.includes(program))
+    setProgramSelected(true)
+    console.log("program: ", schools)
+    setSchools(schools)
+    showFinalList(true)
   }
 
   return (
@@ -198,13 +138,22 @@ const Schools = ({ data }) => {
 
           {scheduleSelected && locationSelected && regionSelected && !programSelected ? 
             <>
-            <p>Last question. Promise. What type of content are you looking to study?</p>
-            <button className="btn" onClick={() => setProgram("dataScience")}>Data Science</button>
-            <button className="btn" onClick={() => setProgram("softwareDev")}>Software Development</button>
-            <button className="btn" onClick={() => setProgram("uxui")}>UX/UI</button>
-            <button className="btn" onClick={() => setProgram("cyberSec")}>Cyber Security</button>
-            <button className="btn" onClick={() => setProgram("licensure")}>Professional Training</button>
-            <button className="btn" onClick={() => setProgram("professional")}>Licensure</button>
+            <label>Last question. Promise. What type of content are you looking to study?</label>
+              <select defaultValue={"default"} onChange={e => setProgram(e.target.value)}>
+                <option value="default">Select a Program</option>
+                <option value="fullStack">Software Development</option>
+                <option value="webDev">Web Development</option>
+                <option value="mobileDev">Mobile Development</option>
+                <option value="uxui">UX/UI</option>
+                <option value="dataSci">Data Science</option>
+                <option value="dataAnalytics">Data Analytics</option>
+                <option value="cySec">Cyber Security</option>
+                <option value="it">Information Technology</option>
+                <option value="management">Management/Operations</option>
+                <option value="med">Medical Training</option>
+                <option value="dent">Dental Training</option>
+                <option value="cert">Certifications</option>
+              </select>
             </> : 
             null
           }
@@ -267,15 +216,10 @@ export const pageQuery = graphql`
   schools: allContentfulSchool {
     edges {
       node {
-        hasUxui
         hasOnline
         hasPartTime
         hasFullTime
-        hasDataScience
-        hasSoftwareDev
-        hasCyberSecurity
-        hasLicensureTraining
-        hasProfessionalTraining
+        programsOffered
         schoolLogo {
           file {
             url
