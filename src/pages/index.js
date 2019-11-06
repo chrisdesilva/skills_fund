@@ -40,7 +40,7 @@ const IndexPage = () => {
                 {!showInput &&
                   <div className="banner__autocomplete">
                     <button className="btn" onClick={()=> toggleShowInput(true)} >I know my school</button>
-                    <button className="btn" ><Link to='/schools'>View All Schools</Link></button>
+                    <button className="btn" ><Link to='/schools'>Help me decide</Link></button>
                   </div>
                 }
                 {showInput &&

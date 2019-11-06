@@ -1,22 +1,38 @@
 .schools {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-areas: 
-    "schoolsFilter schoolsList schoolsList schoolsList schoolsList"
-    ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .schoolsFilter {
-    grid-area: schoolsFilter;
-    background: lighten($black, 85);
-    padding: .5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    width: 100%;
 
     p {
         text-align: center;
         margin-bottom: 0;
+    }
+
+    &__question {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.schoolsList {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    h3 {
+        margin: 0;
     }
 
     .btn {
@@ -26,31 +42,25 @@
 
         &:not(.startOver):hover {
             background: #f7f7f7;
-            color: $primary
+            color: $primary;
         }
 
         &.startOver {
             background: lighten($black, 80);
             color: $black;
-            margin-top: 2rem;
-        }
-
-        &:last-of-type {
-            margin-bottom: .5rem;
+            margin-top: 1.5rem;
+            
+            &:hover {
+                background: $black;
+                color: lighten($black, 80);
+            }
         }
     }
-}
 
-.schoolsList {
-    display: grid;
-    grid-template-columns: repeat(4, 25%);
-    grid-gap: 1rem;
-    padding: 2rem 1rem;
-    background: lighten($primary, 10);
-    grid-area: schoolsList;
-
-    h3 {
-        margin: 0;
+    &__final {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
     }
 
     &__img {
@@ -62,7 +72,6 @@
         img {
             margin: 0;
             object-fit: scale-down;
-            width: 75%;
             height: 100px;
             filter: grayscale(1);
         }
@@ -106,5 +115,16 @@
         border: 2px solid lighten($black, 80);
         border-radius: 5px;
         background: white;
+        width: 25%;
+    }
+
+    &__start {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .btn {
+            margin: 1rem;
+        }
     }
 }
