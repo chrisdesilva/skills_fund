@@ -2,6 +2,7 @@ import { Link, useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 import PropTypes from "prop-types"
 import React, { useEffect, useRef, useState } from "react"
+import { FaCaretDown } from "react-icons/fa"
 
 const Header = () => {
 
@@ -20,6 +21,7 @@ const Header = () => {
   // const [nav, toggleNav] = useState(false)
   const [navBackground, setNavBackground] = useState(false)
   const navRef = useRef()
+  const [isMenuOpen, toggleMenu] = useState(false)
   
   navRef.current = navBackground
   useEffect(() => {
@@ -38,29 +40,44 @@ const Header = () => {
   return (
     <>
     {/* ***** START MOBILE VERSION ***** */}
-      <header>
-      
+      <header className={isMenuOpen ? "nav expanded" : "nav closed"}>
+        <div className={isMenuOpen ? "nav__links" : "nav__links hidden"}>
+          <Link className="colorLink" to="/schools">View All Schools</Link>
+          <Link className="colorLink" to="/quality-assurance">Quality Assurance</Link>
+          <a className="colorLink" href="https://my.skills.fund" target="_blank" rel="noreferrer noopener">Application Status</a>
+          <Link className="colorLink" to="/repayment">Make a Payment</Link>
+          <Link className="colorLink" to="/blog">Why Our Loans Are Better</Link>
+          <Link to="/apply"><button className="btn btn--submit">Apply For A Loan</button></Link>
+        </div>
+        <div className="nav__logo">
+          <div className={navBackground ? "shrink" : null} id="headerLogo">
+            <Link to="/"><Img fluid={data.skflogo.childImageSharp.fluid} alt="Skills Fund logo"/></Link>
+          </div>
+        </div>
+        <div className="nav__menu">
+          <p onClick={() => toggleMenu(!isMenuOpen)}><span className={isMenuOpen ? "rotate" : null}><FaCaretDown /></span> Menu</p>
+        </div> 
       </header>
     {/* ***** END MOBILE VERSION ***** */}
     
 
 
     {/* ***** START WEB VERSION ***** */}
-    <header className={ navBackground ? "nav showNav" : "nav"}   >
-      <div className="nav__logo">
+    <header className={ navBackground ? "bigNav showNav" : "bigNav"}   >
+      <div className="bigNav__logo">
         <div className={navBackground ? "shrink" : null} id="headerLogo">
           <Link to="/"><Img fluid={data.skflogo.childImageSharp.fluid} alt="Skills Fund logo"/></Link>
         </div>
       </div>
-      <div className="nav__links">
+      <div className="bigNav__links">
         <Link className="colorLink" to="/schools">View All Schools</Link>
         <Link className="colorLink" to="/quality-assurance">Quality Assurance</Link>
         <a className="colorLink" href="https://my.skills.fund" target="_blank" rel="noreferrer noopener">Application Status</a>
         <Link className="colorLink" to="/repayment">Make a Payment</Link>
         <Link className="colorLink" to="/blog">Why Our Loans Are Better</Link>
       </div>
-      <div className="nav__apply">
-        <Link className="btn btn--submit" to="/apply">Apply For A Loan</Link>
+      <div className="bigNav__apply">
+        <Link to="/apply"><button className="btn btn--submit">Apply For A Loan</button></Link>
       </div>
     </header>
 

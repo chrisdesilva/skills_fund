@@ -64,7 +64,7 @@ const AutoComplete = props => {
             <p>Enter your school name</p>
             <input value={text} onChange={onTextChanged} type="text" placeholder="School name"/>
             {renderSuggestions()}
-            {link ? <button className="btn"><Link to={link}>Get Funded</Link></button> : null}
+            {link ? <Link to={link}><button className="btn">Get Funded</button></Link> : null}
         </div>
     )
 }

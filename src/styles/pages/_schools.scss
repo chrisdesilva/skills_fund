@@ -39,13 +39,8 @@
 
     .btn {
         margin-top: .5rem;
-        background: $primary;
-        color: #f7f7f7;
-
-        &:not(.startOver):hover {
-            background: #f7f7f7;
-            color: $primary;
-        }
+        border: 2px solid $primary;
+        color: $black;
 
         &.startOver {
             background: lighten($black, 80);
