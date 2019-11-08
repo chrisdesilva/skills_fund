@@ -41,7 +41,7 @@ const Header = () => {
     <>
     {/* ***** START MOBILE VERSION ***** */}
       <header className={isMenuOpen ? "nav expanded" : "nav closed"}>
-        <div className={isMenuOpen ? "nav__links" : "nav__links hidden"}>
+        <div className={isMenuOpen ? "nav__links show" : "nav__links hidden"}>
           <Link className="colorLink" to="/schools">View All Schools</Link>
           <Link className="colorLink" to="/quality-assurance">Quality Assurance</Link>
           <a className="colorLink" href="https://my.skills.fund" target="_blank" rel="noreferrer noopener">Application Status</a>

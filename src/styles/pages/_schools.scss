@@ -41,6 +41,7 @@
         margin-top: .5rem;
         border: 2px solid $primary;
         color: $black;
+        background: transparent;
 
         &.startOver {
             background: lighten($black, 80);
