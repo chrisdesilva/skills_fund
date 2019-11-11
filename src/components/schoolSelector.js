@@ -15,12 +15,13 @@ const SchoolSelector = props => {
     const [itsAMatch, showItsAMatch] = useState(false)
     
     const resetFilters = () => {
+        showOptionButtons(true)
         setScheduleSelected(false)
         setLocationSelected(false)
         setRegionSelected(false)
         setProgramSelected(false)
         showFinalList(false)
-        setSchools(null)
+        setSchools(props.allSchools)
       }
     
       const setSchedule = isPartTime => {
@@ -29,7 +30,6 @@ const SchoolSelector = props => {
         } else {
           schools = props.allSchools
         }
-        console.log("schedule: ", schools)
         setSchools(schools)
         setScheduleSelected(true)
       }
@@ -42,21 +42,18 @@ const SchoolSelector = props => {
         } else {
           setLocationSelected("inPerson")
         }
-        console.log("online: ", schools)
         setSchools(schools)
       }
     
       const setRegion = region => {
         schools = schools.filter(school => school.states.includes(region))
         setRegionSelected(true)
-        console.log("region: ", schools)
         setSchools(schools)
       }
     
       const setProgram = program => {
         schools = schools.filter(school => school.programsOffered.includes(program))
         setProgramSelected(true)
-        console.log("program: ", schools)
         setSchools(schools)
         showFinalList(true)
         showItsAMatch(true)
@@ -79,6 +76,7 @@ const SchoolSelector = props => {
 
                 {isFiltering && !scheduleSelected ? 
                     <div className={!scheduleSelected ? "schoolsFilter__question show" : "schoolsFilter__question"}>
+                        <span className="schoolsList__questionImg"><Img fluid={props.fluid} /></span>
                         <p>First, do you want to attend classes full-time or part-time?</p>
                         <button className="btn" onClick={() => setSchedule(false)}>Full-Time</button>
                         <button className="btn" onClick={() => setSchedule(true)}>Part-Time</button>
@@ -89,6 +87,7 @@ const SchoolSelector = props => {
 
                 {scheduleSelected && !locationSelected ? 
                     <div className={scheduleSelected && !locationSelected ? "schoolsFilter__question show" : "schoolsFilter__question"}>
+                        <span className="schoolsList__questionImg"><Img fluid={props.fluid} /></span>
                         <p>Cool. Do you want to study in person or online?</p>
                         <button className="btn" onClick={() => setOnline(false)}>In-Person</button>
                         <button className="btn" onClick={() => setOnline(true)}>Online</button>
@@ -99,6 +98,7 @@ const SchoolSelector = props => {
 
                 {scheduleSelected && locationSelected === "inPerson" && !regionSelected ? 
                     <div className={scheduleSelected && locationSelected === "inPerson" && !regionSelected ? "schoolsFilter__question show" : "schoolsFilter__question"}>
+                        <span className="schoolsList__questionImg"><Img fluid={props.fluid} /></span>
                         <label>Which state works best for you?</label>
                         <select defaultValue={"default"} onChange={e => setRegion(e.target.value.toLowerCase())}>
                             <option value="default" disabled>Select a State</option>
@@ -146,6 +146,7 @@ const SchoolSelector = props => {
 
                 {scheduleSelected && locationSelected && regionSelected && !programSelected ? 
                     <div className={scheduleSelected && locationSelected && regionSelected && !programSelected ? "schoolsFilter__question show" : "schoolsFilter__question"}>
+                        <span className="schoolsList__questionImg"><Img fluid={props.fluid} /></span>
                         <label>Last question. Promise. What type of content are you looking to study?</label>
                         <select defaultValue={"default"} onChange={e => setProgram(e.target.value)}>
                             <option value="default">Select a Program</option>
@@ -183,23 +184,48 @@ const SchoolSelector = props => {
                         </div> 
                         }
                     )}
+                    {schools.map(school => {
+                        return <div key={school.schoolname} className="schoolsList__school show">
+                            <h3>{school.schoolname}</h3>
+                            <Link to={`/schools/${school.slug}`}>  
+                            <div className="schoolsList__img"><img src={school.schoolLogo.file.url} alt={school.schoolname}/></div>
+                            </Link>
+                            <Link className="schoolsList__link" to={`/schools/${school.slug}`}>  
+                            Get Funded
+                            </Link>
+                        </div> 
+                        }
+                    )}
+                    {schools.map(school => {
+                        return <div key={school.schoolname} className="schoolsList__school show">
+                            <h3>{school.schoolname}</h3>
+                            <Link to={`/schools/${school.slug}`}>  
+                            <div className="schoolsList__img"><img src={school.schoolLogo.file.url} alt={school.schoolname}/></div>
+                            </Link>
+                            <Link className="schoolsList__link" to={`/schools/${school.slug}`}>  
+                            Get Funded
+                            </Link>
+                        </div> 
+                        }
+                    )}
                     {schools.length === 0 ? 
                         <div className="schoolsList__noMatch">
-                            <Img fluid={props.fluid} />
+                            <span className="schoolsList__questionImg"><Img fluid={props.fluid} /></span>
                             <p>Dang, looks like we don't have any options.</p>
                             {isFiltering && scheduleSelected ? <button className="btn startOver show" onClick={resetFilters}>Try Again</button> : null}
                         </div>
                         :
                         null 
                     }
-                </div> 
+                </div>
+                {schools.length > 0 ? <button className="btn startOver show" onClick={resetFilters}>Start Over</button> : null} 
                 </>
                 :
                 null
             }
             {!isFiltering && optionButtons ?
-                <div className="schoolsList__start">
-                    <Img fluid={props.fluid} />
+                <div className="schoolsList__start show">
+                    <span className="schoolsList__questionImg"><Img fluid={props.fluid} /></span>
                     <button className="btn" onClick={showAllSchools}>Show All Schools</button>
                     <button className="btn" onClick={startFilter}>I Need Options</button>
                 </div>

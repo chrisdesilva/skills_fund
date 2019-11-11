@@ -83,7 +83,7 @@
 
   &__menu {
     color: $black;
-    height: 50px;
+    height: 100%;
     display: flex;
     justify-content: flex-end;
 
@@ -155,23 +155,18 @@
   }
 }
 
-.main {
-  position: relative;
-  min-height: 100vh;
-  @include lg {
-    margin-top: 70px;
-  }
-}
+// .app {
+//   display: flex;
+//   flex-direction: column;
+// }
 
-main {
-  padding-bottom: 20rem;
+.main {
+  height: 100vh;
+  min-height: 100vh;
 }
 
 .footer {
   padding: 3rem 1rem 1rem 1rem;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
   background: #f7f7f7;
   margin-bottom: -1rem;
 
