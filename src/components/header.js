@@ -2,13 +2,20 @@ import { Link, useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 import PropTypes from "prop-types"
 import React, { useEffect, useRef, useState } from "react"
-import { FaCaretDown } from "react-icons/fa"
+import { FaBars, FaTimes } from "react-icons/fa"
 
 const Header = () => {
 
   const data = useStaticQuery(graphql`
     query {
       skflogo: file(relativePath: { eq: "skillsFund_logo.png"}) {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      whiteSkflogo: file(relativePath: { eq: "skf_logo_white.png"}) {
         childImageSharp {
           fluid {
             ...GatsbyImageSharpFluid
@@ -40,22 +47,22 @@ const Header = () => {
   return (
     <>
     {/* ***** START MOBILE VERSION ***** */}
-      <header className={isMenuOpen ? "nav expanded" : "nav closed"}>
+      <header className={isMenuOpen ? "nav open" : "nav closed"}>
         <div className={isMenuOpen ? "nav__links show" : "nav__links hidden"}>
-          <Link className="colorLink" to="/schools">View All Schools</Link>
-          <Link className="colorLink" to="/quality-assurance">Quality Assurance</Link>
-          <a className="colorLink" href="https://my.skills.fund" target="_blank" rel="noreferrer noopener">Application Status</a>
-          <Link className="colorLink" to="/repayment">Make a Payment</Link>
-          <Link className="colorLink" to="/blog">Why Our Loans Are Better</Link>
+          <Link to="/schools">View All Schools</Link>
+          <Link to="/quality-assurance">Quality Assurance</Link>
+          <a href="https://my.skills.fund" target="_blank" rel="noreferrer noopener">Application Status</a>
+          <Link to="/repayment">Make a Payment</Link>
+          <Link to="/blog">Why Our Loans Are Better</Link>
           <Link to="/apply"><button className="btn btn--submit">Apply For A Loan</button></Link>
         </div>
         <div className="nav__logo">
           <div className={navBackground ? "shrink" : null} id="headerLogo">
-            <Link to="/"><Img fluid={data.skflogo.childImageSharp.fluid} alt="Skills Fund logo"/></Link>
+            <Link to="/"><Img fluid={isMenuOpen ? data.whiteSkflogo.childImageSharp.fluid : data.skflogo.childImageSharp.fluid} alt="Skills Fund logo"/></Link>
           </div>
         </div>
         <div className="nav__menu">
-          <p onClick={() => toggleMenu(!isMenuOpen)}><span className={isMenuOpen ? "rotate" : null}><FaCaretDown /></span> Menu</p>
+          <span className={isMenuOpen ? "nav__menu--times" : "nav__menu--bars"} onClick={() => toggleMenu(!isMenuOpen)}>{isMenuOpen ? <FaTimes/> : <FaBars />}</span>
         </div> 
       </header>
     {/* ***** END MOBILE VERSION ***** */}
