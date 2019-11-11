@@ -5,7 +5,7 @@
 .nav {
   display: flex;
   position: fixed;
-  width: 100%;
+  width: 100vw;
   background: white;
   z-index: 100;
   padding: 10px;
@@ -157,7 +157,7 @@
 
 .main {
   height: 100vh;
-  min-height: 100vh; 
+  min-height: 100vh;
 }
 
 
