@@ -76,7 +76,7 @@ const SchoolSelector = props => {
 
                 {isFiltering && !scheduleSelected ? 
                     <div className={!scheduleSelected ? "schoolsFilter__question show" : "schoolsFilter__question"}>
-                        <span className="schoolsList__questionImg"><Img fluid={props.fluid} /></span>
+                        <span className="schoolsList__questionImg"><Img fluid={props.fullOrPart} /></span>
                         <p>First, do you want to attend classes full-time or part-time?</p>
                         <button className="btn" onClick={() => setSchedule(false)}>Full-Time</button>
                         <button className="btn" onClick={() => setSchedule(true)}>Part-Time</button>
@@ -87,7 +87,7 @@ const SchoolSelector = props => {
 
                 {scheduleSelected && !locationSelected ? 
                     <div className={scheduleSelected && !locationSelected ? "schoolsFilter__question show" : "schoolsFilter__question"}>
-                        <span className="schoolsList__questionImg"><Img fluid={props.fluid} /></span>
+                        <span className="schoolsList__questionImg"><Img fluid={props.inPersonOnline} /></span>
                         <p>Cool. Do you want to study in person or online?</p>
                         <button className="btn" onClick={() => setOnline(false)}>In-Person</button>
                         <button className="btn" onClick={() => setOnline(true)}>Online</button>
@@ -98,7 +98,7 @@ const SchoolSelector = props => {
 
                 {scheduleSelected && locationSelected === "inPerson" && !regionSelected ? 
                     <div className={scheduleSelected && locationSelected === "inPerson" && !regionSelected ? "schoolsFilter__question show" : "schoolsFilter__question"}>
-                        <span className="schoolsList__questionImg"><Img fluid={props.fluid} /></span>
+                        <span className="schoolsList__questionImg"><Img fluid={props.location} /></span>
                         <label>Which state works best for you?</label>
                         <select defaultValue={"default"} onChange={e => setRegion(e.target.value.toLowerCase())}>
                             <option value="default" disabled>Select a State</option>
@@ -146,7 +146,7 @@ const SchoolSelector = props => {
 
                 {scheduleSelected && locationSelected && regionSelected && !programSelected ? 
                     <div className={scheduleSelected && locationSelected && regionSelected && !programSelected ? "schoolsFilter__question show" : "schoolsFilter__question"}>
-                        <span className="schoolsList__questionImg"><Img fluid={props.fluid} /></span>
+                        <span className="schoolsList__questionImg"><Img fluid={props.program} /></span>
                         <label>Last question. Promise. What type of content are you looking to study?</label>
                         <select defaultValue={"default"} onChange={e => setProgram(e.target.value)}>
                             <option value="default">Select a Program</option>
@@ -208,24 +208,37 @@ const SchoolSelector = props => {
                         </div> 
                         }
                     )}
-                    {schools.length === 0 ? 
-                        <div className="schoolsList__noMatch">
-                            <span className="schoolsList__questionImg"><Img fluid={props.fluid} /></span>
-                            <p>Dang, looks like we don't have any options.</p>
-                            {isFiltering && scheduleSelected ? <button className="btn startOver show" onClick={resetFilters}>Try Again</button> : null}
-                        </div>
-                        :
-                        null 
-                    }
                 </div>
                 {schools.length > 0 ? <button className="btn startOver show" onClick={resetFilters}>Start Over</button> : null} 
                 </>
                 :
                 null
             }
+            {schools.length === 0 && finalList ? 
+                <div className="schoolsList__noMatch">
+                    <span className="schoolsList__questionImg"><Img fluid={props.noMatches} /></span>
+                    <p>Looks like we don't have a program that fits just yet. Try again or check out our whole list of partner programs.</p>
+                    {isFiltering && scheduleSelected ? 
+                        <>
+                            <button className="btn startOver show" onClick={resetFilters}>Try Again</button> 
+                            <button className="btn" onClick={()=> {
+                                resetFilters()
+                                setIsFiltering(false)
+                                showItsAMatch(false)
+                                showOptionButtons(false)
+                                showFinalList(true)
+                            }}>Show All Schools</button>
+                        </>
+                        : 
+                        null
+                    }
+                </div>
+                :
+                null 
+            }
             {!isFiltering && optionButtons ?
                 <div className="schoolsList__start show">
-                    <span className="schoolsList__questionImg"><Img fluid={props.fluid} /></span>
+                    <span className="schoolsList__questionImg"><Img fluid={props.climbers} /></span>
                     <button className="btn" onClick={showAllSchools}>Show All Schools</button>
                     <button className="btn" onClick={startFilter}>I Need Options</button>
                 </div>
