@@ -52,7 +52,7 @@ const IndexPage = () => {
               <p>It’s your future. Expect more from your school and lender.</p>
               <div className="banner__buttons">
                 {!showInput &&
-                  <div className="banner__autocomplete">
+                  <div className="banner__autocomplete show">
                     <button className="btn" onClick={()=> toggleShowInput(true)} >I know my school</button>
                     <Link to='/schools'><button className="btn">I'm doing research</button></Link>
                   </div>

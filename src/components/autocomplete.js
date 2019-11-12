@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { graphql, Link, useStaticQuery } from "gatsby"
+import { FaTimes } from "react-icons/fa"
 
 const AutoComplete = props => {
 
@@ -60,9 +61,10 @@ const AutoComplete = props => {
     }
     
     return (
-        <div id="autocomplete">
+        <div className="autocomplete show">
             <p>Enter your school name</p>
             <input value={text} onChange={onTextChanged} type="text" placeholder="School name"/>
+            <FaTimes className="autocomplete__icon" onClick={props.toggleInput} />
             {renderSuggestions()}
             {link ? <Link to={link}><button className="btn">Get Funded</button></Link> : null}
         </div>
