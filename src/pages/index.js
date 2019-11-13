@@ -107,7 +107,7 @@ const IndexPage = () => {
           </div>
         </div>
 
-          <div className="yotpo yotpo-reviews-carousel bg-gray-100 pb-8 m-0" 
+          <div className="yotpo yotpo-reviews-carousel" 
             data-background-color="transparent" 
             data-mode="top_rated" 
             data-type="site" 
