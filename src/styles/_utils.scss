@@ -27,6 +27,33 @@
 
 // -----
 
+.slideLeft{
+  animation-duration: .5s;
+  animation-name: slideLeft;
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(200%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@-webkit-keyframes slideLeft {
+  from {
+    transform: translateX(200%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}
+
+// -----
+
 .bg-primary {
   background-color: $primary; 
   animation-duration: 1s;
