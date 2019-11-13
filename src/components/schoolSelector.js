@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
+import { FaArrowLeft } from 'react-icons/fa'
 
 const SchoolSelector = props => {
 
-    let [schools, setSchools] = useState(props.allSchools)
+    let [schools, setSchools] = useState(props.allSchools) // holds current set of schools, updates with filter
+    const [prevSchools, setPrevSchools] = useState(null) // holds previous step's list of filtered schools in case user goes back a step
     const [optionButtons, showOptionButtons] = useState(true)
     const [isFiltering, setIsFiltering] = useState(false)
     const [scheduleSelected, setScheduleSelected] = useState(false)
-    const [locationSelected, setLocationSelected] = useState(false)
-    const [regionSelected, setRegionSelected] = useState(false)
+    const [locationSelected, setLocationSelected] = useState({online: false, inPerson: false})
+    const [stateSelected, setStateSelected] = useState(false)
     const [programSelected, setProgramSelected] = useState(false)
     const [finalList, showFinalList] = useState(false)
     const [itsAMatch, showItsAMatch] = useState(false)
@@ -18,42 +20,50 @@ const SchoolSelector = props => {
         showOptionButtons(true)
         setScheduleSelected(false)
         setLocationSelected(false)
-        setRegionSelected(false)
+        setStateSelected(false)
         setProgramSelected(false)
         showFinalList(false)
         setSchools(props.allSchools)
       }
     
       const setSchedule = isPartTime => {
+        setPrevSchools(schools)
         if(isPartTime) {
           schools = props.allSchools.filter(school => school.hasPartTime)
         } else {
           schools = props.allSchools
         }
         setSchools(schools)
+        setIsFiltering(false)
         setScheduleSelected(true)
       }
     
       const setOnline = isOnline => {
+        setPrevSchools(schools)
         if(isOnline) {
           schools = schools.filter(school => school.hasOnline)
-          setLocationSelected("online")
-          setRegionSelected(true)
+          setLocationSelected({online: true, inPerson: false})
+          setStateSelected(true)
         } else {
-          setLocationSelected("inPerson")
+          setLocationSelected({online: false, inPerson: true})
         }
+        setScheduleSelected(false)
         setSchools(schools)
       }
     
       const setRegion = region => {
+        setPrevSchools(schools)
         schools = schools.filter(school => school.states.includes(region))
-        setRegionSelected(true)
+        setStateSelected(true)
         setSchools(schools)
       }
     
       const setProgram = program => {
+        setPrevSchools(schools)
         schools = schools.filter(school => school.programsOffered.includes(program))
         setProgramSelected(true)
+        setStateSelected(false)
+        setLocationSelected(false)
         setSchools(schools)
         showFinalList(true)
         showItsAMatch(true)
@@ -62,6 +72,7 @@ const SchoolSelector = props => {
       const showAllSchools = () => {
         showFinalList(true)
         showOptionButtons(false)
+        showItsAMatch(false)
       }
 
       const startFilter = () => {
@@ -74,30 +85,39 @@ const SchoolSelector = props => {
         <div className="schoolsList">
             <div className="schoolsFilter">
 
-                {isFiltering && !scheduleSelected ? 
-                    <div className={!scheduleSelected ? "schoolsFilter__question show" : "schoolsFilter__question"}>
+                {isFiltering ? 
+                    <div className={isFiltering ? "schoolsFilter__question  show" : "schoolsFilter__question"}>
                         <span className="schoolsList__questionImg"><Img fluid={props.fullOrPart} /></span>
                         <p>First, do you want to attend classes full-time or part-time?</p>
                         <button className="btn" onClick={() => setSchedule(false)}>Full-Time</button>
                         <button className="btn" onClick={() => setSchedule(true)}>Part-Time</button>
+                        <p onClick={() => {
+                            setIsFiltering(false)
+                            showOptionButtons(true)
+                        }} className="schoolsList__back"><FaArrowLeft /><span>Back</span></p>
                     </div> 
                     : 
                     null
                 }
 
-                {scheduleSelected && !locationSelected ? 
-                    <div className={scheduleSelected && !locationSelected ? "schoolsFilter__question show" : "schoolsFilter__question"}>
+                {scheduleSelected ? 
+                    <div className={scheduleSelected ? "schoolsFilter__question  show" : "schoolsFilter__question"}>
                         <span className="schoolsList__questionImg"><Img fluid={props.inPersonOnline} /></span>
                         <p>Cool. Do you want to study in person or online?</p>
                         <button className="btn" onClick={() => setOnline(false)}>In-Person</button>
                         <button className="btn" onClick={() => setOnline(true)}>Online</button>
+                        <p onClick={() => {
+                            setIsFiltering(true)
+                            setScheduleSelected(false)
+                            setSchools(props.allSchools)
+                        }} className="schoolsList__back"><FaArrowLeft /><span>Back</span></p>
                     </div> 
                     : 
                     null
                 }
 
-                {scheduleSelected && locationSelected === "inPerson" && !regionSelected ? 
-                    <div className={scheduleSelected && locationSelected === "inPerson" && !regionSelected ? "schoolsFilter__question show" : "schoolsFilter__question"}>
+                {locationSelected.inPerson && !stateSelected ? 
+                    <div className={locationSelected === "inPerson" ? "schoolsFilter__question  show" : "schoolsFilter__question"}>
                         <span className="schoolsList__questionImg"><Img fluid={props.location} /></span>
                         <label>Which state works best for you?</label>
                         <select defaultValue={"default"} onChange={e => setRegion(e.target.value.toLowerCase())}>
@@ -139,13 +159,18 @@ const SchoolSelector = props => {
                             <option value="WA">Washington</option>
                             <option value="WI">Wisconsin</option>
                         </select>
+                        <p onClick={() => {
+                            setScheduleSelected(true)
+                            setLocationSelected(false)
+                            setSchools(prevSchools)
+                        }} className="schoolsList__back"><FaArrowLeft /><span>Back</span></p>
                     </div> 
                     : 
                     null
                 }
 
-                {scheduleSelected && locationSelected && regionSelected && !programSelected ? 
-                    <div className={scheduleSelected && locationSelected && regionSelected && !programSelected ? "schoolsFilter__question show" : "schoolsFilter__question"}>
+                {stateSelected ? 
+                    <div className={stateSelected ? "schoolsFilter__question show" : "schoolsFilter__question"}>
                         <span className="schoolsList__questionImg"><Img fluid={props.program} /></span>
                         <label>Last question. Promise. What type of content are you looking to study?</label>
                         <select defaultValue={"default"} onChange={e => setProgram(e.target.value)}>
@@ -163,6 +188,16 @@ const SchoolSelector = props => {
                             <option value="dent">Dental Training</option>
                             <option value="cert">Certifications</option>
                         </select>
+                        <p onClick={() => {
+                            if(locationSelected.inPerson) {
+                                setStateSelected(false)
+                                setSchools(prevSchools)
+                            } else {
+                                setPrevSchools(schools)
+                                setStateSelected(false)
+                                setScheduleSelected(true)
+                            }
+                        }} className="schoolsList__back"><FaArrowLeft /><span>Back</span></p>
                     </div> 
                     : 
                     null
@@ -218,7 +253,6 @@ const SchoolSelector = props => {
                 <div className="schoolsList__noMatch">
                     <span className="schoolsList__questionImg"><Img fluid={props.noMatches} /></span>
                     <p>Looks like we don't have a program that fits just yet. Try again or check out our whole list of partner programs.</p>
-                    {isFiltering && scheduleSelected ? 
                         <>
                             <button className="btn startOver show" onClick={resetFilters}>Try Again</button> 
                             <button className="btn" onClick={()=> {
@@ -229,9 +263,6 @@ const SchoolSelector = props => {
                                 showFinalList(true)
                             }}>Show All Schools</button>
                         </>
-                        : 
-                        null
-                    }
                 </div>
                 :
                 null 

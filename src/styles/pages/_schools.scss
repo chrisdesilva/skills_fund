@@ -68,6 +68,20 @@
         }
     }
 
+    &__back {
+        margin-top: 1rem;
+        display: flex;
+        align-items: center;
+
+        span {
+            margin-left: .25rem;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
     &__final {
         display: grid;
         grid-gap: 10px;
