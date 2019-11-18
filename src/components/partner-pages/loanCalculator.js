@@ -103,12 +103,10 @@ const LoanCalculator = props => {
 
     return (
         <div className={props.modal ? "loanCalculator opacity" : "loanCalculator"}>
-            {/* <img className="schoolLogo" src={props.src} alt={props.alt} onClick={props.openSchoolPage}/> */}
             <div className="loanCalculator__content">
 
                 <div className="loanCalculator__select">
                     <h2>Simple. Transparent.</h2>
-                    {/* <div className="loanCalculator__img"><Img fluid={props.scales} /></div> */}
                     <p id="leadText">Figuring out your monthly payments on a loan shouldn't require a math degree. Find out exactly what you'll pay at {props.schoolname} with a Skills Fund loan:</p>
                     
                     <p>{` `}</p>
