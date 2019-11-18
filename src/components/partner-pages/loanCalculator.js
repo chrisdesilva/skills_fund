@@ -142,10 +142,10 @@ const LoanCalculator = props => {
                         <p >Loan Amount<br/><span className="loanCalculator__amount">{formatter.format(loanValue)}</span></p>
                         <p>{formatter.format(programMax)}</p>
                     </div>
-                    <p className="loanCalculator__disclaimers" onClick={props.toggleModal}>Disclaimers</p>
+                    <span className="loanCalculator__disclaimers" onClick={props.toggleModal}>Disclaimers</span>
                 </div>
                 <div className="loanCalculator__monthlyPayments">
-                <div className="loanCalculator__36months loanCalculator__monthlyPayments">
+                <div className="loanCalculator__36months ">
                     <h3>{loanType === "io" ? <span className={loanType === "io" ? "show" : "hide"}>Interest-Only</span> : <span className={loanType === "ir" ? "show" : "hide"}>Immediate Repayment</span>}</h3>
                     <h4>36 Month Option</h4>
                     <span className={loanType === "io" ? "show" : "hide"}><><p className="loanCalculator__paymentAmounts">${interestPayment.payment36}</p><p className="loanCalculator__paymentLabel">Interest Only Payment</p></></span>
@@ -155,13 +155,22 @@ const LoanCalculator = props => {
                     </div>
                 </div>
 
-                <div className="loanCalculator__60months loanCalculator__monthlyPayments">
+                <div className="loanCalculator__60months ">
                     <h3>{loanType === "io" ? <span className={loanType === "io" ? "show" : "hide"}>Interest-Only</span> : <span className={loanType === "ir" ? "show" : "hide"}>Immediate Repayment</span>}</h3>
                     <h4>60 Month Option</h4>
                     <span className={loanType === "io" ? "show" : "hide"}><><p className="loanCalculator__paymentAmounts">${interestPayment.payment60}</p><p className="loanCalculator__paymentLabel">Interest Only Payment</p></></span>
                     <div className={loanType === "io" ? "show" : "show move"}>
                         <p className="loanCalculator__paymentAmounts">${monthlyPayment.payment60}</p><p className="loanCalculator__paymentLabel">Monthly Payment</p>
                         <p className="loanCalculator__paymentAmounts">{formatterWithCents.format(totalPayment.payment60)}</p><p className="loanCalculator__paymentLabel">Total Cost</p>
+                    </div>
+                </div>
+                <div className="loanCalculator__isa ">
+                    <h3 onClick={props.toggleModal}>Income Share Agreement</h3>
+                    <h4>Payment Plan</h4>
+                    <span className="show"><><p className="loanCalculator__paymentAmounts">$60,000</p><p className="loanCalculator__paymentLabel">Annual Salary</p></></span>
+                    <div>
+                        <p className="loanCalculator__paymentAmounts">$750</p><p className="loanCalculator__paymentLabel">Monthly Payment</p>
+                        <p className="loanCalculator__paymentAmounts">{formatterWithCents.format(programMax * 1.5)}</p><p className="loanCalculator__paymentLabel">Total Cost</p>
                     </div>
                 </div>
                 </div>

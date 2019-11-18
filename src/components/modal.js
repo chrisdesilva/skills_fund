@@ -7,11 +7,10 @@ const Modal = props => {
         <div className={props.modal ? "modal show" : "modal hide"}>
             <div className="modal__content">
                 <span className="modal__close" onClick={props.toggleModal}><FaTimes /></span>
-                <h2>Loan calculations based on...</h2>
+                <h2>Income Share Agreement assumes the following:</h2>
                 <ul>
-                    <li>fixed interest rates</li>
-                    <li>monthly interest payments made while in program</li>
-                    <li>a 2 month grace period after program completion</li>
+                    <li>annual salary of $60,000 yielding monthly gross income of $5,000</li>
+                    <li>income share percentage set at 15% of monthly gross income</li>
                     <li>making monthly payments for the duration of your loan term</li>
                 </ul>
             </div>
