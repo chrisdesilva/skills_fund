@@ -200,8 +200,26 @@ select {
         @include lg {
             padding: 3rem 3rem 1rem 3rem;
         }
-
     }
+
+    &__isa {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 .5rem;
+        text-align: center;
+        position: relative;
+
+        &--disclaimers {
+            font-size: 1.5rem;
+            line-height: 0;
+        }
+
+        @include lg {
+            padding: 3rem 3rem 1rem 3rem;
+        }
+    }
+    
 
     &__amount {
         font-size: 1.25rem;
@@ -227,8 +245,8 @@ select {
     &__disclaimers {
         font-size: .75rem;
         cursor: pointer;
-        text-align: center;
         text-decoration: underline;
+        align-self: center;
     }
 
     &__img {
@@ -284,9 +302,14 @@ select {
     &__monthlyPayments {
         grid-area: monthlyPayments;
         display: flex;
+        flex-direction: column;
         justify-content: space-evenly;
         transition: all 500ms;
         padding-top: 1.5rem;
+
+        @include lg {
+            flex-direction: row;
+        }
 
         .hide {
             opacity: 0;
