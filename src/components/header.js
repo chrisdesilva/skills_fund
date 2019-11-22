@@ -77,11 +77,11 @@ const Header = () => {
         </div>
       </div>
       <div className="bigNav__links">
-        <Link className="colorLink" to="/schools">View All Schools</Link>
-        <Link className="colorLink" to="/quality-assurance">Quality Assurance</Link>
-        <a className="colorLink" href="https://my.skills.fund" target="_blank" rel="noreferrer noopener">Application Status</a>
-        <Link className="colorLink" to="/repayment">Make a Payment</Link>
-        <Link className="colorLink" to="/blog">Why Our Loans Are Better</Link>
+        <Link className="colorLink underline" to="/schools">View All Schools</Link>
+        <Link className="colorLink underline" to="/quality-assurance">Quality Assurance</Link>
+        <a className="colorLink underline" href="https://my.skills.fund" target="_blank" rel="noreferrer noopener">Application Status</a>
+        <Link className="colorLink underline" to="/repayment">Make a Payment</Link>
+        <Link className="colorLink underline" to="/blog">Why Our Loans Are Better</Link>
       </div>
       <div className="bigNav__apply">
         <Link to="/apply"><button className="btn btn--submit">Apply For A Loan</button></Link>
