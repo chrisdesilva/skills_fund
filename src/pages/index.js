@@ -43,11 +43,21 @@ const IndexPage = () => {
       <div>
         
         <div className="banner">
+          <div className="stripesRight">
+            <div className="stripesRight--1"></div>
+            <div className="stripesRight--2"></div>
+            <div className="stripesRight--3"></div>
+          </div>
+          <div className="stripesLeft invisible lg:visible">
+            <div className="stripesLeft--1"></div>
+            <div className="stripesLeft--2"></div>
+            <div className="stripesLeft--3"></div>
+          </div>
           <div className="banner__content">
             <div className="banner__img">
               <Img fluid={data.climbers.childImageSharp.fluid} alt="Planting a flag on top of a stack of books"/>
             </div>
-            <div className="banner__text">
+            <div className="banner__text lg:m-12">
               <h1 className="tracking-tight">Higher Ed Financing Made Simple</h1>
               <p>It’s your future. Expect more from your school and lender.</p>
               <div className="banner__buttons">
@@ -81,6 +91,7 @@ const IndexPage = () => {
             </div>
           </div>
           <div className="leadContent__steps">
+
             <h3 className="mb-0 flex items-center justify-center text-5xl text-primary">1</h3>
             <h4 className="tracking-tight font-bold">Know exactly what you'll pay</h4>
             <p>With our fixed rates, there are no surprises when it comes to your monthly payments.</p>

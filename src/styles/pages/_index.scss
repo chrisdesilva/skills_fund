@@ -4,6 +4,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 5rem 2rem 8rem 2rem;
+    position: relative;
 
     h1 {
         font-weight: bold;
@@ -52,6 +53,7 @@
 
     &__img {
         width: 15rem;
+        background: white;
 
         @include lg {
             width: 20rem;
@@ -65,6 +67,67 @@
         @include lg {
             margin-top: -2rem;
         }
+    }
+}
+
+.stripesLeft {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: repeat(24, 1fr);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 8%;
+    transform: skewY(-25deg);
+    z-index: -10;
+
+    &--1 {
+        background: $secondary-dark;
+        grid-row: 0/2;
+        grid-column: 1/25;
+    }
+
+    &--2 {
+        background: $secondary-light;
+        grid-row: 2/3;
+        grid-column: 1/25;
+    }
+
+    &--3 {
+        background: $secondary;
+        grid-row: 3/4;
+        grid-column: 1/25;
+    }
+}
+
+.stripesRight {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: repeat(24, 1fr);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 100%;
+    right: -20%;
+    transform: skewY(-25deg);
+    z-index: -10;
+
+    &--1 {
+        background: $primary-dark;
+        grid-row: 0/2;
+        grid-column: 10/25;
+    }
+
+    &--2 {
+        background: $primary;
+        grid-row: 2/4;
+        grid-column: 10/25;
+    }
+
+    &--3 {
+        background: $primary-light;
+        grid-row: 4/6;
+        grid-column: 10/25;
     }
 }
 
