@@ -74,7 +74,7 @@
     align-items: center;
     padding-top: 5rem;
     background: #f7f7f7;
-    color: darken($primary, 25);
+    color: $primary-dark;
 
     h2 {
         font-size: 1.25rem;
@@ -98,17 +98,6 @@
 
         @include lg {
             flex-direction: row;
-        }
-
-        h3 {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: $primary;
-            text-align: center;
-
-            @include lg {
-                text-align: left;
-            }
         }
 
         &--text {
@@ -144,29 +133,10 @@
         background: lighten($primary, 60);
         padding: 2rem;
 
-        h3 {
-            border: 3px solid lighten($black, 30);
-            color: lighten($black, 30);
-            font-weight: bold;
-            width: 2em;
-            height: 2em;
-            box-sizing: initial;
-
-            text-align: center;
-            border-radius: 50%;  
-            margin: auto;  
-        
-            line-height: 2em;
-
-            &:nth-of-type(2) {
-                line-height: 1.75em;
-            }
-        }
-
         h4 {
             font-size: 1.5rem;
-            color: $primary;
-            margin: 2rem 0;
+            color: $primary-dark;
+            margin: 1rem 0;
             text-align: center;
         }
 
@@ -220,7 +190,7 @@
                 margin-bottom: 1.45rem;
     
                 &:nth-of-type(2) {
-                    background: linear-gradient(lighten($black, 30), lighten($black, 30)) no-repeat center/2px 100%;
+                    background: linear-gradient($primary-dark, $primary-dark) no-repeat center/2px 100%;
                     height: 20rem;
                 }
             }
