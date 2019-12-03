@@ -10,7 +10,7 @@ const Footer = () => (
             <a href="https://skills.fund/privacy-policy" target="_blank" rel="noreferrer noopener" className="colorLink">Privacy Policy</a>
             <a href="https://skills.fund/terms-of-use" target="_blank" rel="noreferrer noopener" className="colorLink">Terms of Use</a>
             <Link to="/careers" className="colorLink">Careers</Link>
-            <Link to="/faq" className="colorLink">FAQ</Link>
+            <Link to="/frequently-asked-questions" className="colorLink">FAQ</Link>
         </div>
         <div className="footer__social">
             <a href="https://twitter.com/skills_fund" target="_blank" rel="noreferrer noopener" className="colorLink"><FaTwitter/></a>
