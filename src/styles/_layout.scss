@@ -8,7 +8,7 @@
   width: 100vw;
   background: white;
   z-index: 100;
-  padding: 10px;
+  padding: 10px 20px;
   transition: all 500ms;
   top: 0;
   left: 0;
@@ -27,11 +27,11 @@
   }
 
   #headerLogo {
-    width: 100%;
+    width: 20vw;
     transition: all 500ms;
   
     &.shrink {
-      width: 90%;
+      width: 18vw;
     }
   }
 
@@ -88,11 +88,7 @@
     justify-content: flex-end;
 
     span {
-      font-size: 1.5rem;
-
-      @include md {
-        font-size: 2.5rem;
-      }
+      font-size: 3vw;
     }
 
     &--times {
@@ -185,7 +181,11 @@
 .main {
   height: 100vh;
   min-height: 100vh;
-  margin-top: 80px;
+  margin-top: 5vh;
+
+  @include lg {
+    margin-top: 10vh;
+  }
 }
 
 
