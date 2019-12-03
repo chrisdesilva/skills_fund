@@ -7,7 +7,7 @@ const FAQTemplate = props => {
 
     return (
         <div className="px-4">
-            <h2 className={isOpen ? "cursor-pointer text-base font-bold text-center" : "cursor-pointer text-base text-center"} onClick={() => toggleIsOpen(!isOpen)}>Q: {props.question}</h2>
+            <h2 className={isOpen ? "cursor-pointer text-base font-bold" : "cursor-pointer text-base"} onClick={() => toggleIsOpen(!isOpen)}>Q: {props.question}</h2>
             <Collapse isOpened={isOpen}>
                 <p className="mb-0 pb-4">{props.answer}</p>
             </Collapse>

@@ -73,3 +73,12 @@ input[type="text"] {
       color: $primary;
     }
   }
+
+  svg {
+    transition: all 300ms;
+  }
+
+  .plus {
+    transform: rotate(45deg);
+    color: $black;
+  }
