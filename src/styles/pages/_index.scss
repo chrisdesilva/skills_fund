@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 5rem 2rem 8rem 2rem;
+    padding: 5rem 0 8rem 0;
     position: relative;
 
     h1 {
@@ -155,7 +155,6 @@
         display: flex;
         align-items: center;
         justify-content: space-evenly;
-        padding: 0 2rem;
         flex-direction: column;
 
         @include lg {
