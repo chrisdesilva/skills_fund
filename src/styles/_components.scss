@@ -78,7 +78,16 @@ input[type="text"] {
     transition: all 500ms ease-in-out;
   }
 
-  .plus {
+  .flip {
+    transform: rotateX(180deg);
+  }
+
+  .spinRight {
     transform: rotate(315deg);
+    color: $black;
+  }
+
+  .spinLeft {
+    transform: rotate(-315deg);
     color: $black;
   }
