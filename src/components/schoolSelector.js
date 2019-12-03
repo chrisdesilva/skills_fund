@@ -219,30 +219,6 @@ const SchoolSelector = props => {
                         </div> 
                         }
                     )}
-                    {schools.map(school => {
-                        return <div key={school.schoolname} className="schoolsList__school show">
-                            <h3>{school.schoolname}</h3>
-                            <Link to={`/schools/${school.slug}`}>  
-                            <div className="schoolsList__img"><img src={school.schoolLogo.file.url} alt={school.schoolname}/></div>
-                            </Link>
-                            <Link className="schoolsList__link" to={`/schools/${school.slug}`}>  
-                            Get Funded
-                            </Link>
-                        </div> 
-                        }
-                    )}
-                    {schools.map(school => {
-                        return <div key={school.schoolname} className="schoolsList__school show">
-                            <h3>{school.schoolname}</h3>
-                            <Link to={`/schools/${school.slug}`}>  
-                            <div className="schoolsList__img"><img src={school.schoolLogo.file.url} alt={school.schoolname}/></div>
-                            </Link>
-                            <Link className="schoolsList__link" to={`/schools/${school.slug}`}>  
-                            Get Funded
-                            </Link>
-                        </div> 
-                        }
-                    )}
                 </div>
                 {schools.length > 0 ? <button className="btn startOver show" onClick={resetFilters}>Start Over</button> : null} 
                 </>
