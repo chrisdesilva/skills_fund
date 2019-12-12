@@ -8,7 +8,7 @@ const FAQTemplate = props => {
 
     return (
         <div className="px-4">
-            <h2 className={isOpen ? "cursor-pointer text-base font-bold flex items-center" : "cursor-pointer text-base flex items-center"} onClick={() => toggleIsOpen(!isOpen)}>{props.question}<FaCaretDown className={isOpen ? "text-base mr-4 flip self-end" : "text-base mr-4 self-end"} /></h2>
+            <h2 className={isOpen ? "cursor-pointer text-base font-bold flex items-center" : "cursor-pointer text-base flex items-center"} onClick={() => toggleIsOpen(!isOpen)}>{props.question}<FaCaretDown className={isOpen ? "text-base mr-4 flip faq self-end" : "text-base mr-4 faq self-end"} /></h2>
             <Collapse isOpened={isOpen}>
                 <p className="mb-0 pb-4">{props.answer}</p>
             </Collapse>

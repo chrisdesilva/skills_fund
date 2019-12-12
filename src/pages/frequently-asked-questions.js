@@ -19,7 +19,7 @@ const FAQ = () => {
             <div className="lg:flex px-4 pb-12 pt-6 lg:pb-24 lg:pt-12">
                 <div className="lg:w-1/3"></div>
                 <div className="lg:w-2/3">
-                    <h3 className="text-secondary cursor-pointer flex items-center" onClick={() => toggleIsApplyOpen(!isApplyOpen)}><FaPlusSquare className={isApplyOpen ? "text-base mr-4 spinRight" : "text-base mr-4"} />Applying for a Loan </h3>
+                    <h3 className="text-secondary cursor-pointer flex items-center" onClick={() => toggleIsApplyOpen(!isApplyOpen)}><FaPlusSquare className={isApplyOpen ? "text-base mr-4 spinRight faq" : "text-base mr-4 faq"} />Applying for a Loan </h3>
                     <Collapse isOpened={isApplyOpen}>
                         <FAQTemplate 
                             question="What’s the difference between fixed rates and variable rates?"
@@ -78,7 +78,7 @@ const FAQ = () => {
                             answer={<><p>Yes, you may apply for financing in parallel to applying for your scholarship. If you are awarded your scholarship prior to the disbursement of your tuition financing to your school, please email <a className="text-secondary" href="mailto:CustomerTrust@Skills.Fund">CustomerTrust@Skills.Fund</a> with the amount of your scholarship, and your loan for tuition will be downward adjusted. Should you receive your scholarship following the second Wednesday after program start, you can apply your funds to your loan balance at any time without pre-payment penalty.</p><p className="mb-0 pb-4"><strong className="text-secondary">Please note:</strong> Should you want to apply for a scholarship, it is recommended to apply for max tuition financing, and once your scholarship is awarded, Skills Fund can downward adjust your requested tuition financing. This will prevent you having to apply for additional funds, should you not be awarded your scholarship, as loans may not be upward adjusted. Simply email <a className="text-secondary" href="mailto:CustomerTrust@Skills.Fund">CustomerTrust@Skills.Fund</a> with your approved scholarship amount.</p></>}
                         />
                     </Collapse>
-                    <h3 className="text-secondary cursor-pointer flex items-center" onClick={() => toggleIsRepayOpen(!isRepayOpen)}><FaPlusSquare className={isRepayOpen ? "text-base mr-4 spinRight" : "text-base mr-4"} />Repaying My Loan </h3>
+                    <h3 className="text-secondary cursor-pointer flex items-center" onClick={() => toggleIsRepayOpen(!isRepayOpen)}><FaPlusSquare className={isRepayOpen ? "text-base mr-4 spinRight faq" : "text-base mr-4 faq"} />Repaying My Loan </h3>
                     <Collapse isOpened={isRepayOpen}>
                         <FAQTemplate 
                             question="Can I pay off my loan faster than the initial term?"
@@ -97,7 +97,7 @@ const FAQ = () => {
                             answer={<><p>Please email <a className="text-secondary" href="mailto:CustomerTrust@Skills.Fund">CustomerTrust@Skills.Fund</a> to request a loan cancellation. If you applied for your loan after X date, log in to your <a className="text-secondary" href="https://my.skills.fund">Skills Fund account</a> to cancel your loan.</p></>}
                         />
                     </Collapse>
-                    <h3 className="text-secondary cursor-pointer flex items-center" onClick={() => toggleIsAboutOpen(!isAboutOpen)}><FaPlusSquare className={isAboutOpen ? "text-base mr-4 spinRight" : "text-base mr-4"} />About Skills Fund </h3>
+                    <h3 className="text-secondary cursor-pointer flex items-center" onClick={() => toggleIsAboutOpen(!isAboutOpen)}><FaPlusSquare className={isAboutOpen ? "text-base mr-4 spinRight faq" : "text-base mr-4 faq"} />About Skills Fund </h3>
                     <Collapse isOpened={isAboutOpen}>
                         <FAQTemplate 
                             question="Who is Skills Fund?"

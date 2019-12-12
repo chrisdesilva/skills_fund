@@ -36,7 +36,7 @@ select {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: lighten($primary, 10);
+    background-color: darken($primary, 18);
     color: white;
     padding: 2rem;
     transition: opacity 1000ms;
@@ -223,7 +223,7 @@ select {
 
     &__amount {
         font-size: 1.25rem;
-        color: lighten($primary, 10);
+        color: darken($primary, 18);
         font-weight: bold;
 
         @include lg {
@@ -281,12 +281,12 @@ select {
             border: 2px solid transparent;
 
             &:hover {
-                border: 2px solid $primary;
+                border: 2px solid darken($primary, 18);
             }
 
             &:active {
                 transform: scale(1.2);
-                border: 2px solid $primary;
+                border: 2px solid darken($primary, 18);
             }
         }
     }
@@ -337,7 +337,7 @@ select {
 
     &__paymentAmounts {
         font-weight: bold;
-        color: lighten($primary, 10);
+        color: darken($primary, 18);
         font-size: 1.4rem;
 
         @include lg {
@@ -358,7 +358,7 @@ select {
         grid-area: select;
 
         h2 {
-            color: lighten($primary, 10);
+            color: darken($primary, 18);
             font-weight: bold;
             font-size: 2rem;
             margin-bottom: .75rem;
