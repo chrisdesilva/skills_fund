@@ -64,7 +64,6 @@ const LoanCalculator = props => {
 
     const handleProgramName = e => {
         setProgramIndex(Number(e.target.value))
-        setLoanType(props.loanInfo[programIndex].loanType)
     }
 
     const handleLoanType = e => {
@@ -77,7 +76,6 @@ const LoanCalculator = props => {
 
     useEffect(() => {
         calculateMonthlyPayment() // run calculator when page loads to show initial amounts
-        setLoanType(props.loanInfo[programIndex].loanType)
         setNonPaymentPeriod(props.loanInfo[programIndex].nonPaymentPeriod)
 
         // check to see if the program has multiple locations and set the program max based on individual cities
@@ -92,6 +90,14 @@ const LoanCalculator = props => {
             setLoanValue(props['loanInfo'][programIndex]['loanInfo']['maxLoanAmt'])
         } else {
             setLoanValue(props.defaultLoanAmount)
+        }
+
+        if(props.loanInfo[programIndex].hasIO && props.loanInfo[programIndex].hasIR){
+            setLoanType(props['loanInfo'][programIndex]['loanType'])
+        } else if(props.loanInfo[programIndex].hasIO && !props.loanInfo[programIndex].hasIR){
+            setLoanType('io')
+        } else {
+            setLoanType('ir')
         }
 
         // hook is triggered when the values in the array below are updated
@@ -120,7 +126,7 @@ const LoanCalculator = props => {
                     <p>{` `}</p>
 
                     <Collapse className="loanCalculator__selectInput" isOpened={props.loanInfo[programIndex].hasIO && props.loanInfo[programIndex].hasIR}>
-                        <select onChange={handleLoanType}>
+                        <select value={loanType} onChange={handleLoanType}>
                             <option value="io">Interest-Only</option>
                             <option value="ir">Immediate Repayment</option>
                         </select>
