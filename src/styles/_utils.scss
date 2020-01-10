@@ -1,114 +1,145 @@
 // -----
 
 .show {
-  animation-duration: 1s;
-  animation-name: show;
+	animation-duration: 1s;
+	animation-name: show;
+	animation-delay: .5s;
+	opacity: 0;
+	animation-fill-mode: forwards;
 }
 
 @keyframes show {
-  from {
-    opacity: 0;
-  }
+	from {
+		opacity: 0;
+	}
 
-  to {
-    opacity: 1;
-  }
+	to {
+		opacity: 1;
+	}
 }
 
 @-webkit-keyframes show {
-  from {
-    opacity: 0;
-  }
+	from {
+		opacity: 0;
+	}
 
-  to {
-    opacity: 1;
-  }
+	to {
+		opacity: 1;
+	}
+}
+
+// -----
+// -----
+
+.shadow {
+	animation-duration: 1s;
+	animation-name: shadow;
+	animation-delay: .5s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes shadow {
+	from {
+		box-shadow: none;
+	}
+
+	to {
+		box-shadow: 10px 15px $primary;
+	}
+}
+
+@-webkit-keyframes shadow {
+	from {
+		box-shadow: none;
+	}
+
+	to {
+		box-shadow: 10px 15px $primary;
+	}
 }
 
 // -----
 
-.slideLeft{
-  animation-duration: .5s;
-  animation-name: slideLeft;
+.slideLeft {
+	animation-duration: .5s;
+	animation-name: slideLeft;
 }
 
 @keyframes slideLeft {
-  from {
-    transform: translateX(200%);
-  }
+	from {
+		transform: translateX(200%);
+	}
 
-  to {
-    transform: translateX(0%);
-  }
+	to {
+		transform: translateX(0%);
+	}
 }
 
 @-webkit-keyframes slideLeft {
-  from {
-    transform: translateX(200%);
-  }
+	from {
+		transform: translateX(200%);
+	}
 
-  to {
-    transform: translateX(0%);
-  }
+	to {
+		transform: translateX(0%);
+	}
 }
 
 // -----
 
 .bg-primary {
-  background-color: $primary; 
-  animation-duration: 1s;
-  animation-name: bg-primary-transition;
+	background-color: $primary;
+	animation-duration: 1s;
+	animation-name: bg-primary-transition;
 }
 
 @keyframes bg-primary-transition {
-  0% {
-    background-color: white;
-  }
+	0% {
+		background-color: white;
+	}
 
-  100% {
-    background-color: $primary;
-  }
+	100% {
+		background-color: $primary;
+	}
 }
 
 @-webkit-keyframes bg-primary-transition {
-  0% {
-    background-color: white;
-  }
+	0% {
+		background-color: white;
+	}
 
-  100% {
-    background-color: $primary;
-  }
+	100% {
+		background-color: $primary;
+	}
 }
 // -----
 
 .expanded {
-  height: 75vh;
-  animation-duration: 1s;
-  animation-name: expand;
+	height: 75vh;
+	animation-duration: 1s;
+	animation-name: expand;
 }
 
 @keyframes expand {
-  0% {
-    height: 5vh;
-  }
+	0% {
+		height: 5vh;
+	}
 
-  100% {
-    height: 75vh;
-  }
+	100% {
+		height: 75vh;
+	}
 }
 
 @-webkit-keyframes expand {
-  0% {
-    height: 5vh;
-  }
+	0% {
+		height: 5vh;
+	}
 
-  100% {
-    height: 75vh;
-  }
+	100% {
+		height: 75vh;
+	}
 }
 
 .opacity {
-  opacity: .2;
+	opacity: .2;
 }
-
-  

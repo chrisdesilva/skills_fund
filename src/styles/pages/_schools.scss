@@ -1,180 +1,179 @@
 .schools {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 5rem 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 5rem 0;
 
-    @include md {
-        margin: 10rem 0;
-    }
+	@include md {
+		margin: 10rem 0;
+	}
 
-    @include xl {
-        margin: 7rem 0;
-    }
+	@include xl {
+		margin: 7rem 0;
+	}
 }
 
 .schoolsFilter {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
 
-    p {
-        text-align: center;
-        margin-bottom: 0;
-    }
+	&__question {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 
-    &__question {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+	&__card {
+		background: lighten($secondary-light, 25);
+	}
 }
 
 .schoolsList {
-    display: flex;
-    flex-direction: column;
-    padding: 0 1rem;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	padding: 0 1rem;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
 
-    h3 {
-        margin: 0;
-    }
+	h3 {
+		margin: 0;
+	}
 
-    label {
-        margin-bottom: .5rem;
-    }
+	label {
+		margin-bottom: .5rem;
+	}
 
-    .btn {
-        margin-top: .5rem;
-        border: 2px solid $primary;
-        color: $black;
-        background: transparent;
+	.btn {
+		margin-top: .5rem;
+		border: 2px solid $primary;
+		color: $black;
+		background: transparent;
 
-        &.startOver {
-            background: lighten($black, 80);
-            color: $black;
-            margin-top: .5rem;
-            border: 2px solid lighten($black, 70);
-            
-            &:hover {
-                background: $black;
-                color: lighten($black, 80);
-                border: 2px solid lighten($black, 80);
-            }
-        }
-    }
+		&.startOver {
+			background: lighten($black, 80);
+			color: $black;
+			margin-top: .5rem;
+			border: 2px solid lighten($black, 70);
 
-    &__back {
-        margin-top: 1rem;
-        display: flex;
-        align-items: center;
+			&:hover {
+				background: $black;
+				color: lighten($black, 80);
+				border: 2px solid lighten($black, 80);
+			}
+		}
+	}
 
-        span {
-            margin-left: .25rem;
-        }
+	&__back {
+		margin-top: 1rem;
+		display: flex;
+		align-items: center;
 
-        &:hover {
-            cursor: pointer;
-        }
-    }
+		span {
+			margin-left: .25rem;
+		}
 
-    &__final {
-        display: grid;
-        grid-gap: 10px;
-        width: 100%;
+		&:hover {
+			cursor: pointer;
+		}
+	}
 
-        @include md {
-            grid-template-columns: 1fr 1fr;
-        }
+	&__final {
+		display: grid;
+		grid-gap: 10px;
+		width: 100%;
 
-        @include lg {
-            grid-template-columns: repeat(4, 1fr);
-        }
-    }
+		@include md {
+			grid-template-columns: 1fr 1fr;
+		}
 
-    &__img {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem 0;
+		@include lg {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
 
-        img {
-            margin: 0;
-            object-fit: scale-down;
-            height: 100px;
-            filter: grayscale(1);
-        }
-    }
+	&__img {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 1rem 0;
 
-    &__link {
-        text-decoration: none;
-        position: relative;
-        transition: all 300ms;
-        color: $black;
+		img {
+			margin: 0;
+			object-fit: scale-down;
+			height: 100px;
+			filter: grayscale(1);
+		}
+	}
 
-        &:after,
-        &:before {
-            transition: all 300ms;
-        }
+	&__link {
+		text-decoration: none;
+		position: relative;
+		transition: all 300ms;
+		color: $black;
 
-        &:after {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-            width: 0%;
-            content: '.';
-            color: transparent;
-            background: $primary;
-            height: 2px;
-          }
-    
-          &:hover:after {
-            width: 75%;
-          }
-    }
+		&:after,
+		&:before {
+			transition: all 300ms;
+		}
 
-    &__noMatch {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+		&:after {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+			width: 0%;
+			content: '.';
+			color: transparent;
+			background: $primary;
+			height: 2px;
+		}
 
-        p {
-            width: 75%;
-        }
-    }
+		&:hover:after {
+			width: 75%;
+		}
+	}
 
-    &__questionImg {
-        width: 20rem;
-    }
+	&__noMatch {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 
-    &__school {
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        border: 2px solid lighten($black, 80);
-        border-radius: 5px;
-        background: white;
-        width: 100%;
-        margin: 1rem 0;
-    }
+		p {
+			width: 75%;
+		}
+	}
 
-    &__start {
-        width: 25%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+	&__questionImg {
+		width: 20rem;
+	}
 
-        .btn {
-            margin: .25rem;
-        }
-    }
+	&__school {
+		padding: 1rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+		align-items: center;
+		border: 2px solid lighten($black, 80);
+		border-radius: 5px;
+		background: white;
+		width: 100%;
+		margin: 1rem 0;
+	}
+
+	&__start {
+		width: 25%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		.btn {
+			margin: .25rem;
+		}
+	}
 }

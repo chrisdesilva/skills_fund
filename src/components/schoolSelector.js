@@ -51,7 +51,8 @@ const SchoolSelector = props => {
         setSchools(schools)
       }
     
-      const setRegion = region => {
+      const setRegion = e => {
+        const region = e.target.value.toLowerCase();
         setPrevSchools(schools)
         schools = schools.filter(school => school.states.includes(region))
         setStateSelected(true)
@@ -86,15 +87,19 @@ const SchoolSelector = props => {
             <div className="schoolsFilter">
 
                 {isFiltering ? 
-                    <div className={isFiltering ? "schoolsFilter__question  show" : "schoolsFilter__question"}>
-                        <span className="schoolsList__questionImg"><Img fluid={props.fullOrPart} /></span>
-                        <p>First, do you want to attend classes full-time or part-time?</p>
-                        <button className="btn" onClick={() => setSchedule(false)}>Full-Time</button>
-                        <button className="btn" onClick={() => setSchedule(true)}>Part-Time</button>
-                        <p onClick={() => {
-                            setIsFiltering(false)
-                            showOptionButtons(true)
-                        }} className="schoolsList__back"><FaArrowLeft /><span>Back</span></p>
+                    <div className={isFiltering ? "schoolsFilter__question show" : "schoolsFilter__question"}>
+                        {/* <span className="schoolsList__questionImg"><Img fluid={props.fullOrPart} /></span> */}
+                        <h2>Full-Time or Part-Time</h2>
+                        <p>Schools offer programs that are <strong>full-time</strong>, which typically requires at least 40 hours of work per week, or programs that are <strong>part-time</strong>, where you'll typically work on material for 10-20 hours per week.</p>
+                        <div className="border p-8 mx-auto flex flex-col items-center shadow schoolsFilter__card">
+                            <p>Do you want to attend classes full-time or part-time?</p>
+                            <button className="btn" onClick={() => setSchedule(false)}>Full-Time</button>
+                            <button className="btn" onClick={() => setSchedule(true)}>Part-Time</button>
+                            <p onClick={() => {
+                                setIsFiltering(false)
+                                showOptionButtons(true)
+                            }} className="schoolsList__back"><FaArrowLeft /><span>Back</span></p>
+                        </div>
                     </div> 
                     : 
                     null
@@ -102,8 +107,11 @@ const SchoolSelector = props => {
 
                 {scheduleSelected ? 
                     <div className={scheduleSelected ? "schoolsFilter__question  show" : "schoolsFilter__question"}>
-                        <span className="schoolsList__questionImg"><Img fluid={props.inPersonOnline} /></span>
-                        <p>Cool. Do you want to study in person or online?</p>
+                        {/* <span className="schoolsList__questionImg"><Img fluid={props.inPersonOnline} /></span> */}
+                        <h2>In-Person or Online</h2>
+                        <p>Courses are usually offered <strong>online</strong>, where you log in to class and participate through your computer, or <strong>in-person</strong>, where you attend class in a traditional classroom environment.</p>
+                        <div className="border p-8 mx-auto flex flex-col items-center shadow schoolsFilter__card">
+                        <p>So...do you want to study in person or online?</p>
                         <button className="btn" onClick={() => setOnline(false)}>In-Person</button>
                         <button className="btn" onClick={() => setOnline(true)}>Online</button>
                         <p onClick={() => {
@@ -111,16 +119,20 @@ const SchoolSelector = props => {
                             setScheduleSelected(false)
                             setSchools(props.allSchools)
                         }} className="schoolsList__back"><FaArrowLeft /><span>Back</span></p>
+                        </div>
                     </div> 
                     : 
                     null
                 }
 
                 {locationSelected.inPerson && !stateSelected ? 
-                    <div className={locationSelected === "inPerson" ? "schoolsFilter__question  show" : "schoolsFilter__question"}>
-                        <span className="schoolsList__questionImg"><Img fluid={props.location} /></span>
+                    <div className={locationSelected === "inPerson" ? "schoolsFilter__question show" : "schoolsFilter__question"}>
+                        {/* <span className="schoolsList__questionImg"><Img fluid={props.location} /></span> */}
+                        <h2>Choose A State</h2>
+                        <p>To make sure the program you're looking for is available in your state, make a selection from the dropdown below.</p>
+                        <div className="border p-8 mx-auto flex flex-col items-center shadow schoolsFilter__card">
                         <label>Which state works best for you?</label>
-                        <select defaultValue={"default"} onChange={e => setRegion(e.target.value.toLowerCase())}>
+                        <select defaultValue={"default"} onChange={setRegion}>
                             <option value="default" disabled>Select a State</option>
                             <option value="AL">Alabama</option>
                             <option value="AZ">Arizona</option>
@@ -164,6 +176,7 @@ const SchoolSelector = props => {
                             setLocationSelected(false)
                             setSchools(prevSchools)
                         }} className="schoolsList__back"><FaArrowLeft /><span>Back</span></p>
+                        </div>
                     </div> 
                     : 
                     null
@@ -171,7 +184,10 @@ const SchoolSelector = props => {
 
                 {stateSelected ? 
                     <div className={stateSelected ? "schoolsFilter__question show" : "schoolsFilter__question"}>
-                        <span className="schoolsList__questionImg"><Img fluid={props.program} /></span>
+                        {/* <span className="schoolsList__questionImg"><Img fluid={props.program} /></span> */}
+                        <h2>Program of Study</h2>
+                        <p>We partner with schools that offer a wide array of different programs to put you on a path toward a better career. Choose the type of program you're looking for below.</p>
+                        <div className="border p-8 mx-auto flex flex-col items-center shadow schoolsFilter__card">
                         <label>Last question. Promise. What type of content are you looking to study?</label>
                         <select defaultValue={"default"} onChange={e => setProgram(e.target.value)}>
                             <option value="default">Select a Program</option>
@@ -198,6 +214,7 @@ const SchoolSelector = props => {
                                 setScheduleSelected(true)
                             }
                         }} className="schoolsList__back"><FaArrowLeft /><span>Back</span></p>
+                        </div>
                     </div> 
                     : 
                     null
