@@ -29,6 +29,7 @@
     "react-helmet": "^5.2.1",
     "react-icons": "^3.7.0",
     "react-motion": "^0.5.2",
+    "react-usa-map": "^1.4.0",
     "slash": "^3.0.0",
     "tailwindcss": "^1.1.4"
   },
