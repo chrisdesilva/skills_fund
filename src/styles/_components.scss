@@ -96,12 +96,18 @@ select {
 path {
 	pointer-events: all;
 	transition: all 300ms;
+	opacity: .75;
 }
 path:hover {
-	opacity: 0.50;
+	opacity: 1;
 	cursor: pointer;
 }
+.DC2 {
+	pointer-events: all;
+	transition: all 300ms;
+	opacity: .75;
+}
 .DC2:hover {
-	opacity: 0.50;
+	opacity: 1;
 	cursor: pointer;
 }
