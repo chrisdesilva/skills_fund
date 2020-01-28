@@ -6,7 +6,7 @@
   "author": "Chris DeSilva <chris.a.desilva@gmail.com>",
   "dependencies": {
     "dotenv": "^8.1.0",
-    "gatsby": "^2.13.73",
+    "gatsby": "^2.19.5",
     "gatsby-image": "^2.2.10",
     "gatsby-plugin-google-gtag": "^1.1.6",
     "gatsby-plugin-manifest": "^2.2.6",
@@ -14,7 +14,7 @@
     "gatsby-plugin-postcss": "^2.1.5",
     "gatsby-plugin-react-helmet": "^3.1.4",
     "gatsby-plugin-sass": "^2.1.18",
-    "gatsby-plugin-sharp": "^2.2.13",
+    "gatsby-plugin-sharp": "^2.4.0",
     "gatsby-source-contentful": "^2.1.47",
     "gatsby-source-filesystem": "^2.1.11",
     "gatsby-source-yotpo": "^0.8.3",
@@ -29,6 +29,7 @@
     "react-helmet": "^5.2.1",
     "react-icons": "^3.7.0",
     "react-motion": "^0.5.2",
+    "react-usa-map": "^1.4.0",
     "slash": "^3.0.0",
     "tailwindcss": "^1.1.4"
   },
