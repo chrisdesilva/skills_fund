@@ -1,104 +1,117 @@
-import { Link, useStaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image"
-import PropTypes from "prop-types"
-import React, { useEffect, useRef, useState } from "react"
-import { FaBars, FaTimes } from "react-icons/fa"
+import { Link, useStaticQuery, graphql } from 'gatsby';
+import Img from 'gatsby-image';
+import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Header = () => {
+	const data = useStaticQuery(graphql`
+		query {
+			skflogo: file(relativePath: { eq: "skillsFund_logo.png" }) {
+				childImageSharp {
+					fluid {
+						...GatsbyImageSharpFluid
+					}
+				}
+			}
+			whiteSkflogo: file(relativePath: { eq: "skf_logo_white.png" }) {
+				childImageSharp {
+					fluid(maxWidth: 1200) {
+						...GatsbyImageSharpFluid
+					}
+				}
+			}
+		}
+	`);
 
-  const data = useStaticQuery(graphql`
-    query {
-      skflogo: file(relativePath: { eq: "skillsFund_logo.png"}) {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-      whiteSkflogo: file(relativePath: { eq: "skf_logo_white.png"}) {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-    }
-  `)
-  
-  // const [nav, toggleNav] = useState(false)
-  const [navBackground, setNavBackground] = useState(false)
-  const navRef = useRef()
-  const [isMenuOpen, toggleMenu] = useState(false)
-  
-  navRef.current = navBackground
-  useEffect(() => {
-    const handleScroll = () => {
-      const show = window.scrollY > 10
-      if (navRef.current !== show){
-        setNavBackground(show)
-      }
-    }
-    document.addEventListener('scroll', handleScroll)
-    return () => {
-      document.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
+	// const [nav, toggleNav] = useState(false)
+	const [ navBackground, setNavBackground ] = useState(false);
+	const navRef = useRef();
+	const [ menuOpen, setMenuOpen ] = useState(false);
 
-  return (
-    <>
-    {/* ***** START MOBILE VERSION ***** */}
-      <header className={isMenuOpen ? "nav open" : "nav closed"}>
-        <div className={isMenuOpen ? "nav__links show" : "nav__links hidden"}>
-          <Link to="/schools">View All Schools</Link>
-          <Link to="/quality-assurance">Quality Assurance</Link>
-          <a href="https://my.skills.fund" target="_blank" rel="noreferrer noopener">Application Status</a>
-          <Link to="/repayment">Make a Payment</Link>
-          <Link to="/blog">Why Our Loans Are Better</Link>
-          <Link to="/apply"><button className="btn btn--submit">Apply For A Loan</button></Link>
-        </div>
-        <div className="nav__logo">
-          <div className={navBackground ? "shrink" : null} id="headerLogo">
-            <Link to="/"><Img fluid={isMenuOpen ? data.whiteSkflogo.childImageSharp.fluid : data.skflogo.childImageSharp.fluid} alt="Skills Fund logo"/></Link>
-          </div>
-        </div>
-        <div className="nav__menu">
-          <span className={isMenuOpen ? "nav__menu--times" : "nav__menu--bars"} onClick={() => toggleMenu(!isMenuOpen)}>{isMenuOpen ? <FaTimes/> : <FaBars />}</span>
-        </div> 
-      </header>
-    {/* ***** END MOBILE VERSION ***** */}
-    
+	navRef.current = navBackground;
+	useEffect(() => {
+		const handleScroll = () => {
+			const show = window.scrollY > 10;
+			if (navRef.current !== show) {
+				setNavBackground(show);
+			}
+		};
+		document.addEventListener('scroll', handleScroll);
+		return () => {
+			document.removeEventListener('scroll', handleScroll);
+		};
+	}, []);
 
+	return (
+		// mobile version
+		<header className="relative p-2">
+			<input onClick={() => setMenuOpen(!menuOpen)} type="checkbox" id="bars" />
+			<label class="menu" htmlFor="bars">
+				<div class="bar" />
+				<div class="bar" />
+				<div class="bar" />
+			</label>
+			<a className="btn btn--nav fixed right-0 top-0 mr-12 text-center" href="https://my.skills.fund/register">
+				Apply Now
+			</a>
 
-    {/* ***** START WEB VERSION ***** */}
-    <header className={ navBackground ? "bigNav showNav" : "bigNav"}   >
-      <div className="bigNav__logo">
-        <div className={navBackground ? "shrink" : null} id="headerLogo">
-          <Link to="/"><Img fluid={data.skflogo.childImageSharp.fluid} alt="Skills Fund logo"/></Link>
-        </div>
-      </div>
-      <div className="bigNav__links">
-        <Link className="colorLink underline" to="/schools">View All Schools</Link>
-        <Link className="colorLink underline" to="/quality-assurance">Quality Assurance</Link>
-        <a className="colorLink underline" href="https://my.skills.fund" target="_blank" rel="noreferrer noopener">Application Status</a>
-        <Link className="colorLink underline" to="/repayment">Make a Payment</Link>
-        <Link className="colorLink underline" to="/blog">Why Our Loans Are Better</Link>
-      </div>
-      <div className="bigNav__apply">
-        <Link to="/apply"><button className="btn btn--submit">Apply For A Loan</button></Link>
-      </div>
-    </header>
+			<ul>
+				<li className="w-32 lg:w-48">
+					<Link to="/">
+						<Img fluid={data.skflogo.childImageSharp.fluid} alt="Skills Fund logo" />
+					</Link>
+				</li>
+			</ul>
 
-    {/* ***** END WEB VERSION ***** */}
-    </>
-  )
-}
+			<div className={menuOpen ? 'content showNav' : 'content'}>
+				<div className="navFlex">
+					<nav>
+						<ul className="navigation">
+							<li>
+								<Link className="w-40" to="/">
+									<Img fluid={data.whiteSkflogo.childImageSharp.fluid} alt="Skills Fund logo" />
+								</Link>
+							</li>
+							<li>
+								<Link to="/schools">Our Partner Schools</Link>
+							</li>
+							<li>
+								<Link to="/about">Why Skills Fund?</Link>
+							</li>
+							<li>
+								<Link to="/blog">Student Journey</Link>
+							</li>
+							<li>
+								<Link to="/loan-guide">Loan Guide</Link>
+							</li>
+							<li>
+								<Link to="/frequently-asked-questions">FAQ</Link>
+							</li>
+							<li>
+								<a href="http://my.skills.fund">Check Loan Status</a>
+							</li>
+							<li>
+								<Link to="/repay">Repay My Loan</Link>
+							</li>
+							<li>
+								<a className="btn" href="https://my.skills.fund/register">
+									Apply Now
+								</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</header>
+	);
+};
 
 Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
+	siteTitle: PropTypes.string
+};
 
 Header.defaultProps = {
-  siteTitle: ``,
-}
+	siteTitle: ``
+};
 
-export default Header
+export default Header;
