@@ -5,8 +5,6 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import SchoolSelector from '../components/schoolSelector';
 
-import USAMap from '../components/usmap';
-
 const Schools = ({ data }) => {
 	// get all schools and return an array with each school's information
 	let allSchools = data.schools.edges.map((school) => {
@@ -17,7 +15,6 @@ const Schools = ({ data }) => {
 		<Layout>
 			<SEO title="Schools" />
 			<div className="schools flex flex-col">
-				<USAMap />
 				<SchoolSelector
 					allSchools={allSchools}
 					climbers={data.climbers.childImageSharp.fluid}

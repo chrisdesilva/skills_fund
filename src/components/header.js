@@ -44,7 +44,15 @@ const Header = () => {
 
 	return (
 		// mobile version
-		<header className="relative p-2">
+		<header
+			className={
+				navBackground ? (
+					'fixed w-full top-0 z-10 p-2 bg-white navBar scrollBorder'
+				) : (
+					'fixed w-full top-0 z-10 p-2 bg-white navBar'
+				)
+			}
+		>
 			<input onClick={() => setMenuOpen(!menuOpen)} type="checkbox" id="bars" />
 			<label class="menu" htmlFor="bars">
 				<div class="bar" />
@@ -55,8 +63,8 @@ const Header = () => {
 				Apply Now
 			</a>
 
-			<ul>
-				<li className="w-32 lg:w-48">
+			<ul className="m-0">
+				<li className={navBackground ? 'logo shrink my-auto' : 'logo my-auto'}>
 					<Link to="/">
 						<Img fluid={data.skflogo.childImageSharp.fluid} alt="Skills Fund logo" />
 					</Link>
@@ -68,7 +76,7 @@ const Header = () => {
 					<nav>
 						<ul className="navigation">
 							<li>
-								<Link className="w-40" to="/">
+								<Link className="w-40 lg:w-48" to="/">
 									<Img fluid={data.whiteSkflogo.childImageSharp.fluid} alt="Skills Fund logo" />
 								</Link>
 							</li>
