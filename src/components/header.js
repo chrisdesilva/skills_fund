@@ -15,7 +15,7 @@ const Header = () => {
 			}
 			whiteSkflogo: file(relativePath: { eq: "skf_logo_white.png" }) {
 				childImageSharp {
-					fluid(maxWidth: 1200) {
+					fluid {
 						...GatsbyImageSharpFluid
 					}
 				}
@@ -53,20 +53,24 @@ const Header = () => {
 				)
 			}
 		>
-			<input onClick={() => setMenuOpen(!menuOpen)} type="checkbox" id="bars" />
-			<label class="menu" htmlFor="bars">
+			<button onClick={() => setMenuOpen(!menuOpen)} id="bars" />
+			<label class={menuOpen ? 'menu menuBars' : 'menu'} htmlFor="bars">
 				<div class="bar" />
 				<div class="bar" />
 				<div class="bar" />
 			</label>
-			<a className="btn btn--nav fixed right-0 top-0 mr-12 text-center" href="https://my.skills.fund/register">
+			<a className="btn btn--nav fixed right-0 top-0 text-center" href="https://my.skills.fund/register">
 				Apply Now
 			</a>
 
-			<ul className="m-0">
-				<li className={navBackground ? 'logo shrink my-auto' : 'logo my-auto'}>
+			<ul className="ml-0 mb-0">
+				<li className={navBackground ? 'logo shrink' : 'logo'}>
 					<Link to="/">
-						<Img fluid={data.skflogo.childImageSharp.fluid} alt="Skills Fund logo" />
+						{menuOpen ? (
+							<Img fluid={data.whiteSkflogo.childImageSharp.fluid} alt="Skills Fund logo" />
+						) : (
+							<Img fluid={data.skflogo.childImageSharp.fluid} alt="Skills Fund logo" />
+						)}
 					</Link>
 				</li>
 			</ul>
@@ -75,11 +79,6 @@ const Header = () => {
 				<div className="navFlex">
 					<nav>
 						<ul className="navigation">
-							<li>
-								<Link className="w-40 lg:w-48" to="/">
-									<Img fluid={data.whiteSkflogo.childImageSharp.fluid} alt="Skills Fund logo" />
-								</Link>
-							</li>
 							<li>
 								<Link to="/schools">Our Partner Schools</Link>
 							</li>

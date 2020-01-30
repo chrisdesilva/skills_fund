@@ -1,7 +1,11 @@
 .navBar {
-	height: 60px;
+	height: 38px;
 	border-bottom: 2px solid transparent;
 	transition: border 300ms;
+
+	@include md {
+		height: 60px;
+	}
 
 	&.scrollBorder {
 		border-bottom-color: $secondary;
@@ -10,12 +14,21 @@
 
 .logo {
 	margin: auto 0;
-	width: 10rem;
+	width: 6rem;
 	transition: width 300ms, transform 300ms;
+	transform: translateY(0);
+	z-index: 100;
+
+	@include md {
+		width: 10rem;
+	}
 
 	&.shrink {
-		width: 8rem;
+		width: 5rem;
 		transform: translateY(4px);
+		@include md {
+			width: 8rem;
+		}
 	}
 }
 
@@ -28,19 +41,24 @@
 	transition: 0.5s ease;
 	height: 50px;
 	z-index: 100;
-	margin-top: 5px;
-	&:hover .bar {
-		box-shadow: 1px 1px 7px 1px RGBa(0, 0, 0, 0.3);
+
+	@include md {
+		margin-top: 5px;
 	}
+
 	.bar {
-		width: 35px;
-		height: 5px;
-		background-color: #eeeeee;
+		width: 18px;
+		height: 2px;
+		background-color: #616161;
 		box-shadow: 1px 1px 3px RGBa(0, 0, 0, 0.4);
 		border-radius: 2px;
 		transition: 0.4s ease;
+		@include md {
+			width: 24px;
+			height: 4px;
+		}
 		&:not(:first-child) {
-			margin-top: 5px;
+			margin-top: 4px;
 		}
 	}
 }
@@ -49,20 +67,26 @@
 	right: -999px;
 	top: -999px;
 }
-#bars:checked + .menu {
-	transform: rotatey(180deg);
+
+#bars + .menuBars {
+	transform: rotatey(-180deg);
 	.bar {
-		transform: rotatey(180deg) rotatex(360deg);
+		background-color: #f7f7f7;
+		transform: rotatey(-180deg) rotatex(-360deg);
 		&:first-child {
-			transform: rotate(-45deg);
-			margin-top: 10px;
+			transform: rotate(45deg);
+			margin-top: 8px;
 		}
 		&:nth-child(2) {
 			opacity: 0;
 		}
 		&:nth-child(3) {
-			margin-top: -15px;
-			transform: rotate(45deg);
+			margin-top: -8px;
+			transform: rotate(-45deg);
+
+			@include md {
+				margin-top: -12px;
+			}
 		}
 	}
 }
@@ -81,11 +105,14 @@
 	height: 100vh;
 	display: block;
 	position: fixed;
-	right: 100%;
+	left: 100%;
 	top: 0;
 	transition: 0.5s;
 	background-image: url("../images/mobile_bg.png");
 	background-size: cover;
+	@include lg {
+		font-size: 1.25rem;
+	}
 
 	@include lg {
 		background-image: url("../images/desktop_bg.png");
@@ -104,6 +131,9 @@
 		}
 		li {
 			margin-bottom: .5rem;
+			@include lg {
+				margin-bottom: 1rem;
+			}
 		}
 		.btn {
 			background-color: white;
@@ -114,7 +144,7 @@
 }
 
 .showNav {
-	right: 0;
+	left: 0;
 	top: 0;
 	opacity: 1;
 }
