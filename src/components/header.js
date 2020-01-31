@@ -101,9 +101,9 @@ const Header = () => {
 								<Link to="/repay">Repay My Loan</Link>
 							</li>
 							<li>
-								<a className="btn" href="https://my.skills.fund/register">
+								<Link className="btn" to="/schools/apply">
 									Apply Now
-								</a>
+								</Link>
 							</li>
 						</ul>
 					</nav>
