@@ -1,6 +1,7 @@
 // ----- FORMS -----
 
-input[type="text"] {
+input[type="text"],
+input[type="email"] {
 	width: 16rem;
 	padding: 5px 5px;
 	border: 2px solid $black;
@@ -58,6 +59,15 @@ select {
 		color: white;
 		font-weight: bold;
 		text-align: center;
+	}
+
+	&--disabled {
+		background-color: lightgray;
+		color: black;
+		opacity: .5;
+		&:hover {
+			box-shadow: none;
+		}
 	}
 
 	&--nav {

@@ -64,11 +64,11 @@ const IndexPage = () => {
 							<div className="banner__buttons">
 								{!showInput && (
 									<div className="banner__autocomplete show">
-										<button className="btn" onClick={() => toggleShowInput(true)}>
-											I know my school
-										</button>
+										<Link to="/schools/apply/">
+											<button className="btn">Apply for a loan</button>
+										</Link>
 										<Link to="/schools">
-											<button className="btn">I'm doing research</button>
+											<button className="btn">Compare bootcamps</button>
 										</Link>
 									</div>
 								)}
