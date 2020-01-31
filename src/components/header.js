@@ -59,9 +59,9 @@ const Header = () => {
 				<div class="bar" />
 				<div class="bar" />
 			</label>
-			<a className="btn btn--nav fixed right-0 top-0 text-center" href="https://my.skills.fund/register">
+			<Link className="btn btn--nav fixed right-0 top-0 text-center" to="/schools/apply">
 				Apply Now
-			</a>
+			</Link>
 
 			<ul className="ml-0 mb-0">
 				<li className={navBackground ? 'logo shrink' : 'logo'}>
