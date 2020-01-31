@@ -116,3 +116,7 @@ select {
 	transform: rotate(-315deg);
 	color: $black;
 }
+
+.ReactCollapse--collapse {
+	transition: height 500ms;
+}

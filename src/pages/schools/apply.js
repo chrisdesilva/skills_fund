@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { UnmountClosed as Collapse } from 'react-collapse';
+import { UnmountClosed } from 'react-collapse';
 
 import Layout from '../../components/layout';
 import SEO from '../../components/seo';
@@ -54,7 +54,7 @@ const Apply = () => {
 	const [ schoolName, setSchoolName ] = useState('');
 	const [ showPrograms, setShowPrograms ] = useState(false);
 	const [ loanUrlIndex, setLoanUrlIndex ] = useState(0);
-	const [ loanUrl, setLoanUrl ] = useState(schoolsList[schoolIndex]['node']['loanUrLs'][loanUrlIndex]['segment']);
+	const [ loanUrl, setLoanUrl ] = useState(null);
 	const [ programName, setProgramName ] = useState('');
 	const [ showApply, setShowApply ] = useState(false);
 	const [ email, setEmail ] = useState('');
@@ -95,31 +95,35 @@ const Apply = () => {
 					<option>Select Your School</option>
 					{schoolsList.map((school, i) => <option value={Number(i)}>{school.node.schoolname}</option>)}
 				</select>
-				<Collapse isOpened={showPrograms}>
+				<UnmountClosed isOpened={showPrograms}>
 					<select onChange={selectProgram}>
 						{schoolsList[schoolIndex].node.loanUrLs.map((program, i) => (
 							<option value={Number(i)}>{program.name}</option>
 						))}
 					</select>
-				</Collapse>
+				</UnmountClosed>
+				{/* <select className={showPrograms ? 'show' : 'opacity-0'} onChange={selectProgram}>
+					{schoolsList[schoolIndex].node.loanUrLs.map((program, i) => (
+						<option value={Number(i)}>{program.name}</option>
+					))}
+				</select> */}
 			</div>
 			<div className="flex justify-center mt-5">
-				<Collapse isOpened={showApply}>
-					<form onSubmit={handleSubmit} className="flex">
-						<input
-							type="email"
-							placeholder="Enter your email address"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-						/>
-						<input
-							type="submit"
-							value="Next &rarr;"
-							className={email ? 'btn btn--submit' : 'btn btn--disabled'}
-							disabled={email ? false : true}
-						/>
-					</form>
-				</Collapse>
+				<form onSubmit={handleSubmit} className={schoolName ? 'flex show' : 'flex opacity-0'}>
+					<input
+						type="email"
+						placeholder="Enter your email address"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+						required
+					/>
+					<input
+						type="submit"
+						value="Next &rarr;"
+						className={email && loanUrl ? 'btn btn--submit' : 'btn btn--disabled'}
+						disabled={email && loanUrl ? false : true}
+					/>
+				</form>
 			</div>
 		</Layout>
 	);
