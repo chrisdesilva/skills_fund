@@ -54,10 +54,10 @@ const Header = () => {
 			}
 		>
 			<button onClick={() => setMenuOpen(!menuOpen)} id="bars" />
-			<label class={menuOpen ? 'menu menuBars' : 'menu'} htmlFor="bars">
-				<div class="bar" />
-				<div class="bar" />
-				<div class="bar" />
+			<label className={menuOpen ? 'menu menuBars' : 'menu'} htmlFor="bars">
+				<div className="bar" />
+				<div className="bar" />
+				<div className="bar" />
 			</label>
 			<Link className="btn btn--nav fixed right-0 top-0 text-center" to="/schools/apply">
 				Apply Now

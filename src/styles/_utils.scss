@@ -1,9 +1,8 @@
 // -----
 
 .show {
-	animation-duration: 1s;
+	animation-duration: 300ms;
 	animation-name: show;
-	animation-delay: .5s;
 	opacity: 0;
 	animation-fill-mode: forwards;
 }

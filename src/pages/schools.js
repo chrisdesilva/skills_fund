@@ -15,15 +15,7 @@ const Schools = ({ data }) => {
 		<Layout>
 			<SEO title="Schools" />
 			<div className="schools flex flex-col">
-				<SchoolSelector
-					allSchools={allSchools}
-					climbers={data.climbers.childImageSharp.fluid}
-					noMatches={data.noMatches.childImageSharp.fluid}
-					fullOrPart={data.fullOrPart.childImageSharp.fluid}
-					location={data.location.childImageSharp.fluid}
-					program={data.program.childImageSharp.fluid}
-					inPersonOnline={data.inPersonOnline.childImageSharp.fluid}
-				/>
+				<SchoolSelector allSchools={allSchools} />
 			</div>
 		</Layout>
 	);
@@ -36,60 +28,21 @@ export const pageQuery = graphql`
 		schools: allContentfulSchool {
 			edges {
 				node {
-					hasOnline
-					hasPartTime
-					hasFullTime
-					programsOffered
+					slug
 					schoolLogo {
-						file {
-							url
+						fluid {
+							src
 						}
 					}
-					schoolname
-					slug
-					states
-				}
-			}
-		}
-		climbers: file(relativePath: { eq: "Climbers_Color.png" }) {
-			childImageSharp {
-				fluid {
-					...GatsbyImageSharpFluid
-				}
-			}
-		}
-		noMatches: file(relativePath: { eq: "balancing.png" }) {
-			childImageSharp {
-				fluid {
-					...GatsbyImageSharpFluid
-				}
-			}
-		}
-		fullOrPart: file(relativePath: { eq: "student_at_desk.png" }) {
-			childImageSharp {
-				fluid {
-					...GatsbyImageSharpFluid
-				}
-			}
-		}
-		location: file(relativePath: { eq: "america_purple.png" }) {
-			childImageSharp {
-				fluid {
-					...GatsbyImageSharpFluid
-				}
-			}
-		}
-		program: file(relativePath: { eq: "cert_color.png" }) {
-			childImageSharp {
-				fluid {
-					...GatsbyImageSharpFluid
-				}
-			}
-		}
-		inPersonOnline: file(relativePath: { eq: "class_color.png" }) {
-			childImageSharp {
-				fluid {
-					...GatsbyImageSharpFluid
+					basicInfo {
+						locations
+						schoolname
+						programTypes
+					}
+					features {
+						products
+						costOfLiving
+					}
 				}
 			}
 		}
