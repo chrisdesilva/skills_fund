@@ -85,19 +85,22 @@ const Header = () => {
 									<Link to="/schools">Our Partner Schools</Link>
 								</li>
 								<li>
-									<Link to="/about">Why Skills Fund?</Link>
+									<Link to="/our-process">How It Works</Link>
 								</li>
 								<li>
-									<Link to="/blog">Student Journey</Link>
+									<Link to="/about">Our Team</Link>
 								</li>
 								<li>
-									<Link to="/loan-guide">Loan Guide</Link>
+									<Link to="/resources">Student Journey</Link>
 								</li>
 								<li>
 									<Link to="/frequently-asked-questions">FAQ</Link>
 								</li>
 								<li>
-									<a href="http://my.skills.fund">Check Loan Status</a>
+									<Link to="/reviews">Reviews</Link>
+								</li>
+								<li>
+									<a href="https://my.skills.fund">Check Loan Status</a>
 								</li>
 								<li>
 									<Link to="/repay">Repay My Loan</Link>
@@ -116,9 +119,9 @@ const Header = () => {
 			<header
 				className={
 					navBackground ? (
-						'fixed w-full top-0 z-10 p-2 bg-white navBar scrollBorder lg:flex items-center hidden'
+						'fixed w-full top-0 z-10 px-2 bg-white navBar scrollBorder lg:flex items-center hidden'
 					) : (
-						'fixed w-full top-0 z-10 p-2 bg-white navBar lg:flex items-center hidden'
+						'fixed w-full top-0 z-10 px-2 bg-white navBar lg:flex items-center hidden'
 					)
 				}
 			>
@@ -129,24 +132,41 @@ const Header = () => {
 						</Link>
 					</li>
 				</ul>
-				<nav className="flex items-center w-2/3">
-					<ul className="flex items-center mb-0 desktopNav">
+				<nav className="flex items-center w-2/3 h-full">
+					<ul className="flex items-center mb-0 desktopNav h-full">
 						<li>
 							<Link to="/schools">Our Partner Schools</Link>
 						</li>
-						<li>
-							<Link to="/about">Why Skills Fund?</Link>
+						<li className="dropdown">
+							<Link className="dropdown--main" to="/our-process">
+								How It Works <FaCaretDown />
+							</Link>
+							<div className="dropdown--content">
+								<li>
+									<Link className="pb-0" to="/our-process">
+										Our Process
+									</Link>
+								</li>
+								<li>
+									<Link className="pb-0" to="/about">
+										Our Team
+									</Link>
+								</li>
+							</div>
 						</li>
 						<li className="dropdown">
-							<Link className="dropdown--main" to="/blog">
+							<Link className="dropdown--main" to="/resources">
 								Student Journey <FaCaretDown />
 							</Link>
 							<div className="dropdown--content">
 								<li>
-									<Link to="/loan-guide">Loan Guide</Link>
+									<Link to="/resources">Blog</Link>
 								</li>
 								<li>
 									<Link to="/frequently-asked-questions">FAQ</Link>
+								</li>
+								<li>
+									<Link to="/reviews">Reviews</Link>
 								</li>
 							</div>
 						</li>
@@ -156,12 +176,12 @@ const Header = () => {
 				<nav className="flex items-center w-1/3 justify-end">
 					<ul className="flex items-center mb-0 desktopNav justify-end">
 						<li id="myLoan" className="dropdown">
-							<a className="dropdown--main" href="http://my.skills.fund">
+							<a className="dropdown--main relative" href="https://my.skills.fund">
 								My Loan <FaCaretDown />
 							</a>
 							<div className="dropdown--content">
 								<li>
-									<a href="http://my.skills.fund">Check Loan Status</a>
+									<a href="https://my.skills.fund">Check Loan Status</a>
 								</li>
 								<li>
 									<Link to="/repay">Repay My Loan</Link>
