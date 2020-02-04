@@ -48,12 +48,13 @@ const SchoolSelector = (props) => {
 			<div className="schoolsList__final">
 				{schools.map((school) => {
 					return (
-						<div key={school.schoolname} className="schoolsList__school show">
-							<h3>{school.schoolname}</h3>
+						<div key={school.basicInfo.schoolname} className="schoolsList__school show">
+							{/* <h3>{school.basicInfo.schoolname}</h3> */}
 							<Link to={`/schools/${school.slug}`}>
-								<div className="schoolsList__img">
+								<h3>{school.basicInfo.schoolname}</h3>
+								{/* <div className="schoolsList__img">
 									<img src={school.schoolLogo.file.url} alt={school.schoolname} />
-								</div>
+								</div> */}
 							</Link>
 							<Link className="schoolsList__link" to={`/schools/${school.slug}`}>
 								Get Funded

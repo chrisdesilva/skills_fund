@@ -86,6 +86,10 @@ select {
 			padding: .5rem;
 			margin-right: 3rem;
 		}
+
+		@include lg {
+			margin-right: 1rem;
+		}
 	}
 }
 

@@ -12,7 +12,7 @@ const PartnerPage = ({ data }) => {
 
 	const [ isModalOpen, toggleModal ] = useState(false);
 	const openSchoolPage = () => {
-		window.open(data.school.schoolurl);
+		window.open(data.school.basicInfo.schoolurl);
 	};
 
 	return (
@@ -23,21 +23,23 @@ const PartnerPage = ({ data }) => {
               <img className="logos__image" onClick={openSchoolPage} src={data.school.schoolLogo.file.url} alt={`${data.school.schoolname} logo`}/>
               <div className="logos__image" ><Img className="logos__skf" fluid={data.skfLogo.childImageSharp.fluid} alt="Skills Fund logo"/></div>
             </div> */}
-				<LoanCalculator
+				{/* <LoanCalculator
 					openSchoolPage={openSchoolPage}
-					alt={`${data.school.schoolname} logo`}
-					maxLoanAmt={data.school.loanInfo[0].loanInfo.maxLoanAmt}
-					defaultLoanAmount={data.school.defaultLoanAmount}
-					ir36={data.school.interestRate36}
-					ir60={data.school.interestRate60}
-					origFee={data.school.origFee}
+					alt={`${data.school.basicInfo.schoolname} logo`}
+					maxLoanAmt={
+						data.school.loanInfo[0].aprAndType[0].maxTuition + data.school.loanInfo[0].aprAndType[0].maxCOL
+					}
+					defaultLoanAmount={data.school.defaultAmount}
+					ir36={data.school.basicInfo.interestRate36}
+					ir60={data.school.basicInfo.interestRate60}
+					origFee={0.04}
 					scales={data.scales.childImageSharp.fluid}
 					loanInfo={loanInfo}
-					toggleModal={() => toggleModal(true)}
-					modal={isModalOpen}
-					schoolname={data.school.schoolname}
-				/>
-				<LoanApp
+					// toggleModal={() => toggleModal(true)}
+					// modal={isModalOpen}
+					schoolname={data.school.basicInfo.schoolname}
+				/> */}
+				{/* <LoanApp
 					schoolname={data.school.schoolname}
 					costOfLiving={data.school.costOfLiving}
 					skfLogo={data.march.childImageSharp.fluid}
@@ -46,8 +48,8 @@ const PartnerPage = ({ data }) => {
 					selectAProgram={data.school.selectAProgram}
 					slug={data.school.slug}
 					modal={isModalOpen}
-				/>
-				{isModalOpen ? <Modal toggleModal={() => toggleModal(false)} modal={isModalOpen} /> : null}
+				/> */}
+				{/* {isModalOpen ? <Modal toggleModal={() => toggleModal(false)} modal={isModalOpen} /> : null}
 				<LoanTerms
 					ir36={data.school.interestRate36}
 					ir60={data.school.interestRate60}
@@ -55,7 +57,7 @@ const PartnerPage = ({ data }) => {
 					APR36={data.school.aprRange36}
 					APR60={data.school.aprRange60}
 					modal={isModalOpen}
-				/>
+				/> */}
 			</div>
 		</Layout>
 	);
@@ -115,6 +117,7 @@ export const pageQuery = graphql`
 			loanInfo {
 				name
 				value
+				defaultAmount
 				metros {
 					maxCOL
 					location
