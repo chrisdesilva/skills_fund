@@ -13,7 +13,7 @@
 		"gatsby-plugin-postcss": "^2.1.19",
 		"gatsby-plugin-react-helmet": "^3.1.21",
 		"gatsby-plugin-sass": "^2.1.27",
-		"gatsby-plugin-sharp": "^2.4.4",
+		"gatsby-plugin-sharp": "^4.25.1",
 		"gatsby-remark-images-contentful": "^2.1.30",
 		"gatsby-source-contentful": "^2.1.84",
 		"gatsby-source-filesystem": "^2.1.47",
