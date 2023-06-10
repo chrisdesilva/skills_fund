@@ -6,7 +6,7 @@
 	"author": "Chris DeSilva <chris.a.desilva@gmail.com>",
 	"dependencies": {
 		"dotenv": "^8.2.0",
-		"gatsby": "^2.19.10",
+		"gatsby": "^4.25.7",
 		"gatsby-background-image": "^0.9.13",
 		"gatsby-image": "^2.2.39",
 		"gatsby-plugin-manifest": "^2.2.40",
